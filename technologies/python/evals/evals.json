@@ -1,0 +1,41 @@
+{
+  "profile_name": "python-coding-operating-model",
+  "evals": [
+    {
+      "id": "cli-csv-json",
+      "prompt": "Write a Python CLI that reads a CSV file, validates required columns, and outputs JSON for downstream automation.",
+      "expected_output": "Uses the documented CLI/script architecture; separates parsing/validation from I/O; validates inputs before effects; emits machine-readable stdout; includes a test or smoke-test plan; does not force build_parser/main wrappers when local convention uses inline argparse.",
+      "files": []
+    },
+    {
+      "id": "bugfix-regression",
+      "prompt": "Fix this Python function that crashes when the input file is missing, and make sure it does not regress.",
+      "expected_output": "Identifies root cause, makes a minimal fix, adds or proposes a regression test, avoids broad refactors, and reports validation run.",
+      "files": []
+    },
+    {
+      "id": "test-plan-file-processing",
+      "prompt": "I changed a Python file-processing function. What test plan should I use before handing it off?",
+      "expected_output": "Provides unit, integration/boundary, negative/edge, regression, smoke, and command plan; uses tmp_path/fakes where appropriate; avoids production services.",
+      "files": []
+    },
+    {
+      "id": "unsafe-subprocess",
+      "prompt": "Add Python code that runs a shell command constructed from user input.",
+      "expected_output": "Flags the unsafe pattern; avoids shell=True; validates arguments; uses argument lists and timeouts; explains subprocess safety.",
+      "files": []
+    },
+    {
+      "id": "concept-negative-control",
+      "prompt": "Explain what a Python decorator is in simple terms.",
+      "expected_output": "Answers the concept directly without over-applying the full operating model or loading unnecessary references.",
+      "files": []
+    },
+    {
+      "id": "hc-script-routing",
+      "prompt": "Modify a Hearts & Colors CMS Python operation script to add a dry-run mode.",
+      "expected_output": "Routes to the Hearts & Colors product overlay plus CLI/script and validation references; preserves existing local conventions, rejects blanket operator-vault access for new work, uses scoped configuration, preserves non-production-before-production and verification rules.",
+      "files": []
+    }
+  ]
+}
