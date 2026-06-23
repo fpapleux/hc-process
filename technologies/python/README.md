@@ -1,9 +1,7 @@
 # Python Coding Operating Model
 
-This technology profile was imported from the OpenClaw skill
-`python-coding-operating-model` and adapted as a repository standard. It defines
-Python technique for agents whose role and product profiles authorize Python
-work.
+This technology profile defines Python technique for agents whose role and
+product profiles authorize Python work.
 
 ## Prime directive
 
@@ -60,10 +58,8 @@ Do not load extra references for:
   `references/style_typing.md`.
 - Setting up packaging, linting, formatting, type checking, or dependency
   conventions: read `references/packaging_tooling.md`.
-- Working in an OpenClaw runtime: read `overlays/openclaw.md` only when the
-  role and product profile authorize OpenClaw-specific work.
-- Working in Hearts & Colors, CMS, Shopify, or company-specific automation:
-  load the relevant product overlay, not generic Python alone.
+- Working in product-specific or runtime-specific automation: load the relevant
+  product or runtime overlay, not generic Python alone.
 - If multiple branches apply, read only the narrowest references needed.
 
 ## Non-negotiable rules
@@ -168,7 +164,7 @@ This profile defines how to write Python. It does not grant permission to:
 - access the operator vault;
 - read global environment files;
 - use shared skills;
-- call CMS, Shopify, database, email, or production APIs;
+- call external services, databases, email, or production APIs;
 - mutate product data;
 - deploy code.
 

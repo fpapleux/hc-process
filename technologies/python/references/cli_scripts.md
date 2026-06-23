@@ -20,8 +20,8 @@ The generic Python standard is:
 Prefer the project's existing CLI architecture. For standalone automation
 scripts, use importable domain logic and a thin CLI adapter.
 
-Do not make OpenClaw, CMS, Shopify, or company-specific assumptions in generic
-Python code. Those belong in product or runtime overlays.
+Do not make product-specific, runtime-specific, or organization-specific
+assumptions in generic Python code. Those belong in product or runtime overlays.
 
 ## Atomic Purpose Taxonomy
 
@@ -278,7 +278,7 @@ If a project already uses another convention, preserve local consistency.
 ## Configuration Loading
 
 Generic Python code must not assume access to the operator vault or global
-OpenClaw environment.
+runtime environment.
 
 Configuration rules:
 
@@ -290,8 +290,8 @@ Configuration rules:
 - Do not hard-code credentials, tokens, production paths, service URLs, or
   account identifiers.
 
-OpenClaw-specific environment behavior belongs in
-`technologies/python/overlays/openclaw.md` or a product overlay.
+Runtime-specific environment behavior belongs in an approved runtime or product
+overlay.
 
 ## Output Contracts
 

@@ -32,7 +32,7 @@ The role operating processes live in:
 - [QA process](../process/qa.md)
 - [Release process](../process/release.md)
 
-Each role folder uses the OpenClaw standard file names:
+Each role folder uses standard profile file names:
 
 - `README.md`: what the profile contains and how to compose it.
 - `IDENTITY.md`: role identity and responsibilities.
@@ -42,9 +42,9 @@ Each role folder uses the OpenClaw standard file names:
 - `USER.md`: role-specific interaction notes for working with the operator.
 - `HEARTBEAT.md`: ops-session checklist for recurring work.
 
-These files start from the OpenClaw default agent file structure, but they do
-not copy secrets, model API keys, or shared credentials. Runtime credentials
-belong in OpenClaw configuration, secret stores, or approved MCP/tool servers.
+These files do not copy secrets, model API keys, or shared credentials. Runtime
+credentials belong in runtime configuration, secret stores, or approved
+MCP/tool servers.
 
 ## Context Model
 

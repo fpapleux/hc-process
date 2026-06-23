@@ -74,8 +74,8 @@ Examples:
 - General coding standards.
 - Python.
 - JavaScript.
-- Shopify.
-- Strapi CMS.
+- E-commerce platform integrations.
+- Content management systems.
 - Database migrations.
 - Browser automation.
 
@@ -141,7 +141,7 @@ role: release
 product profile selected per release:
   - product-name
 technology profile selected per release:
-  - shopify
+  - ecommerce-platform
   - javascript
 ```
 
@@ -155,7 +155,7 @@ Product Owner:
 - Product axis is strong.
 - Technology axis is light.
 - Uses technology labels to route work, such as `tech:python`,
-  `tech:javascript`, `tech:shopify`, or `tech:cms`.
+  `tech:javascript`, `tech:ecommerce`, or `tech:cms`.
 - Does not apply implementation standards directly.
 
 Architect:
@@ -207,8 +207,8 @@ agents/
     general-coding.md
     python.md
     javascript.md
-    shopify.md
-    strapi-cms.md
+    ecommerce-platform.md
+    content-management-system.md
   products/
     product-name.md
 ```

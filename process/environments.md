@@ -43,18 +43,19 @@ Product Owner:
   environments.
 - Ensures issues specify the environment expectation when it affects scope.
 
-## CMS Example
+## External Service Example
 
-For a CMS-backed product:
+For a product backed by a mutable external service:
 
 ```text
-local CMS: developer implementation and local script checks
-test CMS: QA validation and release rehearsal
-prod CMS: release/operations only after approval gates
+local service: developer implementation and local script checks
+test service: QA validation and release rehearsal
+prod service: release/operations only after approval gates
 ```
 
-CMS scripts do not default to production during development or QA. Production
-execution is a release or operations action, not a developer convenience flag.
+Service scripts do not default to production during development or QA.
+Production execution is a release or operations action, not a developer
+convenience flag.
 
 ## Script Requirements
 

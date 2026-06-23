@@ -32,9 +32,9 @@
       "files": []
     },
     {
-      "id": "hc-script-routing",
-      "prompt": "Modify a Hearts & Colors CMS Python operation script to add a dry-run mode.",
-      "expected_output": "Routes to the Hearts & Colors product overlay plus CLI/script and validation references; preserves existing local conventions, rejects blanket operator-vault access for new work, uses scoped configuration, preserves non-production-before-production and verification rules.",
+      "id": "product-script-routing",
+      "prompt": "Modify a product-specific Python operation script for an external service to add a dry-run mode.",
+      "expected_output": "Routes to the relevant product overlay plus CLI/script and validation references; preserves existing local conventions, rejects blanket operator-vault access for new work, uses scoped configuration, preserves non-production-before-production and verification rules.",
       "files": []
     }
   ]

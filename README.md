@@ -103,8 +103,8 @@ Planned examples:
 
 - General coding standards.
 - JavaScript.
-- Shopify.
-- Strapi CMS.
+- E-commerce platform integrations.
+- Content management systems.
 - Browser automation.
 - Database migrations.
 
@@ -128,10 +128,6 @@ Examples:
 
 Product profiles define intent and accumulated product memory. Product profiles
 do not grant authority by themselves.
-
-Current product overlays:
-
-- [Hearts & Colors Python](products/hearts-colors/overlays/python.md)
 
 ## Concrete Agent Profiles
 

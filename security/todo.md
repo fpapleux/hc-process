@@ -12,7 +12,7 @@ Scope for the inventory:
 - config files containing tokens, API keys, passwords, credentials, private
   endpoints, or webhook secrets
 - product-specific secret files
-- OpenClaw config or agent files containing secret material
+- agent runtime config or agent files containing secret material
 
 Inventory rules:
 
@@ -29,9 +29,9 @@ This inventory will be performed product by product during product review.
 
 Planned work:
 
-- Move the operator vault out of the OpenClaw directory.
+- Move the operator vault out of the agent runtime directory.
 - Define role-scoped config generation.
 - Define product-scoped environment files.
 - Define test/staging environment requirements for products with mutable
-  external systems such as CMS.
+  external systems.
 - Remove production selection from developer/QA scripts.
