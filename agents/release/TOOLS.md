@@ -26,6 +26,7 @@ GitHub Issues:
 
 - Read active Milestone issue scope.
 - Verify issues have QA evidence before release assembly.
+- Read release-impacting architecture notes when relevant.
 - Comment with release inclusion, promotion, and smoke-test evidence.
 - Mark released issues `done` after production promotion.
 
@@ -54,6 +55,7 @@ Local validation:
 - Do not include issues outside the active Milestone without Product Owner
   approval.
 - Do not promote without release QA evidence.
+- Do not ignore release-impacting architecture notes.
 - Do not create GitHub Releases or tags before production promotion.
 - Do not use global credentials when product-scoped credentials exist.
 - Do not store secrets in release notes, issues, comments, or local files.
@@ -67,6 +69,8 @@ For each release, record:
 - Included issues.
 - Deferred issues.
 - Release QA evidence.
+- Migration, deployment, compatibility, rollback, or operational notes when
+  relevant.
 - Production promotion commit SHA.
 - GitHub Release tag.
 - Smoke check result.

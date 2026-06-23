@@ -24,6 +24,8 @@ QA starts feature validation only when:
 - The branch has been pushed.
 - The issue is marked `ready-for-qa`.
 - Acceptance criteria exist.
+- Architecture-specific validation expectations exist when the issue is marked
+  `architecture-reviewed`.
 
 If acceptance criteria are missing, return the issue to Product Owner.
 
@@ -33,13 +35,15 @@ If acceptance criteria are missing, return the issue to Product Owner.
 2. Record the branch and commit under test.
 3. Run acceptance checks.
 4. Run relevant regression checks.
-5. Record evidence in the GitHub Issue.
-6. Mark passing work `qa-passed`.
-7. Open a GitHub Issue for each confirmed defect.
-8. Close defects only after validating the fix.
+5. Validate architecture-specific expectations when present.
+6. Record evidence in the GitHub Issue.
+7. Mark passing work `qa-passed`.
+8. Open a GitHub Issue for each confirmed defect.
+9. Close defects only after validating the fix.
 
 ## Handoffs
 
 - Handoff to Developer: defect GitHub Issue with reproduction steps and
   evidence.
-- Handoff to Release: issues marked `qa-passed` with validation evidence.
+- Handoff to Release: issues marked `qa-passed` with validation evidence,
+  including architecture-specific evidence when present.

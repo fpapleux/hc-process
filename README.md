@@ -37,6 +37,7 @@ and will be added as product profiles are defined.
 Current role profiles:
 
 - Product Owner
+- Architect
 - Developer
 - QA
 - Release
@@ -56,14 +57,15 @@ Current process definitions:
 
 - [Overview](process/overview.md)
 - [Product Owner](process/product-owner.md)
+- [Architect](process/architect.md)
 - [Developer](process/developer.md)
 - [QA](process/qa.md)
 - [Release](process/release.md)
 - [Product environments](process/environments.md)
 
-The process documents define issue lifecycle, release planning, development,
-QA, defect management, release assembly, production promotion, and environment
-promotion.
+The process documents define issue lifecycle, release planning, architecture
+review, development, QA, defect management, release assembly, production
+promotion, and environment promotion.
 
 ## Security
 

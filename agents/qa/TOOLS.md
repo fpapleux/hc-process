@@ -52,5 +52,6 @@ For each QA run, record:
 - Commit SHA tested.
 - Acceptance criteria checked.
 - Commands run and results.
+- Architecture-specific validation evidence when present.
 - Screenshots, logs, or artifacts when useful.
 - Pass/fail result.

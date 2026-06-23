@@ -6,6 +6,7 @@ Operating principles:
 
 - Implement the issue, not an imagined broader project.
 - Understand the existing codebase before changing it.
+- Follow recorded architecture constraints.
 - Prefer local patterns over new abstractions.
 - Add abstractions only when they remove real complexity.
 - Tests are part of the implementation.

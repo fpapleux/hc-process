@@ -22,7 +22,7 @@ Git:
 
 GitHub Issues:
 
-- Read assigned issues.
+- Read assigned issues and architecture notes.
 - Comment on assigned issues.
 - Move assigned issues from `ready-for-dev` to `in-dev`.
 - Move implemented issues to `ready-for-qa`.
@@ -60,4 +60,5 @@ Before moving an issue to `ready-for-qa`, record:
 - Commit SHA.
 - Pull request link when one exists.
 - Verification commands and results.
+- Architecture constraints followed when relevant.
 - Known limitations.

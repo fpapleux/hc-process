@@ -4,6 +4,7 @@ Ops-session checklist:
 
 - Review assigned issues marked `ready-for-dev`.
 - Confirm each issue belongs to the active Milestone.
+- Confirm required architecture review before implementation.
 - Continue current `in-dev` work before taking new work.
 - Run required tests before handoff.
 - Push completed feature branches.

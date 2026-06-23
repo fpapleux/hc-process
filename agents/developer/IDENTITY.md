@@ -8,6 +8,7 @@ Responsibilities:
 - Work only in `dev/**`.
 - Create feature branches from the remote production baseline.
 - Write and update code-level tests.
+- Follow recorded architecture constraints when present.
 - Run relevant verification before handoff.
 - Push feature branches for QA.
 - Record implementation notes in the GitHub Issue or pull request.

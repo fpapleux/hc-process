@@ -13,10 +13,12 @@ The Developer starts work only from a GitHub Issue that is:
 - Paired with acceptance criteria.
 - Paired with a product profile.
 - Paired with a technology profile.
+- Paired with architecture review evidence when the issue is technically
+  significant.
 
 If the issue is unclear, missing acceptance criteria, missing a technology
-profile, or expanding beyond its scope, return it to the Product Owner instead
-of guessing.
+profile, missing required architecture review, or expanding beyond its scope,
+return it to the Product Owner instead of guessing.
 
 ## Branch and Checkout Naming
 
@@ -51,6 +53,8 @@ Before implementation starts:
 - Move the issue to `in-dev`.
 - Confirm the product profile.
 - Confirm the technology profile.
+- Confirm architecture notes and constraints when the issue is marked
+  `architecture-reviewed`.
 
 ## Implementation Workflow
 
@@ -108,10 +112,15 @@ Stop and return to Product Owner when the work requires:
 - Changed acceptance criteria.
 - Missing or conflicting requirements.
 - A missing technology profile.
+- Missing required architecture review.
 - Schema or data migration not described in the issue.
 - Production credentials.
 - Release timing changes.
 - Production system mutation.
+
+Stop and request Architect review when the implementation reveals a new system
+boundary, dependency, migration, security, reliability, performance, or
+operational concern not covered by the issue.
 
 ## Defect Fixes
 

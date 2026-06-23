@@ -5,7 +5,7 @@ product folder. It is written for humans and agents.
 
 The goal is to make the filesystem layout match the operating process. Agents
 are constrained by folder-level permissions so that product ownership,
-development, QA, and release work happen in separate lanes.
+architecture, development, QA, and release work happen in separate lanes.
 
 ## Folder Structure
 
@@ -17,6 +17,7 @@ Inside the product folder:
 - `tst/`: QA/test checkouts, one folder per feature branch or release branch
   under test.
 - `prod/`: production baseline, release checkout, or urgent hotfix checkout.
+- `architecture/`: durable architecture decisions, ADRs, and system notes.
 - `agents/`: agent role profiles and profile composition rules.
 - `process/`: operating process definitions.
 - `README.md`: entry point for this product folder.
@@ -33,6 +34,7 @@ website/
     release-2026.06.1/
   prod/
     main/
+  architecture/
   agents/
   process/
   README.md
@@ -52,6 +54,19 @@ Product Owner agents:
 - GitHub Issues: create and edit access.
 - GitHub Milestones: create and edit access.
 - GitHub repository settings: request access only, unless explicitly delegated.
+
+Architect agents:
+
+- Product folder: read access.
+- `architecture/**`: read/write access.
+- Approved product architecture documentation: write access.
+- `dev/**`: read access only.
+- `tst/**`: read access only when needed for architecture review.
+- `prod/**`: read access only when needed for baseline or release-impact
+  review.
+- GitHub Issues: read, comment, and architecture status access.
+- GitHub Pull Requests: read and comment access for architecture review.
+- GitHub Milestones: no edit access.
 
 Developer agents:
 
@@ -101,6 +116,10 @@ into `tst/` or `prod/`.
 - GitHub Milestones track planned releases. GitHub Releases and tags record
   completed production releases.
 - Product environment targeting follows [Product Environment Process](environments.md).
+- Technically significant issues receive architecture review before
+  development starts.
+- Durable architecture decisions live in `architecture/**` or approved product
+  architecture documentation.
 
 ## Lifecycle
 
@@ -108,20 +127,26 @@ The normal lifecycle is:
 
 1. Product Owner turns a brief into GitHub Issues.
 2. Product Owner creates or selects the active GitHub Milestone.
-3. Product Owner marks actionable issues `ready-for-dev`.
-4. Developer implements an issue in `dev/**`.
-5. Developer pushes the feature branch and marks the issue `ready-for-qa`.
-6. QA creates a checkout in `tst/**` and validates the pushed branch.
-7. QA records evidence and marks passing issues `qa-passed`.
-8. Release assembles QA-passed issues into `release/<milestone-name>`.
-9. QA validates the assembled release branch.
-10. Release promotes the validated release branch to production.
-11. Release creates the GitHub Release and tag.
+3. Product Owner marks technically significant issues `needs-architecture`.
+4. Architect records technical direction and marks reviewed issues
+   `architecture-reviewed`.
+5. Product Owner marks actionable issues `ready-for-dev`.
+6. Developer implements an issue in `dev/**`.
+7. Developer pushes the feature branch and marks the issue `ready-for-qa`.
+8. QA creates a checkout in `tst/**` and validates the pushed branch.
+9. QA records evidence and marks passing issues `qa-passed`.
+10. Release assembles QA-passed issues into `release/<milestone-name>`.
+11. QA validates the assembled release branch.
+12. Release promotes the validated release branch to production.
+13. Release creates the GitHub Release and tag.
 
 ## Issue Status Values
 
 - `draft`: issue exists but is not ready for implementation.
 - `needs-clarification`: Product Owner needs input before scoping is complete.
+- `needs-architecture`: Architect review is required before development.
+- `architecture-reviewed`: Architect recorded technical direction and
+  implementation constraints.
 - `ready-for-dev`: developer agents can pick up the issue.
 - `in-dev`: developer agent is implementing the issue.
 - `ready-for-qa`: developer pushed the branch and requests QA.
@@ -140,6 +165,7 @@ Defect-specific statuses:
 ## Role Process Files
 
 - [Product Owner process](product-owner.md)
+- [Architect process](architect.md)
 - [Developer process](developer.md)
 - [QA process](qa.md)
 - [Release process](release.md)

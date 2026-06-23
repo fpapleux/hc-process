@@ -25,6 +25,12 @@ QA:
 - Does not receive production credentials.
 - Validates behavior before release assembly.
 
+Architect:
+
+- Identifies environment, credential, deployment, and operational impact.
+- Does not receive production credentials.
+- Does not run environment mutations.
+
 Release:
 
 - Promotes validated release branches.

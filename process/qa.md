@@ -12,6 +12,8 @@ QA starts feature validation only when:
 - The branch has been pushed.
 - The issue is marked `ready-for-qa`.
 - Acceptance criteria exist.
+- Architecture-specific validation expectations are recorded when the issue is
+  marked `architecture-reviewed`.
 
 If acceptance criteria are missing, return the issue to Product Owner.
 
@@ -45,6 +47,7 @@ QA owns acceptance evidence:
 - Screenshots or logs when useful.
 - Exact branch and commit tested.
 - Clear pass/fail result.
+- Architecture-specific validation evidence when requested by the Architect.
 
 QA writes higher-level checks when the project requires them, such as browser
 flows, smoke tests, fixture validations, or deployment checks. The Developer
@@ -108,5 +111,6 @@ QA marks work `qa-passed` only when:
 
 - Acceptance criteria pass.
 - Relevant regression checks pass.
+- Architecture-specific validation expectations pass when present.
 - Defects are closed or explicitly deferred by the Product Owner.
 - Evidence is recorded in the GitHub Issue.

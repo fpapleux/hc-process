@@ -19,6 +19,7 @@ See [Profile Dimensions](dimensions.md) for the full model.
 The standard role profiles live in:
 
 - [product-owner](product-owner/README.md)
+- [architect](architect/README.md)
 - [developer](developer/README.md)
 - [qa](qa/README.md)
 - [release](release/README.md)
@@ -26,6 +27,7 @@ The standard role profiles live in:
 The role operating processes live in:
 
 - [Product Owner process](../process/product-owner.md)
+- [Architect process](../process/architect.md)
 - [Developer process](../process/developer.md)
 - [QA process](../process/qa.md)
 - [Release process](../process/release.md)
@@ -74,7 +76,8 @@ Product-specific context:
 | Role | Product Specific | Reason |
 | --- | --- | --- |
 | Product Owner | Yes | Carries product vision, priorities, scope boundaries, roadmap, naming, tradeoffs, and the meaning of done. |
-| Developer | Mostly yes | Carries codebase architecture, conventions, tests, local setup, and known implementation pitfalls. |
+| Architect | Yes | Carries product architecture, system boundaries, technical decisions, integration risks, and durable design constraints. |
+| Developer | Mostly yes | Carries codebase conventions, tests, local setup, and known implementation pitfalls. |
 | QA | Mixed | Uses shared QA discipline, but accumulates product-specific acceptance behavior, fixtures, regressions, and test history. |
 | Release | Mostly cross-product | Applies standard release mechanics across products, with product-scoped configuration and credentials. |
 
@@ -93,6 +96,23 @@ Responsibilities:
 - Carries long-term product memory.
 
 The Product Owner does not implement code.
+
+## Architect
+
+The Architect is product-specific and technology-aware.
+
+Responsibilities:
+
+- Reviews technically significant issues before development starts.
+- Records architecture decisions, implementation constraints, and technical
+  risks.
+- Identifies affected boundaries, data, dependencies, security, reliability,
+  and operational concerns.
+- Reviews pull requests for architecture fit when required.
+- Hands implementation constraints to Developer and validation focus to QA.
+
+The Architect does not implement code, decide product priority, validate QA, or
+promote releases.
 
 ## Developer
 
@@ -148,8 +168,8 @@ target, smoke tests, credentials, and cleanup rules for one product.
 
 - Product Owner memory is product memory.
 - Release process is organizational memory.
-- Developers and QA use reusable skills but execute inside one product at a
-  time.
+- Architects, Developers, and QA use reusable skills but execute inside one
+  product at a time.
 - Credentials are scoped by product and role.
 - No role receives write access outside its lane unless explicitly delegated.
 - Cross-product agents operate through product-specific profiles, not through

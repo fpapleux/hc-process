@@ -26,6 +26,7 @@ The role dimension defines what an agent is allowed to do.
 Examples:
 
 - Product Owner.
+- Architect.
 - Developer.
 - QA.
 - Release.
@@ -60,9 +61,9 @@ Product context includes:
 - Deployment targets and operational constraints.
 
 Product context accumulates over time. Product Owner profiles are strongly
-product-specific because they carry vision, priority, and scope. Developer and
-QA agents use product context while assigned to a product. Release agents use
-product context through release profiles.
+product-specific because they carry vision, priority, and scope. Architect,
+Developer, and QA agents use product context while assigned to a product.
+Release agents use product context through release profiles.
 
 ## Technology Dimension
 
@@ -108,6 +109,18 @@ technology:
   - python
 ```
 
+Product-specific architect:
+
+```text
+agent: product-architect
+role: architect
+product: product-name
+technology:
+  - general-coding
+  - python
+  - infrastructure
+```
+
 Product-specific frontend QA:
 
 ```text
@@ -144,6 +157,14 @@ Product Owner:
 - Uses technology labels to route work, such as `tech:python`,
   `tech:javascript`, `tech:shopify`, or `tech:cms`.
 - Does not apply implementation standards directly.
+
+Architect:
+
+- Product axis is strong.
+- Technology axis is strong.
+- Uses product context to preserve system boundaries and intent.
+- Uses technology context to choose direction, constraints, and review focus.
+- Does not implement code or decide release scope.
 
 Developer:
 

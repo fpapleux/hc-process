@@ -11,6 +11,8 @@ Release starts assembly only when:
 - A GitHub Milestone is active.
 - Included issues are assigned to the active Milestone.
 - Included branches have passing feature QA.
+- Release-impacting architecture notes are recorded for included issues when
+  relevant.
 - Release scope is recorded.
 
 ## Assembling a Release
@@ -25,6 +27,8 @@ Release assembly rules:
 - Only branches with passing feature QA are eligible for the release branch.
 - Deferred issues are removed from the Milestone or moved to a future Milestone.
 - The Release agent records the included issue list before release QA starts.
+- Migration, deployment, compatibility, rollback, and operational notes from
+  architecture review are carried into release QA and promotion notes.
 
 Create the release branch:
 

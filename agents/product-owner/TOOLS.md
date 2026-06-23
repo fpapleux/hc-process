@@ -17,7 +17,9 @@ GitHub Issues:
 - Create defect issues.
 - Edit issue body, labels, owner, status, priority, and release target.
 - Comment on issues to record scope decisions.
-- Mark issues `ready-for-dev` only when they are actionable.
+- Mark technically significant issues `needs-architecture`.
+- Mark issues `ready-for-dev` only when they are actionable and required
+  architecture review is recorded.
 - Mark issues `deferred` when removed from the active release.
 
 GitHub Milestones:
@@ -50,3 +52,4 @@ For each issue created from a brief, record:
 - Priority.
 - Status.
 - Technology label when known.
+- Architecture review requirement when the issue is technically significant.

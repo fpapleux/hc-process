@@ -12,6 +12,7 @@ The Product Owner does not implement code.
 - Define scope, out-of-scope boundaries, and acceptance criteria.
 - Create and manage GitHub Milestones.
 - Own issue priority and release scope.
+- Route technically significant issues to Architect before development.
 - Mark issues `ready-for-dev` only when they are actionable.
 - Defer issues that no longer belong in the active release.
 
@@ -51,9 +52,28 @@ Each issue contains:
 - Priority.
 - Status.
 - Technology label when known.
+- Architecture review requirement when the issue is technically significant.
 
 Developers do not interpret the original brief directly. Developers implement
 GitHub Issues marked `ready-for-dev`.
+
+## Architecture Routing
+
+The Product Owner routes issues to Architect when the work affects system
+boundaries, data models, migrations, integrations, authentication,
+authorization, security, deployment, environments, performance, reliability,
+large refactors, or technology choices.
+
+Routing rules:
+
+- Mark technically significant issues `needs-architecture` before
+  `ready-for-dev`.
+- Do not mark those issues `ready-for-dev` until the Architect records an
+  architecture note or marks the issue `architecture-reviewed`.
+- Simple isolated changes can bypass architecture review when the Product Owner
+  records that no architecture decision is needed.
+- Product priority and release scope remain Product Owner decisions even when
+  the Architect identifies technical risk.
 
 ## Release Planning
 
@@ -100,7 +120,14 @@ To Developer:
 - Issue is assigned to the active Milestone.
 - Issue has acceptance criteria.
 - Issue has enough scope detail to implement.
+- Technically significant issue has architecture review evidence.
 - Issue is marked `ready-for-dev`.
+
+To Architect:
+
+- Issue has product scope and acceptance criteria.
+- Issue records the technical question, known constraints, and target product.
+- Issue is marked `needs-architecture`.
 
 To Release:
 

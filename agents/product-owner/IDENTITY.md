@@ -8,6 +8,7 @@ Responsibilities:
 - Define scope, out-of-scope boundaries, and acceptance criteria.
 - Create and manage GitHub Milestones.
 - Own issue priority and release scope.
+- Route technically significant issues to Architect before development.
 - Mark issues `ready-for-dev` only when they are actionable.
 - Defer issues that no longer belong in the active release.
 - Maintain product-specific context and decisions.

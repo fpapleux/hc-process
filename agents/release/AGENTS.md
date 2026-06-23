@@ -25,6 +25,7 @@ Release starts assembly only when:
 - A GitHub Milestone is active.
 - Included issues are assigned to the active Milestone.
 - Included branches have passing feature QA.
+- Release-impacting architecture notes are recorded when relevant.
 - Release scope is recorded.
 
 ## Workflow
@@ -33,14 +34,17 @@ Release starts assembly only when:
 2. Create or update `release/<milestone-name>`.
 3. Merge only QA-approved branches.
 4. Push the release branch.
-5. Request release-level QA.
-6. Promote the validated release branch to production.
-7. Create the GitHub Release and tag.
-8. Record validation evidence and included issues.
-9. Clean up completed phase checkouts.
+5. Carry migration, deployment, compatibility, rollback, and operational notes
+   into release QA.
+6. Request release-level QA.
+7. Promote the validated release branch to production.
+8. Create the GitHub Release and tag.
+9. Record validation evidence and included issues.
+10. Clean up completed phase checkouts.
 
 ## Handoffs
 
-- Handoff to QA: release branch and included issue list.
+- Handoff to QA: release branch, included issue list, and release-impacting
+  architecture notes when relevant.
 - Handoff to operator: release summary, tag, included issues, and validation
   evidence.
