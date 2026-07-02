@@ -116,6 +116,7 @@ into `tst/` or `prod/`.
 - GitHub Milestones track planned releases. GitHub Releases and tags record
   completed production releases.
 - Product environment targeting follows [Product Environment Process](environments.md).
+- Architecture work follows the [Architecture Design Document Specification](documents/architecture-design-document.md).
 - Technically significant issues receive architecture review before
   development starts.
 - Durable architecture decisions live in `architecture/**` or approved product
@@ -170,3 +171,4 @@ Defect-specific statuses:
 - [QA process](qa.md)
 - [Release process](release.md)
 - [Product environment process](environments.md)
+- [Architecture Design Document Specification](documents/architecture-design-document.md)

@@ -11,6 +11,37 @@ local/dev -> test/staging -> production
 The target environment is controlled by role, product process, and scoped
 credentials. It is not controlled by a casual `--prod` command-line flag.
 
+## Platform And Application Segmentation
+
+Separate platforms from application environments.
+
+Platforms are shared host software capabilities such as databases, queues,
+vector stores, identity providers, and observability stacks. Application
+environments are product-specific source checkouts, branches, built artifacts,
+deployed code, configuration, credentials, schemas, collections, namespaces, and
+data roots.
+
+Default rule:
+
+- Use one production platform.
+- Use one non-production platform.
+- Segment development and test within the non-production platform when the
+  platform supports safe logical separation.
+
+Examples of non-production segmentation:
+
+- separate database schemas;
+- separate queues or topics;
+- separate vector collections;
+- separate buckets or prefixes;
+- separate Git checkouts, branches, commits, and image/artifact tags;
+- separate credentials and service identities;
+- separate application config and data roots.
+
+Create additional platform instances only when there is a recorded reason, such
+as hard isolation, incompatible versions, capacity, security, or release
+rehearsal fidelity.
+
 ## Role Ownership
 
 Developer:

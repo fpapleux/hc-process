@@ -1,7 +1,9 @@
-# Product Owner Process
+# Product Owner
 
 The Product Owner carries the user's vision into the GitHub operating model.
-The Product Owner does not implement code.
+The Product Owner defines what to build and why. The Product Owner does not
+define how to build it, does not make technology choices, and does not implement
+code.
 
 ## Responsibilities
 
@@ -26,6 +28,45 @@ The Product Owner receives the brief and classifies the work:
 - Operational task.
 - Prototype or research spike.
 
+## Product Definition Boundaries
+
+The Product Owner defines WHAT and WHY. The Architect defines HOW.
+
+The Product Owner must include:
+
+- User goals and business outcomes.
+- Acceptance criteria stated as observable behavior, not implementation.
+- Scope and out-of-scope boundaries.
+- Business-driven constraints that have technical implications (e.g., "must
+  work offline", "must support 10,000 concurrent users", "must comply with
+  GDPR", "must integrate with Salesforce"). State the constraint and the
+  business reason. Do not prescribe the solution.
+- User experience expectations stated as outcomes (e.g., "page loads in under
+  2 seconds", "user can complete checkout in 3 steps") not as technical
+  mechanisms.
+
+The Product Owner must NOT include:
+
+- Technology choices (languages, frameworks, databases, cloud services).
+- Component design or system decomposition.
+- Data model, schema, or storage decisions.
+- Integration patterns or API design.
+- Deployment approach or infrastructure decisions.
+- Security implementation details (the PO states compliance requirements; the
+  Architect designs the controls).
+
+When the Product Owner has prior experience or context that suggests a
+technical direction, record it as context for the Architect, not as a
+requirement. Label it explicitly: "Context for Architect: we used X in a
+similar product and it worked well because Y."
+
+If a product brief contains technical prescriptions, the Architect must flag
+them and return the brief for revision. Technical prescriptions in a product
+brief create false constraints that limit the Architect's ability to find the
+right solution.
+
+## Repository and Folder Setup
+
 For a new product or tool, the Product Owner verifies that the repository exists
 or requests repository creation. After the repository exists, the Product Owner
 creates the product folder structure:
@@ -46,13 +87,20 @@ Each issue contains:
 - User goal or business reason.
 - Scope.
 - Out-of-scope notes.
-- Acceptance criteria.
-- Dependencies.
+- Acceptance criteria stated as observable behavior.
+- Product dependencies (other features, business milestones, external
+  approvals). Do not list technical dependencies — those are identified by the
+  Architect and managed by the Technical Lead.
+- Business-driven constraints when applicable.
 - Target release Milestone.
 - Priority.
 - Status.
-- Technology label when known.
 - Architecture review requirement when the issue is technically significant.
+
+The issue must not prescribe technical approach, technology choices, or
+implementation details. If the Product Owner has technical context that may
+help, record it in a clearly labeled "Context for Architect" section in the
+issue body.
 
 Developers do not interpret the original brief directly. Developers implement
 GitHub Issues marked `ready-for-dev`.
