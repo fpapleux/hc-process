@@ -18,17 +18,16 @@ Technology controls technique.
 
 ```text
 .
-  agents/       agent role profiles and profile composition rules
-  process/      operating processes for product work
-  security/     environment, secrets, and security follow-up
-  tools/        canonical reusable tool manuals
-  technologies/ technology-specific standards and practices
-  products/     product-specific profiles and context
-  README.md     repository overview
+  agents/        agent role profiles and profile composition rules
+  documents/     document templates and standards (briefs, design docs, plans)
+  process/       operating processes and role definitions
+  security/      environment, secrets, and security follow-up
+  tools/         canonical reusable tool manuals
+  technologies/  technology-specific standards and practices
+  products/      product-specific profiles and context
+  wildwest/      Wild West product (active product using this process)
+  README.md      repository overview
 ```
-
-The `products/` folder may not exist yet. It is part of the intended structure
-and will be added as product profiles are defined.
 
 ## Agents
 
@@ -37,7 +36,10 @@ and will be added as product profiles are defined.
 Current role profiles:
 
 - Product Owner
+- UX Design Lead
 - Architect
+- Tech Lead
+- Operations Lead
 - Developer
 - QA
 - Release
@@ -57,15 +59,34 @@ Current process definitions:
 
 - [Overview](process/overview.md)
 - [Product Owner](process/product-owner.md)
+- [UX Design Lead](process/ux-design-lead.md)
 - [Architect](process/architect.md)
+- [Tech Lead](process/tech-lead.md)
+- [Operations Lead](process/operations-lead.md)
 - [Developer](process/developer.md)
 - [QA](process/qa.md)
 - [Release](process/release.md)
 - [Product environments](process/environments.md)
 
-The process documents define issue lifecycle, release planning, architecture
-review, development, QA, defect management, release assembly, production
-promotion, and environment promotion.
+The process documents define the product lifecycle from ideation through
+production: product ownership, UX design, architecture review, technical
+leadership, operations planning, development, QA, defect management, release
+assembly, production promotion, and environment promotion.
+
+## Documents
+
+[documents/](documents/) defines templates and standards for the documents
+produced during the product lifecycle.
+
+Current document types:
+
+- [Product Brief](documents/product-brief.md) — product vision, goals, scope, and success criteria
+- [UX Design Document](documents/ux-design-document.md) — user experience design, flows, and specifications
+- [Architecture Design Document](documents/architecture-design-document.md) — system architecture, components, and technical decisions
+- [Operations Plan](documents/operations-plan.md) — deployment, monitoring, and operational procedures
+
+Each document is produced by the role responsible for that domain and serves as
+the handoff artifact to downstream roles in the process.
 
 ## Security
 

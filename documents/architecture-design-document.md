@@ -536,14 +536,250 @@ graph LR
 
 ---
 
-## 5. Integration Architecture
+## 5. Development Architecture
+
+This section maps every component from section 4 to its physical realization:
+what artifacts contain it, where the source lives, how it is built, where
+artifacts are stored, how they are deployed, to which environment, and under
+what conditions. This is the bridge between the conceptual architecture and
+the actual codebase and delivery pipeline.
+
+Every platform, application, and data component documented in section 4 must
+appear in this section. If a component cannot be mapped to a concrete artifact,
+source location, and deployment mechanism, the architecture is incomplete.
+
+### 5.1 Repository Structure
+
+Document how source code is organized:
+
+- **Repository strategy**: monorepo, multi-repo, or hybrid. State the reason
+  for the chosen strategy.
+- **Repository inventory**: for each repository, record the name, URL,
+  purpose, and what components it contains.
+- **Directory structure**: the significant directory conventions within each
+  repository. State where application code, tests, configuration,
+  infrastructure-as-code, migrations, and documentation live.
+- **Code ownership**: which team, role, or individual owns which paths. State
+  whether ownership is enforced (CODEOWNERS file, branch protection, review
+  requirements).
+
+For multi-repo setups, produce a Mermaid diagram showing the repository
+relationships:
+
+```mermaid
+graph LR
+    subgraph Repositories
+        API["api-service repo"]
+        Worker["worker repo"]
+        Infra["infrastructure repo"]
+        Shared["shared-lib repo"]
+    end
+
+    API -->|"depends on"| Shared
+    Worker -->|"depends on"| Shared
+    Infra -->|"provisions for"| API
+    Infra -->|"provisions for"| Worker
+```
+
+### 5.2 Artifact Inventory
+
+For every component in sections 4.2, 4.3, and 4.4, document the artifact that
+contains it:
+
+| Field | Description |
+| --- | --- |
+| Component | Name from section 4 (e.g., "API Service", "Order Database", "Migration Scripts"). |
+| Layer | Infrastructure, platform, application, or data. |
+| Source location | Repository and path (e.g., `api-service/src/`). |
+| Build mechanism | How source becomes artifact (Dockerfile, webpack, pip build, cargo build, SAM build, Terraform plan, SQL migration tool). |
+| Output artifact | What the build produces (container image, static bundle, Python wheel, Lambda zip, Terraform state, migration files). |
+| Artifact registry | Where the built artifact is stored (container registry, npm registry, S3 bucket, artifact repository, Git tag). |
+| Versioning scheme | How artifacts are versioned (semver, git SHA, date-based, commit count). State how the version is assigned (CI pipeline, manual tag, automatic from commit). |
+
+Example:
+
+| Component | Layer | Source location | Build mechanism | Output artifact | Artifact registry | Versioning |
+| --- | --- | --- | --- | --- | --- | --- |
+| API Service | Application | `api-service/` | Dockerfile | Container image | ECR `api-service` | Git SHA (short) |
+| Background Worker | Application | `worker/` | Dockerfile | Container image | ECR `worker` | Git SHA (short) |
+| Order Schema | Data | `api-service/migrations/` | Alembic | Migration files | Bundled in API image | Sequential migration number |
+| Infrastructure | Infrastructure | `infra/` | Terraform | Terraform state | S3 `infra-state` | Workspace per environment |
+| Shared Library | Application | `shared-lib/` | pip build | Python wheel | Private PyPI | Semver |
+
+Every component from section 4 must appear in this table. If a component has
+no distinct artifact (e.g., it is bundled into another component's artifact),
+record that relationship explicitly.
+
+### 5.3 Build Pipeline
+
+Document the build pipeline for each artifact:
+
+For each pipeline, record:
+
+- **Pipeline definition location**: where the CI/CD configuration lives
+  (e.g., `.github/workflows/api-build.yml`, `Jenkinsfile`, `buildspec.yml`).
+- **Trigger**: what starts the pipeline (push to branch, pull request, merge
+  to main, manual dispatch, tag creation, schedule).
+- **Stages**: ordered list of build stages with what each does.
+- **Quality gates**: what checks must pass at each stage before the next
+  stage runs (lint, type check, unit tests, integration tests, security scan,
+  container scan, coverage threshold).
+- **Build dependencies**: what must build or be available before this pipeline
+  can run (shared library published, base image available, infrastructure
+  provisioned).
+- **Build outputs**: what the pipeline produces and where it stores them.
+- **Build duration target**: maximum acceptable build time.
+
+Produce a Mermaid diagram for the primary build pipeline:
+
+```mermaid
+flowchart LR
+    Source["Source Push"] --> Lint["Lint + Type Check"]
+    Lint --> Test["Unit Tests"]
+    Test --> Security["SAST + SCA"]
+    Security --> Build["Build Image"]
+    Build --> IntTest["Integration Tests"]
+    IntTest --> Push["Push to Registry"]
+    Push --> Tag["Tag Artifact"]
+```
+
+### 5.4 Deployment Architecture
+
+For every artifact, document how it reaches each environment:
+
+#### Environment Inventory
+
+List every environment the system uses:
+
+| Environment | Purpose | Who operates it | Access control |
+| --- | --- | --- | --- |
+| Local / dev | Developer workstation | Developer | Local credentials |
+| Test / staging | QA validation and release rehearsal | Technical Lead | Non-production credentials, scoped per environment |
+| Production | Live system | Release / Operations | Production credentials, restricted access |
+
+Add or remove environments to match the actual product. State any additional
+environments (sandbox, preview, canary) and their purpose.
+
+#### Deployment Mapping
+
+For each artifact and each target environment, record:
+
+| Field | Description |
+| --- | --- |
+| Artifact | Name from the artifact inventory. |
+| Target environment | Which environment this deployment targets. |
+| Deployment mechanism | How the artifact is deployed (Kubernetes apply, ECS service update, Lambda deploy, Terraform apply, S3 sync, manual script). |
+| Deployment trigger | What causes deployment (merge to main, tag creation, manual approval, pipeline stage, scheduled). |
+| Deployment conditions | What must be true before deployment proceeds (tests passed, artifact built, prior stage deployed, approval gate, change window). |
+| Deployment order | Dependencies on other deployments (e.g., "infrastructure must deploy before application", "migrations must run before API restart"). |
+| Rollback mechanism | How to undo this deployment (redeploy previous image, revert Terraform, rollback migration). |
+| Zero-downtime | Whether this deployment causes downtime and the mechanism that prevents it (rolling update, blue-green, canary). |
+
+Example:
+
+| Artifact | Environment | Mechanism | Trigger | Conditions | Order | Rollback |
+| --- | --- | --- | --- | --- | --- | --- |
+| API image | Production | ECS rolling update | Merge to `main` | All tests pass, staging validated | After migration | Redeploy previous image tag |
+| Migrations | Production | Alembic upgrade | Before API deploy | Staging migration validated | First | Alembic downgrade |
+| Infrastructure | Production | Terraform apply | Manual approval | Plan reviewed and approved | Before all others | Terraform apply previous state |
+| Static assets | Production | S3 sync + CDN invalidation | After API deploy | API deploy succeeded | After API | Sync previous version |
+
+Produce a deployment flow diagram showing the deployment order and dependencies:
+
+```mermaid
+flowchart TD
+    Infra["Infrastructure\n(Terraform)"] --> Migration["Database Migration\n(Alembic)"]
+    Migration --> API["API Service\n(ECS Rolling)"]
+    API --> Worker["Background Worker\n(ECS Rolling)"]
+    API --> Assets["Static Assets\n(S3 + CDN)"]
+```
+
+### 5.5 Configuration Management
+
+Document how configuration varies across environments:
+
+#### Configuration Sources
+
+For each environment, state where configuration comes from:
+
+| Source type | Description | Examples |
+| --- | --- | --- |
+| Environment variables | Injected at runtime by the deployment platform. | `DATABASE_URL`, `LOG_LEVEL`, `FEATURE_FLAG_X` |
+| Configuration files | Checked into source control, per-environment variants. | `config/production.yaml`, `config/staging.yaml` |
+| Secrets manager | Sensitive values stored in a dedicated secrets service. | AWS Secrets Manager, HashiCorp Vault, GCP Secret Manager |
+| Feature flags | Runtime-toggleable configuration. | LaunchDarkly, environment-specific flag sets |
+| Infrastructure outputs | Values produced by infrastructure provisioning. | Terraform outputs, CloudFormation exports |
+
+For each configuration value that differs across environments, record:
+
+| Config key | Local/dev | Test/staging | Production | Source |
+| --- | --- | --- | --- | --- |
+| `DATABASE_URL` | `localhost:5432/dev` | `staging-db:5432/test` | Secrets Manager | Environment variable |
+| `LOG_LEVEL` | `DEBUG` | `INFO` | `WARN` | Config file |
+| `API_KEY_PAYMENT` | Test key (hardcoded) | Test key (secrets) | Production key (secrets) | Secrets Manager |
+
+#### Secret Management
+
+For each secret the system uses, record:
+
+- **Secret name**: identifier.
+- **Purpose**: what it authenticates or protects.
+- **Storage**: where the secret is stored (secrets manager, environment
+  variable, encrypted file).
+- **Injection**: how the secret reaches the runtime (environment variable,
+  mounted file, SDK call).
+- **Rotation**: the rotation schedule and mechanism (manual, automated,
+  triggered by event).
+- **Access**: which components and which roles can read the secret.
+
+Secrets must never appear in source code, configuration files committed to
+version control, logs, or error messages. State how this is enforced (secret
+scanning in CI, log filtering, .gitignore rules).
+
+### 5.6 Version Control Strategy
+
+Document the branching and release model:
+
+- **Branching model**: trunk-based, Git Flow, GitHub Flow, or custom. State
+  the model and the reason for choosing it.
+- **Branch naming convention**: the pattern for feature branches, release
+  branches, and hotfix branches.
+- **Merge strategy**: merge commit, squash merge, or rebase. State the policy
+  and the reason.
+- **Release tagging convention**: how releases are tagged (semver, date-based,
+  milestone-based). State what triggers a tag.
+- **Branch protection**: what rules are enforced on the main branch (required
+  reviews, required status checks, no force push, signed commits).
+- **Feature branch lifecycle**: how long feature branches live, when they are
+  deleted, how stale branches are handled.
+
+### 5.7 Local Development Environment
+
+Document the local setup a developer needs:
+
+- **Required dependencies**: language runtimes, tools, and their versions.
+  State whether a version manager is used (nvm, pyenv, asdf).
+- **Local services**: what platform services run locally (database, queue,
+  cache) and how (Docker Compose, local install, cloud dev instance).
+- **Setup steps**: the exact commands to go from a fresh clone to a running
+  local system. State the target setup duration.
+- **Local configuration**: how local dev configuration is managed (`.env`
+  file, local config override, environment variables).
+- **Local credentials**: how developers get non-production credentials for
+  local development. State whether credentials are shared, per-developer, or
+  auto-provisioned.
+- **Local testing**: how developers run tests locally before pushing.
+
+---
+
+## 6. Integration Architecture
 
 Document every integration point where the system communicates with an external
 system, third-party service, or independently deployed internal system. Section
 2.2 identified these boundaries. This section specifies the contracts and
 resilience patterns for each.
 
-### 5.1 Integration Inventory
+### 6.1 Integration Inventory
 
 For each integration, record:
 
@@ -561,7 +797,7 @@ For each integration, record:
 | Failure mode | What happens when this integration is unavailable. |
 | Resilience pattern | Retry, circuit breaker, fallback, dead letter queue, timeout. |
 
-### 5.2 Critical Path Sequences
+### 6.2 Critical Path Sequences
 
 For each critical user journey that crosses an integration boundary, produce a
 sequence diagram:
@@ -584,7 +820,7 @@ sequenceDiagram
 Show the happy path first. Add error paths as separate diagrams or `alt`
 blocks when the failure handling is architecturally significant.
 
-### 5.3 Authentication and Authorization Flows
+### 6.3 Authentication and Authorization Flows
 
 Document how identity and permissions flow across integration boundaries:
 
@@ -614,7 +850,7 @@ sequenceDiagram
 
 ---
 
-## 6. Capability Assessment
+## 7. Capability Assessment
 
 Capabilities are quality attributes and operating abilities. Assess them from
 three angles: runtime, operations, and development.
@@ -636,7 +872,7 @@ verification method is not acceptable.
 Skip capabilities that are genuinely not material, but record them as `non-goal`
 with a one-line justification rather than omitting them silently.
 
-### 6.1 Runtime Capabilities
+### 7.1 Runtime Capabilities
 
 Assess the following capabilities. Each entry must use the five-field format
 above.
@@ -682,7 +918,13 @@ the recovery path is. Include infrastructure failures (host loss, network
 partition), platform failures (database outage, queue backup), and application
 failures (crash loop, memory leak, deadlock).
 
-### 6.2 Operations Capabilities
+### 7.2 Operations Capabilities
+
+The operations capabilities defined in this section are design-time
+requirements. They feed the initial operations plan produced by the Architect
+per the [Operations Plan Document Specification](operations-plan.md). The
+Operations Lead adapts the operations plan to the live production environment
+after the first release.
 
 Assess the following capabilities. Each entry must use the five-field format
 above.
@@ -727,7 +969,7 @@ how access to production systems is controlled and audited.
 **Cost.** State the primary cost drivers. State how cost scales with load.
 State the monthly cost ceiling and the alerting threshold for cost anomalies.
 
-### 6.3 Development Capabilities
+### 7.3 Development Capabilities
 
 Assess the following capabilities. Each entry must use the five-field format
 above.
@@ -766,7 +1008,7 @@ ownership is enforced (CODEOWNERS file, review requirements, access controls).
 
 ---
 
-## 7. Decisions
+## 8. Decisions
 
 Record every architecturally significant decision using this format. A decision
 is architecturally significant when it affects system structure, quality
@@ -817,9 +1059,9 @@ decision in the architecture note.
 
 ---
 
-## 8. Risks and Open Questions
+## 9. Risks and Open Questions
 
-### 8.1 Risks
+### 9.1 Risks
 
 For each identified architectural risk, record:
 
@@ -836,7 +1078,7 @@ Do not list risks that have no bearing on architectural decisions. Every risk
 listed must connect to a component, capability, integration, or decision
 documented earlier in this document.
 
-### 8.2 Open Questions
+### 9.2 Open Questions
 
 Record questions that require resolution before or during implementation. Each
 question must include:
@@ -846,19 +1088,19 @@ question must include:
 - Who can answer it.
 - What the architect assumes in the absence of an answer.
 
-### 8.3 Follow-Up Architecture Work
+### 9.3 Follow-Up Architecture Work
 
 Record architecture work that is identified but deferred. Each entry must state
 what the work is, why it is deferred, and what triggers the need to complete it.
 
 ---
 
-## 9. Implementation and Verification
+## 10. Implementation and Verification
 
 This section bridges architecture into development and QA. It translates
 architectural decisions into actionable constraints.
 
-### 9.1 Developer Implementation Constraints
+### 10.1 Developer Implementation Constraints
 
 State what the developer must follow during implementation. Each constraint must
 reference the architectural decision, principle, or component that motivates it.
@@ -887,7 +1129,7 @@ Examples of implementation constraints:
   business logic (motivated by the input validation requirement in section
   4.3).
 
-### 9.2 QA Verification Expectations
+### 10.2 QA Verification Expectations
 
 State what QA must validate from an architecture perspective. These are in
 addition to functional acceptance criteria.
@@ -910,7 +1152,7 @@ Examples of verification expectations:
 - Verify that expired or tampered tokens are rejected at every trust boundary.
 - Verify that rate limiting activates under simulated abuse load.
 
-### 9.3 Architecture Review on Pull Requests
+### 10.3 Architecture Review on Pull Requests
 
 State the conditions under which the architect must review pull requests for
 this product. Reference specific components, boundaries, or contracts that
@@ -918,7 +1160,7 @@ trigger review.
 
 ---
 
-## 10. Scaling Rules
+## 11. Scaling Rules
 
 This section defines what is required and what is optional at each scope level,
 and how to work with existing artifacts.
@@ -977,13 +1219,20 @@ table marks the minimum depth for each:
 | 4.2 Platform | Component inventory with segmentation rules, encryption at rest, and access control. Diagram if more than one service. |
 | 4.3 Application | Component inventory with responsibilities, boundaries, interfaces, authentication, authorization, and input validation. Application component diagram required. |
 | 4.4 Data | Data classification table. Entity list with ownership and per-entity classification. Data model diagram required. Schema evolution approach stated. Encryption at rest and access control per data store. |
-| 5. Integration | Integration inventory for every external boundary including encryption in transit, authentication, authorization, and data classification. Sequence diagram for at least one critical path. |
-| 6.1 Runtime | Performance, reliability, security, and privacy assessed with five-field format. |
-| 6.2 Operations | Deployability, observability, rollback, and security operations assessed with five-field format. |
-| 6.3 Development | Testability, security testing, local development, and CI/CD assessed with five-field format. |
-| 7. Decisions | At least one decision with full format including security impact. |
-| 8. Risks | At least one risk and one open question section. |
-| 9. Implementation | Developer constraints and QA verification expectations including security constraints and security verification. |
+| 5.1 Repository Structure | Repository inventory with strategy and directory conventions. Diagram for multi-repo setups. |
+| 5.2 Artifact Inventory | Every component from section 4 mapped to its artifact, source location, build mechanism, output, registry, and versioning scheme. |
+| 5.3 Build Pipeline | Pipeline definition, triggers, stages, quality gates, and build outputs for each artifact. Pipeline diagram required. |
+| 5.4 Deployment Architecture | Environment inventory. Deployment mapping for every artifact to every target environment with mechanism, trigger, conditions, order, and rollback. Deployment flow diagram required. |
+| 5.5 Configuration Management | Configuration sources per environment. Secret inventory with storage, injection, rotation, and access. |
+| 5.6 Version Control Strategy | Branching model, merge strategy, tagging convention, branch protection rules. |
+| 5.7 Local Development | Setup steps, dependencies, local services, credentials, and testing approach. |
+| 6. Integration | Integration inventory for every external boundary including encryption in transit, authentication, authorization, and data classification. Sequence diagram for at least one critical path. |
+| 7.1 Runtime | Performance, reliability, security, and privacy assessed with five-field format. |
+| 7.2 Operations | Deployability, observability, rollback, and security operations assessed with five-field format. |
+| 7.3 Development | Testability, security testing, local development, and CI/CD assessed with five-field format. |
+| 8. Decisions | At least one decision with full format including security impact. |
+| 9. Risks | At least one risk and one open question section. |
+| 10. Implementation | Developer constraints and QA verification expectations including security constraints and security verification. |
 
 ### Scoped Document Requirements
 
@@ -995,11 +1244,12 @@ A `scoped` architecture note must include:
 | 2. Context and Scope | Business context and system boundary for this change (must reference the `full` document). Diagram optional. |
 | 3. Principles and Patterns | Only principles and patterns relevant to this issue. Must reference the `full` document. |
 | 4. Component Architecture | Only affected layers and components. Diagram optional but recommended when boundaries change. Security fields required for affected components. |
-| 5. Integration | Only affected integrations with security fields. Sequence diagram optional. |
-| 6. Capabilities | Only capabilities affected by this issue, using five-field format. Security capability required when the change affects trust boundaries, data access, or authentication. |
-| 7. Decisions | At least one decision with context, decision, rationale, security impact, and alternatives. |
-| 8. Risks | Risks and open questions relevant to this issue. |
-| 9. Implementation | Developer constraints and QA verification expectations for this issue, including security constraints when applicable. |
+| 5. Development Architecture | Only affected artifacts, pipelines, deployments, or configuration. Required when the change introduces a new artifact, modifies the build pipeline, changes deployment behavior, or alters configuration management. |
+| 6. Integration | Only affected integrations with security fields. Sequence diagram optional. |
+| 7. Capabilities | Only capabilities affected by this issue, using five-field format. Security capability required when the change affects trust boundaries, data access, or authentication. |
+| 8. Decisions | At least one decision with context, decision, rationale, security impact, and alternatives. |
+| 9. Risks | Risks and open questions relevant to this issue. |
+| 10. Implementation | Developer constraints and QA verification expectations for this issue, including security constraints when applicable. |
 
 A `scoped` document that touches a section already covered in a `full` document
 must reference the `full` document and state only what changes or what is added.
@@ -1036,7 +1286,7 @@ necessary is lower than the cost of missing a dimension.
 
 ---
 
-## 11. Mermaid Diagram Standards
+## 12. Mermaid Diagram Standards
 
 All diagrams in architecture documents must use Mermaid syntax. Mermaid renders
 natively in GitHub, most markdown tools, and agent-facing documentation
@@ -1052,8 +1302,11 @@ systems.
 | 4.3 Application | Application component (`graph`) | Always for `full`. |
 | 4.4 Data Model | Entity relationship (`erDiagram`) or data model (`graph`) | Always for `full`. |
 | 4.4 Data Flow | Data flow (`graph`) | When more than one data movement path exists. |
-| 5.2 Critical Paths | Sequence (`sequenceDiagram`) | At least one critical path for `full`. |
-| 5.3 Auth Flow | Auth sequence (`sequenceDiagram`) | When more than one trust boundary exists. Always for `full` when the product handles restricted or confidential data. |
+| 5.1 Repository Structure | Repository relationship (`graph`) | When the system uses multiple repositories. |
+| 5.3 Build Pipeline | Build pipeline flow (`flowchart`) | Always for `full`. |
+| 5.4 Deployment Architecture | Deployment flow (`flowchart`) | Always for `full`. |
+| 6.2 Critical Paths | Sequence (`sequenceDiagram`) | At least one critical path for `full`. |
+| 6.3 Auth Flow | Auth sequence (`sequenceDiagram`) | When more than one trust boundary exists. Always for `full` when the product handles restricted or confidential data. |
 
 ### Diagram Conventions
 

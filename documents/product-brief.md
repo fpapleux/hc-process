@@ -64,8 +64,10 @@ Create exactly these slides, in this order:
 4. **Value Proposition**: The core promise. Use a blue callout for the
    one-sentence value statement plus supporting copy.
 5. **Solution Overview**: Key capabilities. Use capability cards.
-6. **How It Works**: Architecture, operating model, or user flow as a Mermaid
-   diagram inside `.flow-diagram`.
+6. **How It Works**: User journey, operating model, or conceptual workflow as
+   a Mermaid diagram inside `.flow-diagram`. Show the experience from the
+   user's perspective. Do not define system architecture, component design,
+   or technical implementation — those belong to the Architect.
 7. **Differentiators**: Why this product over alternatives. Use a comparison
    table or differentiator cards.
 8. **Success Metrics**: KPIs as stat cards.
@@ -85,9 +87,33 @@ clear TODO placeholders.
 
 ## Product Owner Boundaries
 
-When operating as Product Owner, the brief may define product scope and follow-up
-work, but the Product Owner must not implement code, mutate production, deploy,
-or perform QA validation.
+The product brief defines WHAT and WHY. It must not define HOW.
+
+The brief must include:
+
+- User goals and business outcomes.
+- Scope and out-of-scope boundaries.
+- Acceptance criteria stated as observable behavior, not implementation.
+- Business-driven constraints that have technical implications (state the
+  constraint and the business reason, not the solution).
+- Target user descriptions.
+
+The brief must NOT include:
+
+- Technology choices (languages, frameworks, databases, cloud services).
+- Component design or system decomposition.
+- Data model, schema, or storage decisions.
+- Integration patterns or API design.
+- Deployment approach or infrastructure decisions.
+- Security implementation details (state compliance requirements; the Architect
+  designs the controls).
+
+When the Product Owner has technical context from prior experience, record it
+in the "Design Decisions" slide explicitly labeled as context for the Architect,
+not as a requirement.
+
+The Product Owner must not implement code, create PRs, mutate production,
+deploy, or perform QA validation.
 
 ## Mermaid Rules
 
@@ -105,6 +131,19 @@ Brief diagrams must favor legibility over density.
 - Use concise node labels and move detailed explanation into slide text, cards,
   or tables.
 - If a flow becomes crowded, split it across multiple diagrams or use phases.
+
+## Handoff
+
+When the product brief is accepted by the operator, the next step in the
+process is the UX Design Lead. The UX Design Lead reads the accepted product
+brief and produces the UX design document (user flows, wireframes, interaction
+specs, accessibility requirements). The product brief is also consumed later by
+the Architect alongside the approved UX designs.
+
+The product brief must be complete enough for the UX Design Lead to identify
+all user types, goals, journeys, and constraints without guessing. If the brief
+does not describe who the users are or what they need to accomplish, it is not
+ready for handoff.
 
 ## Completion Message
 

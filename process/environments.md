@@ -68,6 +68,16 @@ Release:
 - Uses production credentials only through approved release tooling.
 - Records production promotion evidence.
 
+Operations Lead:
+
+- Monitors production environment health through approved observability
+  tooling.
+- Does not receive ad-hoc production mutation access.
+- Executes production changes only through documented runbook procedures
+  (scaling, restart, failover).
+- Uses production credentials only through approved operational tooling.
+- Creates GitHub Issues for operational problems found in production.
+
 Product Owner:
 
 - Defines whether a product requires local, test, staging, and production

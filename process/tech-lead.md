@@ -32,15 +32,16 @@ The Technical Lead is responsible for:
 
 ### Development Planning
 
-The Technical Lead produces a development plan from two accepted inputs:
+The Technical Lead produces a development plan from three accepted inputs:
 
 | Input | Source | Purpose |
 | --- | --- | --- |
 | Product brief | Product Owner | Defines what to build: user goals, business outcomes, scope, acceptance criteria. |
+| UX design document | UX Design Lead (refined by operator) | Defines how the user experiences the product: user flows, wireframes, interaction specs, accessibility requirements. |
 | Architecture design document | Architect | Defines how it is structured: components, integrations, capabilities, constraints, security posture. |
 
-Both inputs must be in `accepted` status before the Technical Lead begins
-planning. If either is in `draft` or `review`, the Technical Lead returns it to
+All three inputs must be in `accepted` status before the Technical Lead begins
+planning. If any is in `draft` or `review`, the Technical Lead returns it to
 its owner.
 
 The development plan:
@@ -193,6 +194,8 @@ Lead owns maintenance priority independently.
 The Technical Lead starts development planning only when:
 
 - The product brief exists and is accepted by the Product Owner.
+- The UX design document exists and is accepted (approved by operator with
+  visual design applied).
 - The architecture design document exists and is accepted by the Architect.
 - The active release milestone exists.
 - The product folder structure is created (`dev/`, `tst/`, `prod/`,
@@ -201,6 +204,8 @@ The Technical Lead starts development planning only when:
 For maintenance work, the Technical Lead starts from:
 
 - Defect issues created by QA with required fields.
+- Operational issues created by the Operations Lead (labeled `ops-identified`)
+  with evidence, impact, and urgency.
 - Maintenance items identified by the Technical Lead, developers, or
   operations.
 
@@ -250,6 +255,12 @@ To Architect:
 - Architecturally significant defects or maintenance items that need review
   before development.
 - Implementation questions that reveal architecture gaps.
+
+To Operations Lead:
+
+- Release schedules and deployment timelines that affect operational
+  monitoring.
+- Resolution status of `ops-identified` issues.
 
 To Product Owner:
 

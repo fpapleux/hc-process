@@ -163,19 +163,27 @@ Each issue targeted for the active release records:
 
 ## Handoffs
 
-To Developer:
+To UX Design Lead (via operator):
 
-- Issue is assigned to the active Milestone.
-- Issue has acceptance criteria.
-- Issue has enough scope detail to implement.
-- Technically significant issue has architecture review evidence.
-- Issue is marked `ready-for-dev`.
+- Accepted product brief with user goals, business outcomes, scope, acceptance
+  criteria, target user descriptions, and business-driven constraints.
+- The brief does not contain technology choices, implementation prescriptions,
+  or visual design specifications.
 
-To Architect:
+To Architect (via operator, after UX design is approved):
 
-- Issue has product scope and acceptance criteria.
-- Issue records the technical question, known constraints, and target product.
+- Accepted product brief.
+- Approved UX design document (with operator's visual design refinement).
+- Issue records the business question, known constraints, and target product.
 - Issue is marked `needs-architecture`.
+
+To Technical Lead:
+
+- Product brief is accepted.
+- UX design document is accepted (approved by operator).
+- Architecture design document is accepted (produced by the Architect).
+- Active release milestone exists.
+- Release scope is defined: which issues are included, which are deferred.
 
 To Release:
 
