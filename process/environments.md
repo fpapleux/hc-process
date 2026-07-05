@@ -1,6 +1,12 @@
 # Product Environment Process
 
-Products with mutable external systems use explicit environment lanes.
+Products with mutable runtime behavior or mutable external-system access use
+explicit environment lanes.
+
+Environment separation is mandatory for every product, platform, feature, tool,
+and runtime we build now or in the future. Production and non-production are
+separate runtime worlds. This is a process control, not a technology
+preference.
 
 ## Environment Lanes
 
@@ -8,8 +14,41 @@ Products with mutable external systems use explicit environment lanes.
 local/dev -> test/staging -> production
 ```
 
-The target environment is controlled by role, product process, and scoped
-credentials. It is not controlled by a casual `--prod` command-line flag.
+The target environment is controlled by role, product process, separate runtime
+instances, platform permissions, and scoped credentials. It is not controlled
+by a casual `--prod` command-line flag.
+
+A runtime instance has exactly one target environment. A service, UI, API,
+worker, scheduler, CLI daemon, or other mutable runtime must not expose,
+select, proxy, switch between, or manage both production and non-production.
+Environment selection by route parameter, query string, dropdown, command-line
+flag, or config row is not a valid control when the same running process can
+reach both worlds.
+
+There is no "trusted operator" exception. A runtime that can reach both worlds
+is misdesigned even when the operator is expected to choose carefully, the UI
+shows warnings, or the feature is intended only for previews.
+
+For products that expose a runtime platform or service, the first released
+runtime must stand up the non-production platform persistently before the
+environment is called operational. After that point, the non-production
+platform is maintained as an environment, not recreated only for ad-hoc tests.
+Smoke checks for that maintained environment use approved non-production
+credentials, TLS material, configuration, and service targets.
+
+The non-production runtime must prove that it cannot access production. Smoke
+evidence is incomplete unless it shows that non-production credentials,
+configuration, runtime roots, databases, queues, object stores, logs, service
+units, scheduler actions, and external service targets are non-production only.
+
+Generated dummy credentials, generated dummy certificates, and ephemeral test
+fixtures may be used only to validate test harnesses. They are not acceptable
+evidence that a maintained non-production platform is operational.
+
+Operations Lead owns creation and maintenance of host-managed environment
+material. Release consumes approved material to validate and promote the
+released artifact. Release must not invent credentials, TLS keys, service
+accounts, or trust material to unblock its own smoke checks.
 
 ## Platform And Application Segmentation
 
@@ -25,8 +64,16 @@ Default rule:
 
 - Use one production platform.
 - Use one non-production platform.
-- Segment development and test within the non-production platform when the
-  platform supports safe logical separation.
+- Deploy one production application/runtime instance per product service.
+- Deploy one non-production application/runtime instance per product service.
+- Segment development and test within the non-production platform and
+  non-production runtime instance only when the platform supports safe logical
+  separation.
+
+The default rule is a floor, not a suggestion. A single UI/API/service process
+that can reach both production and non-production is prohibited, even if it
+stores an environment column, renders a warning label, requires a flag, or asks
+the operator to choose carefully.
 
 Examples of non-production segmentation:
 
@@ -38,9 +85,34 @@ Examples of non-production segmentation:
 - separate credentials and service identities;
 - separate application config and data roots.
 
+Examples of required production/non-production separation:
+
+- separate deployed service processes or containers;
+- separate service-manager units and service users when locally hosted;
+- separate runtime roots and source checkouts;
+- separate config roots and `.env` files;
+- separate credentials, service identities, and secret stores;
+- separate databases, schemas, or database files with access scoped to one
+  runtime world;
+- separate queue/topic/bucket/prefix namespaces;
+- separate log roots and backup roots;
+- separate scheduler/cron ownership so non-production cannot trigger
+  production scheduled work;
+- separate UI/API endpoints or network bindings with no cross-environment
+  proxying.
+
+Filesystem, network, credential, and platform permissions must enforce the
+wall. UI labels, documentation, operator memory, or "be careful" workflows are
+not controls.
+
 Create additional platform instances only when there is a recorded reason, such
 as hard isolation, incompatible versions, capacity, security, or release
 rehearsal fidelity.
+
+Create fewer than the required production and non-production runtime instances
+only when the product has no mutable runtime and no mutable external-system
+access. If a product can mutate production data or production systems, missing
+runtime separation is release-blocking.
 
 ## Role Ownership
 
@@ -61,15 +133,32 @@ Architect:
 - Identifies environment, credential, deployment, and operational impact.
 - Does not receive production credentials.
 - Does not run environment mutations.
+- Must reject architecture that lets one runtime instance, UI, API, worker,
+  scheduler, CLI daemon, database handle, or service identity reach both
+  production and non-production.
+- Records missing environment separation as release-blocking architecture
+  rework, not as a cosmetic documentation issue.
 
 Release:
 
 - Promotes validated release branches.
 - Uses production credentials only through approved release tooling.
 - Records production promotion evidence.
+- Consumes approved non-production and production environment material during
+  smoke checks and deployment validation.
+- Does not create or approve host-managed credentials, TLS material, service
+  identities, or secret roots.
+- Must refuse release promotion when non-production can access production
+  runtimes, credentials, data stores, logs, service units, scheduler actions, or
+  external production targets.
 
 Operations Lead:
 
+- Provisions and maintains non-production and production environment material
+  outside Git: secret roots, credentials, TLS material, service-manager
+  configuration, runtime directories, dashboards, alerts, and runbooks.
+- Can be invoked before first production release for scoped non-production
+  provisioning when a runtime release is blocked on real operational material.
 - Monitors production environment health through approved observability
   tooling.
 - Does not receive ad-hoc production mutation access.
@@ -77,6 +166,10 @@ Operations Lead:
   (scaling, restart, failover).
 - Uses production credentials only through approved operational tooling.
 - Creates GitHub Issues for operational problems found in production.
+- Provisions production and non-production runtime material separately. A shared
+  service account, shared runtime root, shared config file, shared DB/log root,
+  or shared scheduler that can cross the production/non-production boundary is
+  not acceptable operational material.
 
 Product Owner:
 
@@ -107,3 +200,6 @@ Scripts that interact with mutable external systems:
 - expose dry-run or preview behavior when practical;
 - record changed IDs, files, counts, and verification commands;
 - fail closed when environment or credential state is unclear.
+- refuse to run when a non-production invocation can resolve production
+  credentials, production runtime roots, production database/log paths, or
+  production external-service targets.

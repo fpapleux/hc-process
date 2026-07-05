@@ -67,16 +67,21 @@ right solution.
 
 ## Repository and Folder Setup
 
-For a new product or tool, the Product Owner verifies that the repository exists
-or requests repository creation. After the repository exists, the Product Owner
-creates the product folder structure:
+For a new product or tool, the Product Owner records the intended product
+identity, target repository need, and target production folder when known. The
+Product Owner does not initialize the repository or create the product phase
+folders.
 
-```bash
-mkdir -p dev tst prod
-```
+If the target GitHub repository does not exist yet, the Product Owner records
+the intended active release milestone instead of creating it. The Technical Lead
+creates or selects that milestone after new product repository bootstrap.
 
-The Product Owner creates or updates the product operating documentation and
-records product-specific decisions there.
+After the Product Owner brief, UX design document, and architecture design
+document are approved, the Technical Lead performs the new product repository
+bootstrap defined in `process/overview.md` and `process/tech-lead.md`.
+
+The Product Owner creates or updates product operating documentation and records
+product-specific decisions there.
 
 ## GitHub Issue Definition
 
@@ -125,28 +130,44 @@ Routing rules:
 
 ## Release Planning
 
-Product Owner agents manage release planning in GitHub.
+Product Owner agents provide release priority and product-scope input.
 
-The Product Owner creates a GitHub Milestone before feature work starts:
+Before feature work starts, the Product Owner records the intended release
+priority and, when useful, the intended milestone name:
 
 ```text
 Milestone: 2026.06.1
-Status: active
+Status: intended
 Target date: YYYY-MM-DD
+Priority input: #123 and #124 must be considered first
 ```
 
-The active Milestone defines the planned release. It contains the GitHub Issues
-targeted for that release.
+The Release Manager opens the planning release record in GitHub at Technical
+Lead request. That planning release record is a GitHub Milestone and release
+tracking issue, not a GitHub Release or tag.
+
+The Technical Lead selects the release scope after receiving Product Owner and
+operator priority input. The Product Owner may request that specific issues be
+included or deferred, but the Technical Lead resolves sequencing, dependency,
+risk, defect, and capacity trade-offs before finalizing the release manifest
+for operator approval.
 
 Release planning rules:
 
 - Exactly one GitHub Milestone is active by default.
 - Every issue selected for implementation is assigned to the active Milestone.
-- The Product Owner owns release scope and issue priority.
+- The Product Owner owns product priority input and user-visible scope
+  decisions.
+- The Technical Lead owns release composition and issue assignment after Product
+  Owner and operator input.
 - Developer agents pick up only issues assigned to the active Milestone.
 - QA agents test only branches connected to issues assigned to the active
   Milestone.
-- Product Owner agents remove issues from the Milestone when they are deferred.
+- Product Owner agents do not create GitHub Releases or tags and do not use
+  them for planning.
+- Product Owner agents do not move issues into or out of the active Milestone
+  after operator approval of the release manifest unless the operator approves
+  the scope change.
 - GitHub Release objects are not used for planning. They are created only after
   production promotion.
 

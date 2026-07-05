@@ -23,6 +23,7 @@ The standard role profiles live in:
 - [developer](developer/README.md)
 - [qa](qa/README.md)
 - [release](release/README.md)
+- [operations-lead](operations-lead/README.md)
 
 The role operating processes live in:
 
@@ -31,6 +32,7 @@ The role operating processes live in:
 - [Developer process](../process/developer.md)
 - [QA process](../process/qa.md)
 - [Release process](../process/release.md)
+- [Operations Lead process](../process/operations-lead.md)
 
 Each role folder uses standard profile file names:
 
@@ -80,6 +82,7 @@ Product-specific context:
 | Developer | Mostly yes | Carries codebase conventions, tests, local setup, and known implementation pitfalls. |
 | QA | Mixed | Uses shared QA discipline, but accumulates product-specific acceptance behavior, fixtures, regressions, and test history. |
 | Release | Mostly cross-product | Applies standard release mechanics across products, with product-scoped configuration and credentials. |
+| Operations Lead | Mostly cross-product | Applies standard environment, monitoring, incident, and runbook discipline with product-scoped infrastructure and secrets. |
 
 ## Product Owner
 
@@ -163,6 +166,26 @@ Responsibilities:
 Release agents can serve multiple products only through product-specific release
 profiles. A release profile defines the repository, branch rules, deployment
 target, smoke tests, credentials, and cleanup rules for one product.
+
+## Operations Lead
+
+Operations Lead is centralized in process but product-scoped in execution.
+
+Responsibilities:
+
+- Provisions and maintains host-managed non-production and production
+  environment material.
+- Owns secret roots, scoped credentials, TLS material, service-manager setup,
+  runtime directories, dashboards, alerts, and runbooks outside Git.
+- Monitors managed environments and records operational issues.
+- Maintains the operations plan after activation.
+- Hands approved environment material to Release without exposing secret
+  values.
+
+Operations Lead agents can serve multiple products only through product-specific
+operations profiles. An operations profile defines the environments, secret
+locations, service-manager rules, monitoring targets, incident procedures, and
+runbooks for one product.
 
 ## Boundary Rules
 

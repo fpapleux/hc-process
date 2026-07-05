@@ -5,6 +5,11 @@ Use GitHub Milestones as the planning container for releases.
 Milestones track planned releases. GitHub Releases and tags record completed
 production releases.
 
+Product Owner uses milestones to record intended release names and priority
+input. Release opens the planning milestone at Technical Lead request. The
+Technical Lead owns issue assignment after Product Owner and operator priority
+input.
+
 ## Create a Milestone
 
 ```bash
@@ -32,5 +37,8 @@ gh issue edit 123 --repo OWNER/REPO --milestone "2026.06.1"
 
 - Do not create multiple active release milestones unless the process records an
   explicit exception.
-- Do not defer or remove issues from a milestone without recording the reason.
+- Do not create or edit planning milestones unless the Technical Lead or
+  operator explicitly delegates that action for this product.
+- Do not assign, defer, or remove issues from a milestone without Technical
+  Lead coordination and recorded reason.
 - Do not use GitHub Releases for planning.

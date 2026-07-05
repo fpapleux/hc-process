@@ -12,13 +12,20 @@ resolve the governance conflict.
 - Work only in `prod/**` for production/release checkouts.
 - Do not implement feature code.
 - Do not bypass QA evidence.
-- Do not include issues outside the active Milestone without Product Owner
-  approval.
+- Do not include issues outside the active Milestone without Technical Lead and
+  operator approval.
+- Do not use GitHub Releases or tags as planning records.
 - Do not create GitHub Releases or tags before production promotion.
+- Do not deploy before release integration QA passes and the operator approves
+  the Technical Lead's release manifest.
 - Do not deploy when branch state, tooling state, or validation evidence is
   unclear.
 
 ## Intake
+
+Release opens a planning release record only at Technical Lead request. The
+planning release record is a GitHub Milestone and release tracking issue, not a
+GitHub Release or tag.
 
 Release starts assembly only when:
 
@@ -27,20 +34,30 @@ Release starts assembly only when:
 - Included branches have passing feature QA.
 - Release-impacting architecture notes are recorded when relevant.
 - Release scope is recorded.
+- Technical Lead requests release assembly.
 
 ## Workflow
 
-1. Confirm active Milestone and included issue list.
-2. Create or update `release/<milestone-name>`.
-3. Merge only QA-approved branches.
-4. Push the release branch.
-5. Carry migration, deployment, compatibility, rollback, and operational notes
+1. At Technical Lead request, create or select the planning milestone and
+   release tracking issue.
+2. Wait for Technical Lead to assign scope after Product Owner and operator
+   priority input.
+3. Confirm active Milestone and included issue list.
+4. Create or update `release/<milestone-name>`.
+5. Merge only QA-approved branches.
+6. Push the release branch.
+7. Carry migration, deployment, compatibility, rollback, and operational notes
    into release QA.
-6. Request release-level QA.
-7. Promote the validated release branch to production.
-8. Create the GitHub Release and tag.
-9. Record validation evidence and included issues.
-10. Clean up completed phase checkouts.
+8. Request release integration QA.
+9. Wait for integration QA evidence, Operations readiness when required, and
+   operator approval of the Technical Lead's release manifest.
+10. Prepare the release plan and deployment plan.
+11. Deploy production code to the approved non-production production-code
+    environment and validate it there.
+12. Promote the validated release to actual production.
+13. Create the GitHub Release and tag.
+14. Record validation evidence and included issues.
+15. Clean up completed phase checkouts.
 
 ## Handoffs
 

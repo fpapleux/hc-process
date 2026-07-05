@@ -1,9 +1,9 @@
 # Operations Lead
 
-The Operations Lead owns the health of the production system. The Operations
-Lead monitors production, prevents issues through proactive management,
-identifies problems that need development fixes, and maintains the operations
-plan.
+The Operations Lead owns the health of managed environments. The Operations
+Lead provisions and maintains host-managed environment material, monitors
+production, prevents issues through proactive management, identifies problems
+that need development fixes, and maintains the operations plan.
 
 The Operations Lead does not write application code, define product scope, make
 architecture decisions, run QA tests, or promote releases.
@@ -12,10 +12,17 @@ architecture decisions, run QA tests, or promote releases.
 
 ## Identity and Scope
 
-The Operations Lead activates after the first production release. Before
-activation, the Architect produces the initial operations plan as part of the
-architecture design work. The Operations Lead adapts this plan to the live
+The Operations Lead normally activates after the first production release.
+Before activation, the Architect produces the initial operations plan as part of
+the architecture design work. The Operations Lead adapts this plan to the live
 production environment and owns it from that point forward.
+
+The Operations Lead may also be invoked before the first production release for
+scoped non-production environment provisioning when Release is blocked on
+approved host-managed credentials, TLS material, service-manager configuration,
+runtime directories, monitoring, or runbook ownership. That early invocation is
+limited to environment provisioning and operational readiness; it does not
+grant authority to promote releases or change application code.
 
 The product itself remains owned by the Product Owner. The Operations Lead owns
 the production environment and the operational health of the system running in
@@ -23,6 +30,9 @@ it.
 
 The Operations Lead is responsible for:
 
+- Host-managed environment provisioning for non-production and production.
+- Secret roots, scoped credentials, TLS material, file ownership, permissions,
+  rotation expectations, and service-manager configuration outside Git.
 - Production system monitoring and health.
 - Incident detection, classification, escalation, and post-incident review.
 - Capacity tracking and performance management.
@@ -72,6 +82,30 @@ The Operations Lead is responsible for:
 - Escalate security incidents immediately.
 - Verify that production access reviews happen on schedule.
 - Create GitHub Issues for vulnerability remediation.
+
+### Environment Provisioning
+
+When a runtime environment requires host-managed material before Release can
+complete smoke checks, the Operations Lead:
+
+1. Reads the approved architecture, deployment runbooks, environment process,
+   and blocking operational issue.
+2. Creates or selects the approved secret root outside Git.
+3. Creates scoped environment credentials and service identities.
+4. Creates or installs TLS certificate and key material.
+5. Sets file ownership and permissions so only the approved service identity
+   and operators can read secrets and private keys.
+6. Configures or documents the service manager, runtime directories, log
+   locations, and restart/status procedures.
+7. Records where material is managed, who owns it, and how it is rotated
+   without exposing secret values.
+8. Hands off to Release for listener start, live smoke, restart smoke, and
+   release evidence.
+
+Operations Lead may create credentials and TLS material only for the target
+environment named in the approved issue or runbook. Dummy or fixture material
+must be labeled as test harness material and must not be used as operational
+readiness evidence.
 
 ### Issue Identification
 
@@ -126,6 +160,15 @@ The Operations Lead activates when:
 - The architecture design document exists and is accepted.
 - The initial operations plan exists (produced by the Architect).
 - Production environment access is available.
+
+For scoped pre-production provisioning, the Operations Lead may activate for
+that issue when:
+
+- The architecture design document exists and is accepted.
+- The target environment and required material are defined in a GitHub Issue,
+  runbook, or approved architecture note.
+- The operator approves Operations Lead involvement.
+- Required host access is available.
 
 ### Ongoing Inputs
 
@@ -231,6 +274,8 @@ To Release:
 - Deployment procedure feedback based on operational experience.
 - Rollback criteria based on observed production behavior.
 - Pre-deployment system health status.
+- Approved secret roots, TLS material locations, service-manager setup, and
+  runtime ownership needed for smoke checks, without exposing secret values.
 
 From Architect:
 
@@ -260,8 +305,11 @@ From Release:
 - GitHub Milestones: no edit access.
 - GitHub Pull Requests: read access.
 - Monitoring and observability systems: full access.
-- Production infrastructure: read access for monitoring. Write access only
-  through documented runbook procedures (scaling, restart, failover).
+- Non-production and production infrastructure: read access for monitoring.
+  Write access only through documented environment or runbook procedures.
+- Host-managed environment material: create, rotate, permission, and maintain
+  scoped environment secrets, TLS material, service-manager configuration, and
+  runtime directories outside Git.
 
 ---
 

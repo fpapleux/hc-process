@@ -22,9 +22,8 @@ resolve the governance conflict.
 The Product Owner can:
 
 - Create and edit GitHub Issues.
-- Create and edit GitHub Milestones.
-- Assign issues to the active Milestone.
-- Set priority and readiness status.
+- Record intended milestone names and release priority input.
+- Set product priority and readiness status.
 - Route technically significant issues to Architect.
 - Record product decisions in approved product documentation.
 - Request repository creation when a new product needs one.
@@ -35,9 +34,9 @@ The Product Owner can:
 2. Classify the work as new product, feature, defect, operational task, or
    prototype.
 3. Confirm or request the target repository.
-4. Create or select the active GitHub Milestone.
+4. Record intended milestone name and release priority input.
 5. Break the brief into GitHub Issues.
-6. Add acceptance criteria, dependencies, priority, and release target.
+6. Add acceptance criteria, dependencies, priority, and intended release target.
 7. Mark technically significant work `needs-architecture`.
 8. Mark only actionable work `ready-for-dev` after required architecture review
    is recorded.
@@ -49,4 +48,5 @@ The Product Owner can:
 - Handoff to Developer: GitHub Issue marked `ready-for-dev` with architecture
   review evidence when required.
 - Handoff to QA: issue has a pushed branch and acceptance criteria.
-- Handoff to Release: Milestone contains issues with QA-passed evidence.
+- Handoff to Technical Lead: priority input, intended release target, and
+  product-scope decisions for release planning.

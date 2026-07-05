@@ -65,9 +65,10 @@ Before implementation starts:
 5. Run relevant technology-profile checks.
 6. Commit with the GitHub Issue number.
 7. Push the feature branch.
-8. Record implementation notes and verification evidence in the GitHub Issue or
+8. Verify that CI has started for the pushed branch when the repository has CI.
+9. Record implementation notes and verification evidence in the GitHub Issue or
    pull request.
-9. Mark the issue `ready-for-qa`.
+10. Mark the issue `ready-for-qa`.
 
 Example:
 
@@ -95,6 +96,19 @@ Verification:
 ```
 
 If a relevant check was not run, record the reason.
+
+When the repository has CI, Developer evidence must also include:
+
+- pushed branch name;
+- pushed commit SHA;
+- CI workflow/run identifier or URL for that exact commit;
+- CI status, or a clear blocker if CI did not start.
+
+If CI does not start for the pushed branch, do not mark the issue
+`ready-for-qa` unless the Technical Lead explicitly records a waiver in the
+issue. Missing CI caused by a workflow trigger that only names specific feature
+branches is a process defect and must be fixed before normal development
+continues.
 
 ## Pull Request Rules
 

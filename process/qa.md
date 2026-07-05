@@ -12,6 +12,8 @@ QA starts feature validation only when:
 - The branch has been pushed.
 - The issue is marked `ready-for-qa`.
 - Acceptance criteria exist.
+- CI evidence exists for the exact pushed branch and commit when the repository
+  has CI, unless the Technical Lead explicitly recorded a waiver.
 - Architecture-specific validation expectations are recorded when the issue is
   marked `architecture-reviewed`.
 
@@ -46,12 +48,43 @@ QA owns acceptance evidence:
 - Reproduction steps.
 - Screenshots or logs when useful.
 - Exact branch and commit tested.
+- CI workflow/run identifier, commit SHA, and pass/fail status when CI exists.
 - Clear pass/fail result.
 - Architecture-specific validation evidence when requested by the Architect.
+
+If the repository has CI and no CI run exists for the tested branch/commit, QA
+does not mark the issue `qa-passed` unless the Technical Lead explicitly
+waived CI for that issue. QA records the missing run as a blocker or defect
+with the branch, commit, expected workflow, and observed workflow state.
 
 QA writes higher-level checks when the project requires them, such as browser
 flows, smoke tests, fixture validations, or deployment checks. The Developer
 remains responsible for turning confirmed bugs into code-level regression tests.
+
+## Release Integration Validation
+
+After Release assembles `release/<milestone-name>`, QA validates the assembled
+release branch in `tst/release-<milestone-name>`. This validation is separate
+from feature-level QA. Passing individual issues is necessary, but it is not
+sufficient for release approval.
+
+Release integration QA verifies:
+
+- The release branch contains only issues assigned to the milestone and not
+  explicitly deferred.
+- Merged behavior works across issue boundaries.
+- Regression, smoke, browser, CLI, API, migration, or deployment rehearsal
+  checks required by the product pass against the assembled release branch.
+- Required CI passes for the release branch commit when CI exists, unless the
+  Technical Lead explicitly records a waiver.
+- Release-impacting architecture notes and operational validation expectations
+  are addressed.
+- No release evidence depends on bypassed validation, fixture credentials,
+  dummy TLS material, disabled certificate verification, or browser security
+  exceptions.
+
+QA records release integration evidence in the release tracking issue or
+milestone before handing the release back to the Technical Lead and Release.
 
 ## Defect Management
 
@@ -111,6 +144,8 @@ QA marks work `qa-passed` only when:
 
 - Acceptance criteria pass.
 - Relevant regression checks pass.
+- Required CI passes for the exact tested commit, unless explicitly waived by
+  Technical Lead.
 - Architecture-specific validation expectations pass when present.
 - Defects are closed or explicitly deferred by the Product Owner.
 - Evidence is recorded in the GitHub Issue.

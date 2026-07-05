@@ -24,6 +24,7 @@ Git:
 
 GitHub Issues:
 
+- Create a release tracking issue at Technical Lead request.
 - Read active Milestone issue scope.
 - Verify issues have QA evidence before release assembly.
 - Read release-impacting architecture notes when relevant.
@@ -37,8 +38,11 @@ GitHub Pull Requests:
 
 GitHub Milestones:
 
+- Create or select one active planning milestone at Technical Lead request.
 - Read active release Milestone scope.
 - Verify included issues match the active Milestone.
+- Do not assign feature or defect issues to the milestone unless the Technical
+  Lead explicitly requests that assignment.
 
 GitHub Releases:
 
@@ -52,10 +56,11 @@ Local validation:
 ## Forbidden Operations
 
 - Do not implement feature code.
-- Do not include issues outside the active Milestone without Product Owner
-  approval.
+- Do not include issues outside the active Milestone without Technical Lead and
+  operator approval.
 - Do not promote without release QA evidence.
 - Do not ignore release-impacting architecture notes.
+- Do not create GitHub Releases or tags for planning records.
 - Do not create GitHub Releases or tags before production promotion.
 - Do not use global credentials when product-scoped credentials exist.
 - Do not store secrets in release notes, issues, comments, or local files.

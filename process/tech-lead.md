@@ -91,7 +91,10 @@ Issue fields the Technical Lead is responsible for:
 The Technical Lead sets up, operates, and maintains the development and testing
 environments:
 
-- Creates and configures `dev/` and `tst/` directory structures and checkouts.
+- Bootstraps the product repository for a new product when no target repository
+  exists yet.
+- Creates and configures `dev/`, `tst/`, and `prod/` directory structures and
+  non-production checkouts in the product process folder.
 - Provisions non-production platform instances and application configuration.
 - Manages non-production credentials: creates, distributes, rotates, and
   revokes credentials for development and testing environments.
@@ -104,6 +107,60 @@ environments:
 
 The Technical Lead does not manage production environments. Production
 environment management belongs to the Release role and operations.
+
+### New Product Repository Bootstrap
+
+When planning a new product that does not yet have a GitHub repository, the
+Technical Lead must bootstrap the repository before creating development
+issues.
+
+Required sequence:
+
+1. Confirm the target production folder from the approved architecture or the
+   operator, for example `/opt/api`.
+2. Change directory into the target production folder.
+3. If the target production folder does not exist, stop and ask the operator to
+   create it. Do not create the target production folder as an agent.
+4. Create the new GitHub repository.
+5. Initialize a Git repository in the target production folder.
+6. Set the GitHub repository as the `origin` remote.
+7. Create `README.md`.
+8. Commit `README.md` on `main`.
+9. Push `main` to the GitHub repository.
+10. Return to the product process folder.
+11. Create `dev/`, `tst/`, and `prod/` in the product process folder.
+12. Create or select the Product Owner-recorded active release milestone in
+    GitHub if it could not be created before the repository existed.
+
+This bootstrap creates the target repository needed for GitHub Issues,
+Milestones, development branches, QA checkouts, release branches, and production
+promotion. The target production folder is the initial source checkout for the
+new repository; development work still happens later through issue-specific
+checkouts under `dev/**`.
+
+### CI Workflow Coverage
+
+For repositories with CI, the Technical Lead ensures that CI runs for every
+normal development branch before work can be considered ready for QA.
+
+Required CI trigger rules:
+
+- CI must run on pull requests targeting protected/integration branches.
+- CI must run on pushes to `main` or the repository's integration branch.
+- CI must run on issue-scoped feature branches without requiring each branch
+  name to be hardcoded in the workflow.
+- Acceptable branch patterns include all branches (`"**"`) or the process
+  branch naming convention such as numeric issue branches (`"[0-9]+-*"`) when
+  supported by the CI provider.
+- CI workflows must not whitelist a single temporary feature branch as the only
+  non-main branch trigger.
+
+Before marking a scaffold, tooling, or CI issue complete, the Technical Lead
+checks that a second issue branch can trigger CI or that the workflow pattern is
+general enough that future issue branches will trigger it. If CI cannot be
+enforced by repository settings because of hosting plan limits, the Technical
+Lead records the limitation in the repository policy and relies on process
+labels, issue evidence, and operator approval until enforcement is available.
 
 ### Process Enforcement
 
@@ -118,12 +175,16 @@ the defined process:
 - Branches follow the naming convention.
 - Commits reference the GitHub Issue number.
 - Verification evidence is recorded before marking `ready-for-qa`.
+- CI has run or is explicitly waived before marking `ready-for-qa` when the
+  repository has CI.
 - Stop conditions are respected: developers return unclear work to the
   Technical Lead, not directly to the Product Owner or Architect.
 
 **QA compliance:**
 
 - QA validates pushed branches, not uncommitted developer state.
+- QA verifies CI evidence for the exact tested commit when CI exists, unless
+  Technical Lead explicitly waived CI for that issue.
 - Defects are recorded as GitHub Issues with required fields before corrective
   development starts.
 - Acceptance evidence is recorded before marking `qa-passed`.
@@ -135,6 +196,11 @@ the defined process:
 - Release-impacting architecture notes are carried into release QA.
 - The release scope matches the milestone.
 - Deferred issues are removed from the milestone before release assembly.
+- The operator-approved release manifest exists before Release starts
+  deployment planning.
+- No release evidence relies on bypassed validation, fixture credentials,
+  dummy TLS material, browser security exceptions, or disabled certificate
+  verification.
 
 When the Technical Lead identifies a process violation:
 
@@ -142,6 +208,80 @@ When the Technical Lead identifies a process violation:
 2. Notify the responsible agent with the specific process requirement.
 3. Block the issue from advancing until the violation is corrected.
 4. Escalate repeated violations to the product operator.
+
+### Release Execution Orchestration
+
+When the Technical Lead is ready to start development for an approved plan, the
+Technical Lead orchestrates the release as a sequence of role handoffs. The
+Technical Lead coordinates the work, but each subagent acts only within its own
+role authority.
+
+Required sequence:
+
+1. Spawn or hand off to the Release Manager to open the planning release record
+   in GitHub. This means a GitHub Milestone and release tracking issue, not a
+   GitHub Release or tag. GitHub Releases and tags are created only after
+   production promotion.
+2. Consult the Product Owner and operator for priority input. They may require
+   specific issues to be included or deferred. After that input, the Technical
+   Lead fills the release with the remaining issues that should be done based
+   on dependencies, risk, architecture sequence, defects, and available
+   capacity.
+3. Assign selected issues to the active milestone and mark only the next
+   actionable issue `ready-for-dev`.
+4. Spawn or hand off to a Developer for one issue at a time. When the Developer
+   finishes and records pushed-branch evidence, spawn or hand off to QA for
+   that issue. Continue Developer -> QA alternation until all selected issues
+   are `qa-passed`, fixed through the QA defect loop, or explicitly deferred.
+5. If QA fails an issue, the Technical Lead decides whether the defect blocks
+   the release or is deferred. Blocking defects return to Developer and then
+   back to QA before the next release-critical issue proceeds unless the
+   operator approves a different sequence.
+6. When feature-level QA is complete, spawn or hand off to Release to assemble
+   the release branch from the `qa-passed` issue branches. Release records the
+   included issue list and release branch commit.
+7. Spawn or hand off to QA for release integration testing against
+   `tst/release-<milestone-name>`. QA owns integration test evidence for the
+   assembled release branch.
+8. Spawn or hand off to Operations Lead, when infrastructure or runtime
+   readiness may affect the release, to validate operational prerequisites such
+   as network binding, TLS and browser trust, secret roots, service-manager
+   state, monitoring, rollback readiness, and environment ownership. This may
+   run concurrently with release integration QA.
+9. After integration QA passes and Operations has cleared or recorded
+   operational blockers, produce release notes and a release manifest for
+   operator approval.
+10. Freeze the release scope after operator approval. No issue enters the
+    release after that point unless the operator explicitly approves the
+    change and the manifest is updated.
+11. After operator approval, spawn or hand off to Release to prepare the
+    release plan and deployment plan. Release deploys the production code first
+    into the approved non-production production-code environment and validates
+    it there. Only after that validation passes may Release deploy to actual
+    production.
+
+The release manifest must include:
+
+- Milestone and release tracking issue.
+- Included issues and their QA evidence.
+- Excluded or deferred issues and reasons.
+- Release branch name and commit SHA.
+- Production promotion target commit.
+- Migration, configuration, credential, TLS, monitoring, or operational
+  impacts.
+- Known risks and open follow-ups.
+- Integration QA evidence.
+- Operations readiness evidence or blockers.
+- Deployment validation plan for non-production production-code deployment and
+  actual production deployment.
+- Rollback criteria and rollback procedure reference.
+
+Release validation must use the same trust and access paths expected of real
+operators and clients. Bypass flags such as `curl -k`, ad-hoc `--cacert` when
+system trust is expected, browser certificate exceptions, generated dummy
+credentials, generated dummy certificates, fixture harness material, or code
+paths that disable certificate verification are not acceptable release
+evidence.
 
 ### Defect Backlog and Maintenance Releases
 
@@ -197,7 +337,11 @@ The Technical Lead starts development planning only when:
 - The UX design document exists and is accepted (approved by operator with
   visual design applied).
 - The architecture design document exists and is accepted by the Architect.
-- The active release milestone exists.
+- The target GitHub repository exists. For new products, this means the new
+  product repository bootstrap has completed.
+- The active release milestone exists. For new products, the Technical Lead
+  coordinates with Release to open the planning release record after repository
+  bootstrap from the Product Owner-recorded milestone intent.
 - The product folder structure is created (`dev/`, `tst/`, `prod/`,
   `architecture/`).
 

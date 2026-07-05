@@ -26,6 +26,11 @@ gh issue create \
 
 Issue bodies must include the fields required by the role process.
 
+Release may create a release tracking issue at Technical Lead request. Release
+tracking issues are planning records for milestone scope, release branch,
+integration QA evidence, operational readiness, deployment planning, and
+promotion evidence. They are not GitHub Releases or tags.
+
 ## Comment on an Issue
 
 ```bash
