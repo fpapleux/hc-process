@@ -37,6 +37,8 @@ The Product Owner must include:
 - User goals and business outcomes.
 - Acceptance criteria stated as observable behavior, not implementation.
 - Scope and out-of-scope boundaries.
+- Roadmap feature inventory organized as a table with `V1 features`,
+  `V2 features`, and `Beyond features`.
 - Business-driven constraints that have technical implications (e.g., "must
   work offline", "must support 10,000 concurrent users", "must comply with
   GDPR", "must integrate with Salesforce"). State the constraint and the
@@ -65,6 +67,25 @@ them and return the brief for revision. Technical prescriptions in a product
 brief create false constraints that limit the Architect's ability to find the
 right solution.
 
+## Roadmap Feature Inventory
+
+The product brief roadmap is the source of truth for planned product features.
+It must include a table with these columns:
+
+| V1 features | V2 features | Beyond features |
+| --- | --- | --- |
+| Feature names planned for the first releasable version. | Feature names planned for the next version. | Feature names intentionally deferred beyond V2. |
+
+Each listed feature needs a stable, human-readable name. When useful, add a
+short feature ID such as `F-V1-01`, but do not turn the ID scheme into a
+technical design. The feature name or ID is used later by the Technical Lead to
+trace GitHub Issues back to Product Owner intent.
+
+Roadmap entries describe user-visible product capability, not implementation
+tasks. Do not list infrastructure chores, component names, database work,
+refactors, or technical setup as roadmap features unless they are explicitly
+the product being delivered.
+
 ## Repository and Folder Setup
 
 For a new product or tool, the Product Owner records the intended product
@@ -89,6 +110,12 @@ Every feature starts as a GitHub Issue. Every defect starts as a GitHub Issue.
 
 Each issue contains:
 
+- Issue type: `feature` or `defect`.
+- Source reference:
+  - For features, the roadmap phase and feature name or feature ID from the
+    accepted product brief.
+  - For defects, the defect report, QA failure, incident, or operator report
+    that created the bug-fix need.
 - User goal or business reason.
 - Scope.
 - Out-of-scope notes.
@@ -109,6 +136,12 @@ issue body.
 
 Developers do not interpret the original brief directly. Developers implement
 GitHub Issues marked `ready-for-dev`.
+
+Every developer-executable issue must directly complete a roadmap feature,
+complete an explicit slice of a roadmap feature, or fix a defect. Supporting
+technical work can be represented only when it is tied to one of those source
+references; it must not become orphan developer work with no feature or defect
+correlation.
 
 ## Architecture Routing
 
@@ -201,10 +234,13 @@ To Architect (via operator, after UX design is approved):
 To Technical Lead:
 
 - Product brief is accepted.
+- Roadmap feature inventory lists V1, V2, and Beyond features.
 - UX design document is accepted (approved by operator).
 - Architecture design document is accepted (produced by the Architect).
 - Active release milestone exists.
 - Release scope is defined: which issues are included, which are deferred.
+- Feature issues cite their source roadmap feature or feature ID, and defect
+  issues cite their source defect record.
 
 To Release:
 

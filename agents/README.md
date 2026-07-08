@@ -91,6 +91,7 @@ The Product Owner is product-specific.
 Responsibilities:
 
 - Turns user briefs into GitHub Issues.
+- Maintains the roadmap feature inventory for V1, V2, and Beyond.
 - Defines scope, out-of-scope boundaries, and acceptance criteria.
 - Creates and manages GitHub Milestones.
 - Owns release scope and issue priority.

@@ -9,6 +9,8 @@ The Developer starts work only from a GitHub Issue that is:
 
 - Assigned to the active release Milestone.
 - Marked `ready-for-dev`.
+- Typed as `feature` or `defect`.
+- Tied to a source roadmap feature or defect record.
 - Clear enough to implement.
 - Paired with acceptance criteria.
 - Paired with a product profile.
@@ -16,9 +18,10 @@ The Developer starts work only from a GitHub Issue that is:
 - Paired with architecture review evidence when the issue is technically
   significant.
 
-If the issue is unclear, missing acceptance criteria, missing a technology
-profile, missing required architecture review, or expanding beyond its scope,
-return it to the Product Owner instead of guessing.
+If the issue is unclear, missing acceptance criteria, missing a source roadmap
+feature or defect record, missing a technology profile, missing required
+architecture review, or expanding beyond its scope, return it to the Technical
+Lead instead of guessing.
 
 ## Branch and Checkout Naming
 
@@ -50,6 +53,8 @@ Before implementation starts:
 
 - Verify the GitHub Issue is assigned to the active release Milestone.
 - Verify the issue is marked `ready-for-dev`.
+- Verify the issue is typed as `feature` or `defect` and tied to a source
+  roadmap feature or defect record.
 - Move the issue to `in-dev`.
 - Confirm the product profile.
 - Confirm the technology profile.
@@ -58,17 +63,19 @@ Before implementation starts:
 
 ## Implementation Workflow
 
-1. Read the GitHub Issue and acceptance criteria.
-2. Inspect the existing codebase before changing it.
-3. Implement the scoped change.
-4. Add or update code-level tests.
-5. Run relevant technology-profile checks.
-6. Commit with the GitHub Issue number.
-7. Push the feature branch.
-8. Verify that CI has started for the pushed branch when the repository has CI.
-9. Record implementation notes and verification evidence in the GitHub Issue or
-   pull request.
-10. Mark the issue `ready-for-qa`.
+1. Read the GitHub Issue, source reference, and acceptance criteria.
+2. Confirm whether the issue completes a roadmap feature, completes a slice of
+   a roadmap feature, or fixes a defect.
+3. Inspect the existing codebase before changing it.
+4. Implement the scoped change.
+5. Add or update code-level tests.
+6. Run relevant technology-profile checks.
+7. Commit with the GitHub Issue number.
+8. Push the feature branch.
+9. Verify that CI has started for the pushed branch when the repository has CI.
+10. Record implementation notes and verification evidence in the GitHub Issue or
+    pull request.
+11. Mark the issue `ready-for-qa`.
 
 Example:
 

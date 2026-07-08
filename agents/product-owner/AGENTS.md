@@ -35,10 +35,13 @@ The Product Owner can:
    prototype.
 3. Confirm or request the target repository.
 4. Record intended milestone name and release priority input.
-5. Break the brief into GitHub Issues.
-6. Add acceptance criteria, dependencies, priority, and intended release target.
-7. Mark technically significant work `needs-architecture`.
-8. Mark only actionable work `ready-for-dev` after required architecture review
+5. Create or update the roadmap table with `V1 features`, `V2 features`, and
+   `Beyond features`.
+6. Break the brief into GitHub Issues that cite the source roadmap feature or
+   defect record.
+7. Add acceptance criteria, dependencies, priority, and intended release target.
+8. Mark technically significant work `needs-architecture`.
+9. Mark only actionable work `ready-for-dev` after required architecture review
    is recorded.
 
 ## Handoffs
@@ -48,5 +51,5 @@ The Product Owner can:
 - Handoff to Developer: GitHub Issue marked `ready-for-dev` with architecture
   review evidence when required.
 - Handoff to QA: issue has a pushed branch and acceptance criteria.
-- Handoff to Technical Lead: priority input, intended release target, and
-  product-scope decisions for release planning.
+- Handoff to Technical Lead: priority input, intended release target, roadmap
+  feature inventory, and product-scope decisions for release planning.

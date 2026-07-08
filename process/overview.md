@@ -179,6 +179,9 @@ into `tst/` or `prod/`.
   build it or make technology choices.
 - Product Owner agents turn briefs into GitHub Issues, acceptance criteria, and
   release scope.
+- Product briefs include a roadmap feature table with `V1 features`,
+  `V2 features`, and `Beyond features`; roadmap feature names become source
+  references for later GitHub Issues.
 - The UX Design Lead translates the product brief into structural UX: user
   flows, wireframes, interaction specs, and accessibility requirements. The
   operator refines the UX with visual design before it reaches the Architect.
@@ -207,6 +210,10 @@ into `tst/` or `prod/`.
   Lead creates maintenance milestones when the release is maintenance-only.
 - Each feature or defect has a GitHub Issue assigned to the active release
   Milestone before development starts.
+- Every developer-executable issue must directly complete a roadmap feature,
+  complete an explicit slice of a roadmap feature, or fix a defect. No issue
+  may be marked `ready-for-dev` without a `feature` or `defect` type and a
+  source reference to the Product Owner roadmap feature or defect record.
 - The project works against one active planned release at a time unless the
   Product Owner records an explicit exception. A maintenance milestone may
   run in parallel.
@@ -236,9 +243,9 @@ into `tst/` or `prod/`.
 
 The normal feature lifecycle is:
 
-1. Product Owner produces a product brief as GitHub Issues with user goals,
-   business outcomes, scope, and acceptance criteria. The brief does not
-   prescribe technology or implementation.
+1. Product Owner produces a product brief with user goals, business outcomes,
+   scope, acceptance criteria, and a roadmap feature table listing V1, V2, and
+   Beyond features. The brief does not prescribe technology or implementation.
 2. Product Owner records the intended release priority and milestone intent.
    The GitHub Milestone is opened later by Release at Technical Lead request
    when the repository exists.
@@ -259,9 +266,11 @@ The normal feature lifecycle is:
    Owner, Technical Lead asks Release to open the planning release record in
    GitHub after repository bootstrap.
 10. Technical Lead receives the product brief, UX design document, and
-    architecture design document. Produces a development plan: decomposes
-    work into GitHub Issues, sequences by dependency, assigns to the
-    milestone, prepares environments.
+    architecture design document. Produces a development plan: creates issue
+    coverage for the in-scope Product Owner roadmap features, decomposes work
+    into GitHub Issues, records the source feature or defect for each developer
+    issue, sequences by dependency, assigns to the milestone, and prepares
+    environments.
 11. Operator approves the development plan.
 12. Technical Lead asks Release to open the planning release record in GitHub:
     a GitHub Milestone and release tracking issue. This is not a GitHub Release

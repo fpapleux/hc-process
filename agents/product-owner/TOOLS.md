@@ -43,6 +43,9 @@ GitHub Milestones:
 
 For each issue created from a brief, record:
 
+- Issue type: `feature` or `defect`.
+- Source reference: roadmap phase and feature name or ID for features; defect
+  report, QA failure, incident, or operator report for defects.
 - User goal or business reason.
 - Scope.
 - Out-of-scope notes.

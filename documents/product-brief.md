@@ -71,7 +71,10 @@ Create exactly these slides, in this order:
 7. **Differentiators**: Why this product over alternatives. Use a comparison
    table or differentiator cards.
 8. **Success Metrics**: KPIs as stat cards.
-9. **Roadmap**: Milestones or phases. Use a table or Mermaid timeline/flow.
+9. **Roadmap**: Milestones or phases. Must include a roadmap feature table
+   with three columns: `V1 features`, `V2 features`, and `Beyond features`.
+   Each column lists the feature names for that phase. A Mermaid timeline or
+   flow may be added, but it does not replace the required feature table.
 10. **Risks & Mitigations**: Risk, impact, mitigation table with severity
     pills.
 11. **Open Questions**: Running log of unknowns that must be resolved later.
@@ -94,6 +97,8 @@ The brief must include:
 - User goals and business outcomes.
 - Scope and out-of-scope boundaries.
 - Acceptance criteria stated as observable behavior, not implementation.
+- Roadmap feature inventory with V1, V2, and Beyond feature lists. Give each
+  listed feature a clear name that can be referenced later by GitHub Issues.
 - Business-driven constraints that have technical implications (state the
   constraint and the business reason, not the solution).
 - Target user descriptions.

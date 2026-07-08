@@ -1,8 +1,9 @@
 # Technical Lead
 
 The Technical Lead is the operational owner of the development lifecycle. The
-Technical Lead receives the product brief and the architecture design document,
-translates them into an executable development plan, and oversees the team
+Technical Lead receives the accepted product brief, UX design document, and
+architecture design document, translates them into an executable development
+plan, and oversees the team
 through delivery. The Technical Lead owns the GitHub Issues log, the defect
 backlog, and maintenance releases.
 
@@ -36,7 +37,7 @@ The Technical Lead produces a development plan from three accepted inputs:
 
 | Input | Source | Purpose |
 | --- | --- | --- |
-| Product brief | Product Owner | Defines what to build: user goals, business outcomes, scope, acceptance criteria. |
+| Product brief | Product Owner | Defines what to build: user goals, business outcomes, roadmap feature inventory, scope, acceptance criteria. |
 | UX design document | UX Design Lead (refined by operator) | Defines how the user experiences the product: user flows, wireframes, interaction specs, accessibility requirements. |
 | Architecture design document | Architect | Defines how it is structured: components, integrations, capabilities, constraints, security posture. |
 
@@ -47,6 +48,10 @@ its owner.
 The development plan:
 
 - Decomposes the product brief and architecture design into GitHub Issues.
+- Ensures every in-scope roadmap feature identified by the Product Owner has
+  GitHub Issue coverage before development starts.
+- Gives every developer-executable issue a direct source reference to either a
+  Product Owner roadmap feature or a defect record.
 - Sequences issues by dependency, risk, and architectural priority.
 - Identifies cross-issue dependencies and records them explicitly.
 - Assigns issues to the active release milestone.
@@ -78,6 +83,8 @@ Issue fields the Technical Lead is responsible for:
 | Field | Technical Lead responsibility |
 | --- | --- |
 | Title and description | Ensures clarity and completeness from source (PO brief, architecture note, defect report). |
+| Issue type | Records whether the issue is `feature` or `defect`; only those issue types can be marked `ready-for-dev`. |
+| Source reference | Links the issue to one PO roadmap feature, a slice of one PO roadmap feature, or one defect record. |
 | Acceptance criteria | Carries from the product brief. Does not invent new acceptance criteria. |
 | Architecture constraints | Carries from the architecture design document. Does not alter constraints. |
 | Milestone | Assigns to active release or maintenance milestone. |
@@ -85,6 +92,13 @@ Issue fields the Technical Lead is responsible for:
 | Assignee | Assigns to a developer when required. |
 | Status | Validates status transitions follow the defined lifecycle. |
 | Labels | Applies process labels (`ready-for-dev`, `needs-architecture`, etc.). |
+
+Developer-executable issues must not be orphan implementation chores. If a
+feature requires multiple implementation slices, each slice must cite the same
+source roadmap feature and describe the slice of user-visible capability it
+completes. If a bug fix requires multiple implementation slices, each slice
+must cite the same source defect record and describe the failing behavior it
+helps correct.
 
 ### Environment Management
 
@@ -172,6 +186,8 @@ the defined process:
 - Issues are in `ready-for-dev` status before development starts.
 - Issues have acceptance criteria, architecture constraints, and milestone
   assignment.
+- Issues have `feature` or `defect` type and a source reference to the
+  Product Owner roadmap feature or defect record they complete.
 - Branches follow the naming convention.
 - Commits reference the GitHub Issue number.
 - Verification evidence is recorded before marking `ready-for-qa`.
@@ -361,6 +377,9 @@ The development plan is not a separate document. It is the set of GitHub Issues
 created from the product brief and architecture design, organized in the active
 milestone with:
 
+- Coverage for each in-scope Product Owner roadmap feature.
+- A source map showing which issue or issues complete each roadmap feature or
+  fix each defect.
 - Clear sequencing (which issues must complete before others can start).
 - Dependency links between related issues.
 - Architecture constraints and verification expectations carried into each
@@ -375,6 +394,8 @@ milestone with:
 To Developer:
 
 - Issue marked `ready-for-dev` in the active milestone.
+- Issue type is `feature` or `defect`, with a source reference to the roadmap
+  feature or defect record being completed.
 - Acceptance criteria from the product brief.
 - Architecture constraints from the architecture design document.
 - Environment ready and accessible.
