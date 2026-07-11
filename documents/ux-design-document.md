@@ -3,11 +3,12 @@
 This specification defines the standard structure, required content, depth
 expectations, and diagram requirements for UX design documents. It is the
 authoritative reference the UX Design Lead follows when documenting the
-structural user experience for any application.
+structural experience for any product, tool, workflow, service, report, or
+automation.
 
 Every UX design document produced under this process must follow this
 specification. The scaling rules define which sections are required and which
-are optional based on document scope.
+are optional based on document scope, product model, and assurance level.
 
 ---
 
@@ -118,32 +119,68 @@ State the accessibility targets:
 - Legal or compliance obligations that mandate specific accessibility
   standards.
 
+### 2.5 UX Calibration Snapshot
+
+Carry forward the Product Owner calibration and record the UX Design Lead's
+interpretation:
+
+| Field | Description |
+| --- | --- |
+| Product model | Product model from the accepted product brief. |
+| Assurance level | Prototype, personal productivity, production grade, or enterprise/regulated. |
+| Operator objective | Speed, robustness, exploration, launch readiness, delegation clarity, risk reduction, or other stated objective. |
+| UX surface type | Screen UX, Terminal UX, Operational UX, API Consumer UX, Report UX, Process UX, or Agent/Handoff UX. |
+| UX documentation depth | Minimal, focused, complete, or enterprise-depth. |
+| Primary interaction mode | Screen, command, job/run, API contract, report consumption, workflow state, approval/handoff, or other. |
+| Edge-case depth | Which edge cases are designed explicitly and which fail clearly/log. |
+| Accessibility depth | Accessibility expectations appropriate to the surface and assurance level. |
+| Architecture bridge depth | Prototype summary, focused bridge, complete bridge, or enterprise-depth bridge. |
+
+If the product brief lacks enough calibration to choose surface type or depth,
+return it to Product Owner unless the missing detail can be safely inferred
+from durable context and recorded as an assumption.
+
+### 2.6 UX Surface Type
+
+Select the surface type that matches the product model:
+
+| Surface type | Use for | Primary UX artifact |
+| --- | --- | --- |
+| Screen UX | Web/app products, dashboards, visual control surfaces. | Screen flows, information architecture, wireframes, interaction states. |
+| Terminal UX | CLI tools. | Command structure, flags/options, help, output, errors, exit behavior. |
+| Operational UX | ETL jobs, batch jobs, migrations, automations. | Run lifecycle, status, logs, reports, rerun/failure behavior. |
+| API Consumer UX | APIs and services consumed by developers or systems. | Operation discovery, examples, request/response expectations, errors. |
+| Report UX | Dashboards, exports, decision-support artifacts. | Metric hierarchy, filters, freshness, export/sharing behavior. |
+| Process UX | BPM/workflow/state-machine products. | Actors, states, handoffs, exceptions, audit-visible transitions. |
+| Agent/Handoff UX | Automation agents, approval workflows, evidence capture. | Trigger, human checkpoints, allowed actions, evidence, escalation. |
+
 ---
 
-## 3. User Flows
+## 3. Interaction Flows
 
-Document every user journey the product supports.
+Document every user, operator, developer-consumer, command, operational, or
+process journey the product supports at the depth required by calibration.
 
 ### Flow Requirements
 
-For each user flow, record:
+For each interaction flow, record:
 
 | Field | Description |
 | --- | --- |
 | Flow name | Descriptive name (e.g., "Checkout with saved payment method"). |
-| Entry point | Where the user enters the flow (screen, deep link, notification). |
-| Completion state | What the user sees when the flow is complete. |
+| Entry point | Where the actor enters the flow (screen, command, trigger, API call, notification). |
+| Completion state | What the actor sees or receives when the flow is complete. |
 | Steps | Ordered list of steps with decision points and branches. |
-| Error paths | What happens when a step fails. How the user recovers. |
-| Edge cases | Empty states, first-time use, maximum data, expired sessions, permission denial. |
+| Error paths | What happens when a step fails. How the actor recovers or receives evidence. |
+| Edge cases | Empty states, first-time use, maximum data, expired sessions, permission denial, partial job failure, invalid command input, unavailable upstream/downstream systems. |
 | Data per step | What data the step displays and where it comes from. |
 | Side effects per step | What writes, external calls, or state changes the step triggers. |
 
 ### Mermaid Flow Diagrams
 
-Every user flow must have a Mermaid flowchart. Use `flowchart TD` (top-down)
-for most flows. Use `flowchart LR` (left-right) when the flow is strictly
-linear.
+Every required interaction flow must have a Mermaid flowchart. Use
+`flowchart TD` (top-down) for most flows. Use `flowchart LR` (left-right) when
+the flow is strictly linear.
 
 ```mermaid
 flowchart TD
@@ -181,6 +218,10 @@ Conventions:
 ---
 
 ## 4. Information Architecture
+
+Information architecture is required for Screen UX, Report UX, and Process UX.
+For Terminal UX, Operational UX, and API Consumer UX, use the model-specific
+sections instead unless a screen-based control surface exists.
 
 ### 4.1 Screen Inventory
 
@@ -256,6 +297,11 @@ For each screen, record content priority:
 ---
 
 ## 5. Wireframes
+
+Wireframes are required for Screen UX and for any visual control surface.
+Wireframes are not required for terminal-only CLI tools, headless ETL/batch
+jobs, API-only services, or automations without screens. For those products,
+the model-specific interaction section is the structural UX artifact.
 
 ### Wireframe Requirements
 
@@ -356,12 +402,110 @@ For each data-displaying element, record:
 
 ---
 
-## 6. Interaction Specifications
+## 6. Model-Specific Interaction Sections
 
-For each interactive pattern in the product, produce a detailed specification.
-Group by pattern type.
+Include the section that matches the selected UX surface type. Do not include
+all model-specific sections by default.
 
-### 6.1 Form Interactions
+### 6.1 Terminal Interaction Design
+
+Use for CLI tools.
+
+Record:
+
+- Command and subcommand inventory.
+- Arguments, flags, options, defaults, and required values.
+- Help output structure and examples.
+- Input validation behavior and prompts, when applicable.
+- Normal output examples: human-readable, JSON, table, file, log, or stream.
+- Error message format and recovery guidance.
+- Exit behavior and exit-code expectations.
+- Destructive-action confirmation behavior.
+- Examples for common tasks.
+
+For prototype CLI tools, define only the command shape, minimum arguments,
+happy-path output, and simple error text needed to build and test the tool.
+
+### 6.2 Operational Interaction Design
+
+Use for ETL jobs, batch jobs, migrations, and automations.
+
+Record:
+
+- Trigger/start behavior: manual command, schedule, event, or operator action.
+- Status/progress visibility.
+- Success output or completion evidence.
+- Failure output and where diagnostics appear.
+- Log/report expectations.
+- Rerun behavior.
+- Partial failure behavior.
+- Operator validation evidence.
+
+For prototype ETL or batch work, this may be limited to manual execution,
+console output, clear failure message, and enough logging to debug.
+
+### 6.3 API Consumer Experience
+
+Use for API or service products where the user is a developer or integrating
+system.
+
+Record:
+
+- Operation discovery and naming expectations.
+- Request/response examples at the product-intent level.
+- Authentication touchpoints as user experience expectations, not
+  implementation design.
+- Error categories and message expectations.
+- Debugging/support signals exposed to the consumer.
+- Compatibility expectations when relevant.
+
+### 6.4 Report Consumption Design
+
+Use for dashboards, reports, exports, and decision-support artifacts.
+
+Record:
+
+- Audience and decision supported.
+- Metric hierarchy and definitions carried from the product brief.
+- Filter, sorting, grouping, and drill-down behavior.
+- Freshness and timestamp visibility.
+- Export, sharing, and print behavior.
+- Empty, loading, stale, and error states.
+
+### 6.5 Process State Experience
+
+Use for BPM, workflow, and state-machine products.
+
+Record:
+
+- Actors and their visible responsibilities.
+- Process states and transition labels.
+- Handoffs between actors.
+- Exception states and recovery paths.
+- Status visibility by role.
+- Audit-visible events and operator-facing evidence.
+
+### 6.6 Agent/Handoff Experience
+
+Use for automation agents, approval workflows, and evidence capture.
+
+Record:
+
+- Trigger and activation experience.
+- Agent allowed actions visible to the human.
+- Human approval checkpoints.
+- Evidence captured before and after actions.
+- Escalation, pause, stop, and recovery behavior.
+- Completion and handoff evidence.
+
+---
+
+## 7. Interaction Specifications
+
+For each interactive pattern in the product, produce a specification at the
+depth required by UX calibration. Group by pattern type.
+
+### 7.1 Form Interactions
 
 For each form:
 
@@ -374,7 +518,7 @@ For each form:
 | Draft saving | Whether the form auto-saves drafts and the mechanism (interval, on blur, on navigation). |
 | Multi-step forms | Step indicator, step navigation (back/forward), what state is preserved between steps. |
 
-### 6.2 Navigation Interactions
+### 7.2 Navigation Interactions
 
 For each navigation pattern:
 
@@ -386,7 +530,7 @@ For each navigation pattern:
 | Deep linking | Whether the resulting view is addressable by URL and what URL parameters it accepts. |
 | History behavior | Whether the navigation adds a history entry (back button works) or replaces the current entry. |
 
-### 6.3 Feedback Patterns
+### 7.3 Feedback Patterns
 
 For each feedback pattern:
 
@@ -397,7 +541,7 @@ For each feedback pattern:
 | Error | Error message content, display location, persistence (dismissible or persistent until fixed), and recovery action. |
 | Confirmation | When confirmation is required (destructive actions, irreversible changes), dialog content, button labels, and default focus. |
 
-### 6.4 Real-Time Interactions
+### 7.4 Real-Time Interactions
 
 For each element that requires live data:
 
@@ -410,7 +554,7 @@ For each element that requires live data:
 | Visual treatment | How the user knows data has changed (highlight, animation, counter badge). |
 | Conflict resolution | What happens if the user is editing data that changes server-side during the edit. |
 
-### 6.5 Offline Interactions
+### 7.5 Offline Interactions
 
 For each interaction that may occur without connectivity:
 
@@ -424,11 +568,20 @@ For each interaction that may occur without connectivity:
 
 ---
 
-## 7. Accessibility Specification
+## 8. Accessibility Specification
 
-### 7.1 Keyboard Navigation
+Accessibility requirements scale to UX surface type and assurance level.
+Screen UX requires screen-level keyboard, screen reader, focus, non-color,
+touch, and motion coverage. Terminal, operational, API, report, process, and
+agent/handoff UX require the equivalent accessibility expectations for their
+surface, such as readable terminal output, non-color status indicators,
+keyboard-only operation, understandable errors, and accessible generated
+reports.
 
-For each screen, document the tab order:
+### 8.1 Keyboard Navigation
+
+For each screen or interactive surface, document the tab order or keyboard
+operation:
 
 ```
 Tab order for Order Detail screen:
@@ -455,9 +608,9 @@ Document keyboard shortcuts:
 | `Escape` | Close modal/drawer | When modal is open |
 | `Ctrl+Enter` | Submit form | When form is focused |
 
-### 7.2 Screen Reader Support
+### 8.2 Screen Reader Support
 
-For each screen, document the landmark structure:
+For each screen or generated document/report, document the landmark structure:
 
 ```html
 <header>    — Global navigation, logo, user menu
@@ -485,7 +638,7 @@ Document announcement patterns:
   successfully" or "Error: unable to cancel order").
 - How table content is navigated and announced.
 
-### 7.3 Focus Management
+### 8.3 Focus Management
 
 For each dynamic content change, document where focus moves:
 
@@ -497,7 +650,7 @@ For each dynamic content change, document where focus moves:
 | Inline error on submit | First field with an error | User needs to fix the error. |
 | Item deleted from list | Next item in list, or empty state message | User needs a valid focus target. |
 
-### 7.4 Non-Color Indicators
+### 8.4 Non-Color Indicators
 
 For each status or state communicated through color, document the non-color
 alternative:
@@ -509,7 +662,7 @@ alternative:
 | Success message | Green | Green background + checkmark icon + text |
 | Disabled button | Grey | Grey + reduced opacity + `cursor: not-allowed` + tooltip "Cannot cancel a shipped order" |
 
-### 7.5 Touch Targets and Motion
+### 8.5 Touch Targets and Motion
 
 Touch targets:
 
@@ -526,15 +679,16 @@ Motion:
 
 ---
 
-## 8. Design-to-Architecture Bridge
+## 9. Design-to-Architecture Bridge
 
 This section exists to feed the Architect. The UX Design Lead populates it;
 the Architect reads it alongside the product brief when producing the
 architecture design document.
 
-### 8.1 Data Requirements Inventory
+### 9.1 Data Requirements Inventory
 
-For each screen, list every data entity the UI needs:
+For each screen, command, job, report, API operation, or handoff, list every
+data entity the experience exposes or requires:
 
 | Screen | Entity | Operations | Fields displayed | Fields editable |
 | --- | --- | --- | --- | --- |
@@ -543,7 +697,7 @@ For each screen, list every data entity the UI needs:
 | Order Detail | LineItem | Read | name, quantity, price | None |
 | New Order | Order | Create | — | customer, items, shipping address, payment |
 
-### 8.2 Real-Time Requirements Inventory
+### 9.2 Real-Time Requirements Inventory
 
 | Element | Data | Update frequency | Acceptable staleness | Mechanism hint |
 | --- | --- | --- | --- | --- |
@@ -553,7 +707,7 @@ For each screen, list every data entity the UI needs:
 The "Mechanism hint" column is a suggestion, not a prescription. The Architect
 decides the technical mechanism.
 
-### 8.3 Offline Requirements Inventory
+### 9.3 Offline Requirements Inventory
 
 | Interaction | Offline behavior | Sync on reconnect | Conflict strategy |
 | --- | --- | --- | --- |
@@ -561,14 +715,14 @@ decides the technical mechanism.
 | Create new order | Queue locally | Submit on reconnect | Fail if conflicting server state |
 | Browse order list | Show cached list with offline indicator | Refresh on reconnect | Server wins |
 
-### 8.4 File and Media Handling
+### 9.4 File and Media Handling
 
 | Feature | Type | Max size | Formats | Preview | Processing |
 | --- | --- | --- | --- | --- | --- |
 | Product image upload | Image | 10MB | JPEG, PNG, WebP | Thumbnail preview before upload | Server-side resize to 3 sizes |
 | Invoice download | PDF | — | PDF | Browser PDF viewer | Server-generated |
 
-### 8.5 Authentication Touchpoints
+### 9.5 Authentication Touchpoints
 
 List where authentication and authorization intersect the user experience:
 
@@ -579,7 +733,7 @@ List where authentication and authorization intersect the user experience:
 | Login | Dedicated login screen. Support email/password and SSO. |
 | Logout | Confirmation dialog. Clear local cached data. Redirect to login. |
 
-### 8.6 Performance Expectations
+### 9.6 Performance Expectations
 
 | Screen | Perceived load time target | Interaction response target |
 | --- | --- | --- |
@@ -590,22 +744,24 @@ List where authentication and authorization intersect the user experience:
 
 ---
 
-## 9. Scaling Rules
+## 10. Scaling Rules
 
 ### Full Document Requirements
 
-A `full` UX design document must include all sections:
+A `full` UX design document must include the calibrated sections required by
+the selected UX surface type:
 
 | Section | Minimum depth |
 | --- | --- |
 | 1. Header | All fields including canonical path. |
-| 2. Product Context | All subsections. User types with goals and context. Accessibility baseline stated. |
-| 3. User Flows | Every user journey diagrammed in Mermaid with error paths and edge cases. Data and side-effect annotations per step. |
-| 4. Information Architecture | Screen inventory with hierarchy. Navigation model defined. Mermaid sitemap diagram. Content priority per screen. |
-| 5. Wireframes | Every screen wireframed with element annotations, all interaction states, responsive structure, and data bindings. |
-| 6. Interaction Specifications | Every interactive pattern specified with trigger, action, feedback, and resulting state. Form, navigation, feedback, real-time, and offline patterns covered. |
-| 7. Accessibility | Keyboard navigation per screen. Screen reader landmarks and live regions. Focus management for dynamic content. Non-color indicators. Touch targets. Motion alternatives. |
-| 8. Bridge | Data requirements, real-time requirements, offline requirements, auth touchpoints, and performance expectations populated. |
+| 2. Product Context | All relevant subsections, including UX calibration snapshot and selected UX surface type. |
+| 3. Interaction Flows | Every required journey diagrammed in Mermaid with error paths and edge cases at the selected assurance depth. Data and side-effect annotations per step when relevant. |
+| 4. Information Architecture | Required for Screen UX, Report UX, and Process UX. Screen inventory, navigation, sitemap, and content priority where screens exist. |
+| 5. Wireframes | Required for Screen UX and visual control surfaces. Not required for terminal-only, headless operational, API-only, or agent-only products without screens. |
+| 6. Model-Specific Interaction Sections | Required section matching the selected UX surface type. |
+| 7. Interaction Specifications | Every relevant interactive pattern specified with trigger, action, feedback, and resulting state at the calibrated depth. |
+| 8. Accessibility | Accessibility expectations appropriate to the selected UX surface type and assurance level. |
+| 9. Bridge | Architecture bridge populated to the calibrated depth. Prototype bridge may include only obvious implications and hard constraints. |
 
 ### Scoped Document Requirements
 
@@ -614,13 +770,14 @@ A `scoped` UX design note must include:
 | Section | Requirement |
 | --- | --- |
 | 1. Header | Product, scope level, date, canonical path of parent `full` document, related issues. |
-| 2. Product Context | Reference the `full` document. State only new user types or changed context. |
-| 3. User Flows | Only new or modified flows. Mermaid diagram required for each. |
-| 4. Information Architecture | Only new or modified screens. Reference the `full` document for unchanged screens. |
-| 5. Wireframes | Only new or modified screens with full annotation depth. |
-| 6. Interaction Specifications | Only new or modified interactions. |
-| 7. Accessibility | Only accessibility changes for affected screens. |
-| 8. Bridge | Only data, real-time, offline, auth, or performance changes. |
+| 2. Product Context | Reference the `full` document. State only changed calibration, user types, or context. |
+| 3. Interaction Flows | Only new or modified flows. Mermaid diagram required when the flow is material at the selected assurance level. |
+| 4. Information Architecture | Only new or modified screens, report structures, or process structures. Reference the `full` document for unchanged structure. |
+| 5. Wireframes | Only new or modified screens when screen wireframes are required. |
+| 6. Model-Specific Interaction Sections | Only changed model-specific interaction details. |
+| 7. Interaction Specifications | Only new or modified interactions. |
+| 8. Accessibility | Only accessibility changes for affected surfaces. |
+| 9. Bridge | Only changed data, real-time, offline, auth, performance, operational, or integration implications. |
 
 ### When to Produce Each Level
 
@@ -634,30 +791,34 @@ Produce a `scoped` document when:
 
 - The work modifies specific screens or flows in a product with existing UX
   documentation.
-- The changes do not alter navigation structure or core user flows.
+- The changes do not alter navigation structure or core interaction flows.
+- The changes do not alter the selected UX surface type or assurance-level
+  depth.
 
 Update an existing `full` document when:
 
 - A `scoped` note introduces changes that affect the overall UX structure.
 - Screens, flows, or navigation patterns are added or removed.
+- Product model, assurance level, UX surface type, or UX depth changes.
 - Accessibility requirements change.
 
 ---
 
-## 10. Mermaid Diagram Standards
+## 11. Mermaid Diagram Standards
 
 ### Required Diagrams by Section
 
 | Section | Diagram type | When required |
 | --- | --- | --- |
-| 3. User Flows | Flowchart (`flowchart TD` or `flowchart LR`) | Every user flow for `full`. |
-| 4. Information Architecture | Sitemap (`graph TD`) | Always for `full`. |
-| 6. Complex interactions | State diagram (`stateDiagram-v2`) | When an interaction has more than 3 states. |
-| 6. Multi-step interactions | Sequence (`sequenceDiagram`) | When an interaction involves API calls or multi-system coordination. |
+| 3. Interaction Flows | Flowchart (`flowchart TD` or `flowchart LR`) | Every material interaction flow for `full`. |
+| 4. Information Architecture | Sitemap (`graph TD`) | For Screen UX, Report UX, or Process UX when structure is non-trivial. |
+| 6. Model-Specific Interactions | Flowchart or state diagram | When the command/job/API/report/process lifecycle has decision points or states. |
+| 7. Complex interactions | State diagram (`stateDiagram-v2`) | When an interaction has more than 3 states. |
+| 7. Multi-step interactions | Sequence (`sequenceDiagram`) | When an interaction involves API calls or multi-system coordination. |
 
 ### Diagram Conventions
 
-**User flow diagrams:**
+**Interaction flow diagrams:**
 
 | Shape | Meaning | Mermaid syntax |
 | --- | --- | --- |
