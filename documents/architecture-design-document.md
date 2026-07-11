@@ -3,11 +3,12 @@
 This specification defines the standard structure, required content, depth
 expectations, and diagram requirements for architecture design documents. It is
 the authoritative reference an architect follows when documenting architecture
-for any application.
+for any product, tool, workflow, service, report, or automation.
 
 Every architecture design document produced under this process must follow this
 specification. The scaling rules at the end define which sections are required
-and which are optional based on document scope.
+and which are optional based on document scope, product model, assurance level,
+and architecture calibration.
 
 ---
 
@@ -191,6 +192,54 @@ system depends on that are outside the architect's control.
 | --- | --- | --- |
 | Identity provider (Keycloak). | Platform team. | Auth flow blocked if unavailable. |
 | Payment gateway API. | External vendor. | Checkout flow blocked, needs fallback. |
+
+### 2.6 Architecture Calibration Snapshot
+
+Carry forward Product Owner and UX calibration and record the Architect's
+interpretation:
+
+| Field | Description |
+| --- | --- |
+| Product model | Product model from the accepted product brief. |
+| Assurance level | Prototype, personal productivity, production grade, or enterprise/regulated. |
+| Operator objective | Speed, robustness, exploration, launch readiness, delegation clarity, risk reduction, or other stated objective. |
+| UX surface type | UX surface type from the accepted UX design document. |
+| Architecture scope | Prototype, personal productivity, production grade, or enterprise/regulated architecture depth. |
+| Architecture documentation depth | Minimal, focused, complete, or enterprise-depth. |
+| Risk depth | Which risk categories are designed explicitly and which are recorded as deferred. |
+| Security depth | Security treatment appropriate to assurance level and hard safety boundaries. |
+| Operations depth | None/minimal, basic run support, production support, or enterprise operations depth. |
+| Verification depth | Smoke/manual, focused automated checks, production-grade test expectations, or enterprise validation expectations. |
+| Deferred architecture concerns | Concerns intentionally deferred because of product model, assurance level, or operator objective. |
+
+If the product brief or UX design lacks enough calibration to choose
+architecture depth, return it to the owning role unless the missing detail can
+be safely inferred from durable context and recorded as an assumption.
+
+### 2.7 Model-Specific Architecture Focus
+
+Use the product model to decide which architecture questions matter.
+
+For a `CLI Tool`, emphasize execution context, packaging, command dispatch,
+filesystem and network access, configuration, credentials, idempotency,
+logging, dependency boundaries, destructive-operation safeguards, and
+verification depth appropriate to assurance level.
+
+For an `ETL / Batch Job`, emphasize data boundaries, source/destination access,
+transformation ownership, credentials, volume, idempotency, checkpointing,
+replay/rollback, validation, monitoring, and recovery only to the selected
+assurance depth.
+
+For an `API / Service`, emphasize consumers, contracts, authentication and
+authorization boundaries, error contracts, rate/volume expectations, backward
+compatibility, observability, and operational support.
+
+For a `Workflow / BPM Platform`, emphasize state ownership, process modeling,
+actor permissions, audit-visible transitions, exception handling, integration
+boundaries, and operational recovery.
+
+For prototype assurance, keep this section short and record excluded
+production-grade concerns explicitly instead of designing them.
 
 ---
 
@@ -1207,32 +1256,23 @@ When updating an existing `full` document (not creating one for the first time):
 
 ### Full Document Requirements
 
-A `full` architecture design document must include all sections. The following
-table marks the minimum depth for each:
+A `full` architecture design document must include calibrated coverage for all
+sections relevant to the selected product model, assurance level, and
+architecture scope. Full does not mean maximum depth for every product; it
+means durable architecture coverage at the appropriate depth.
 
 | Section | Minimum depth |
 | --- | --- |
 | 1. Header | All fields including canonical path. |
-| 2. Context and Scope | All subsections. System context diagram with trust boundaries required. |
-| 3. Principles and Patterns | At least three product-specific principles with rationale. At least two patterns with trade-offs. Non-goals section present. |
-| 4.1 Infrastructure | Component inventory with network security and encryption in transit. Diagram if more than one component. May state "provider-managed" with constraints. |
-| 4.2 Platform | Component inventory with segmentation rules, encryption at rest, and access control. Diagram if more than one service. |
-| 4.3 Application | Component inventory with responsibilities, boundaries, interfaces, authentication, authorization, and input validation. Application component diagram required. |
-| 4.4 Data | Data classification table. Entity list with ownership and per-entity classification. Data model diagram required. Schema evolution approach stated. Encryption at rest and access control per data store. |
-| 5.1 Repository Structure | Repository inventory with strategy and directory conventions. Diagram for multi-repo setups. |
-| 5.2 Artifact Inventory | Every component from section 4 mapped to its artifact, source location, build mechanism, output, registry, and versioning scheme. |
-| 5.3 Build Pipeline | Pipeline definition, triggers, stages, quality gates, and build outputs for each artifact. Pipeline diagram required. |
-| 5.4 Deployment Architecture | Environment inventory. Deployment mapping for every artifact to every target environment with mechanism, trigger, conditions, order, and rollback. Deployment flow diagram required. |
-| 5.5 Configuration Management | Configuration sources per environment. Secret inventory with storage, injection, rotation, and access. |
-| 5.6 Version Control Strategy | Branching model, merge strategy, tagging convention, branch protection rules. |
-| 5.7 Local Development | Setup steps, dependencies, local services, credentials, and testing approach. |
-| 6. Integration | Integration inventory for every external boundary including encryption in transit, authentication, authorization, and data classification. Sequence diagram for at least one critical path. |
-| 7.1 Runtime | Performance, reliability, security, and privacy assessed with five-field format. |
-| 7.2 Operations | Deployability, observability, rollback, and security operations assessed with five-field format. |
-| 7.3 Development | Testability, security testing, local development, and CI/CD assessed with five-field format. |
-| 8. Decisions | At least one decision with full format including security impact. |
-| 9. Risks | At least one risk and one open question section. |
-| 10. Implementation | Developer constraints and QA verification expectations including security constraints and security verification. |
+| 2. Context and Scope | All relevant subsections, including architecture calibration snapshot and model-specific architecture focus. System boundary diagram required when boundaries are non-trivial or trust boundaries exist. |
+| 3. Principles and Patterns | Product-specific principles and patterns that materially guide implementation. Prototype work may record only the principles needed to avoid unsafe or irreversible choices. |
+| 4. Component Architecture | Affected infrastructure, platform, application, and data boundaries at calibrated depth. Production and enterprise work require explicit security, data, and trust-boundary treatment. |
+| 5. Development Architecture | Repository, artifact, build, deployment, configuration, version-control, and local development expectations at calibrated depth. Prototype work may limit this to enough structure to build and run safely. |
+| 6. Integration | External boundaries, contracts, credentials, and data crossing points at calibrated depth. Required when the product crosses system boundaries. |
+| 7. Capabilities | Runtime, operations, and development capabilities using the five-field format at the selected assurance depth. Prototype work may record only material constraints and explicit deferrals. |
+| 8. Decisions | Decisions that materially constrain implementation. At least one decision when architecture alternatives exist. |
+| 9. Risks | Risks, open questions, and deferred architecture concerns relevant to the selected assurance level. |
+| 10. Implementation | Developer constraints and QA verification expectations at calibrated depth, including security constraints whenever non-public data, credentials, destructive actions, or trust boundaries are involved. |
 
 ### Scoped Document Requirements
 
@@ -1241,7 +1281,7 @@ A `scoped` architecture note must include:
 | Section | Requirement |
 | --- | --- |
 | 1. Header | Product, scope level, date, canonical path of parent `full` document, related issues. |
-| 2. Context and Scope | Business context and system boundary for this change (must reference the `full` document). Diagram optional. |
+| 2. Context and Scope | Changed business context, system boundary, and architecture calibration for this change (must reference the `full` document). Diagram optional. |
 | 3. Principles and Patterns | Only principles and patterns relevant to this issue. Must reference the `full` document. |
 | 4. Component Architecture | Only affected layers and components. Diagram optional but recommended when boundaries change. Security fields required for affected components. |
 | 5. Development Architecture | Only affected artifacts, pipelines, deployments, or configuration. Required when the change introduces a new artifact, modifies the build pipeline, changes deployment behavior, or alters configuration management. |
@@ -1273,6 +1313,8 @@ Produce a `scoped` document when:
 - The product already has a `full` document that covers the stable architecture.
 - The changes do not alter system boundaries, core data models, or platform
   dependencies.
+- The selected product model, assurance level, and architecture scope do not
+  require durable full documentation.
 
 Update an existing `full` document when:
 
@@ -1280,9 +1322,13 @@ Update an existing `full` document when:
 - A component, integration, or platform dependency is added or removed.
 - A security review, audit, or incident reveals inaccuracies.
 - The architect reviews the document and finds stale content.
+- Product model, assurance level, architecture scope, or deferred architecture
+  concerns change.
 
-When in doubt, produce a `full` document. The cost of documenting more than
-necessary is lower than the cost of missing a dimension.
+When in doubt, use the calibration snapshot to decide. Do not produce maximum
+depth by default. Ask or return to the owning role only when ambiguity
+materially affects safety, security, data integrity, compliance, production
+operation, or downstream implementation.
 
 ---
 

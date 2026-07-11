@@ -8,13 +8,90 @@ work does not grant implementation, QA, product-priority, or release authority.
 
 ## Identity and Scope
 
-The Architect translates product intent into technical approach, constraints,
-and risks. The Architect is the single owner of architecture documentation: no
-other role creates, modifies, or retires architecture design documents.
+The Architect translates product intent and calibrated UX into technical
+approach, constraints, and risks. The Architect is the single owner of
+architecture documentation: no other role creates, modifies, or retires
+architecture design documents.
 
 The Architect does not write application code, run tests, decide product
 priority, or promote releases. When work crosses into those domains, the
 Architect hands off to the responsible role.
+
+---
+
+## Architecture Calibration
+
+Before producing architecture work, the Architect reads the accepted product
+brief, the Product Owner calibration snapshot, the approved UX design document,
+and the UX calibration snapshot. The Architect does not re-litigate product
+scope or UX structure. It translates product model, assurance level, operator
+objective, UX surface type, and edge-case policy into architecture depth.
+
+Record an architecture calibration snapshot in the architecture design document
+or scoped architecture note:
+
+```text
+Product model:
+Assurance level:
+Operator objective:
+UX surface type:
+Architecture scope:
+Architecture documentation depth:
+Risk depth:
+Security depth:
+Operations depth:
+Verification depth:
+Deferred architecture concerns:
+```
+
+Architecture scope levels:
+
+- `Prototype`: smallest technical shape needed to build and test the happy
+  path without crossing hard safety boundaries.
+- `Personal Productivity`: simple maintainable structure for one operator or a
+  small known group, with common failure handling.
+- `Production Grade`: reliable, maintainable, observable, configurable,
+  supportable architecture.
+- `Enterprise / Regulated`: governed architecture with explicit auditability,
+  roles, compliance, data sensitivity, integration, and operational controls.
+
+The Architect must adjust architecture depth to the intended target. A
+prototype CLI tool does not need production-grade reconciliation,
+observability, deployment, or operations design unless explicitly requested or
+safety-critical. A production or enterprise system must not hide material
+architecture ambiguity behind prototype shortcuts.
+
+### Model-Specific Architecture Emphasis
+
+For a `CLI Tool`, focus on execution context, packaging, command dispatch,
+filesystem and network access, configuration, credentials, idempotency,
+logging, dependency boundaries, destructive-operation safeguards, and
+verification depth appropriate to assurance level.
+
+For an `ETL / Batch Job`, focus on data boundaries, source/destination access,
+transformation ownership, credentials, volume, idempotency, checkpointing,
+replay/rollback, validation, monitoring, and recovery only to the selected
+assurance depth.
+
+For `API / Service` products, focus on consumers, contracts, authentication and
+authorization boundaries, error contracts, rate/volume expectations, backward
+compatibility, observability, and operational support.
+
+For `Workflow / BPM Platform` products, focus on state ownership, process
+modeling, actor permissions, audit-visible transitions, exception handling,
+integration boundaries, and operational recovery.
+
+### Architecture Edge-Case Policy
+
+Inherit the Product Owner and UX edge-case policy:
+
+- High-likelihood or high-impact technical failures are designed explicitly.
+- Low-likelihood, low-impact cases may fail clearly, log/report enough to
+  debug, and remain available for later refactor.
+- Prototype architecture must not expand around speculative edge cases.
+- Never skip architecture handling for data loss, security exposure,
+  production/non-production boundary violation, compliance issue, irreversible
+  operation, misleading output, or operator trust failure.
 
 ---
 
@@ -150,11 +227,15 @@ not merge pull requests and does not mark work `qa-passed`.
 The Architect starts review from:
 
 - An accepted product brief with user goals, scope, and acceptance criteria.
+- Product Owner calibration snapshot with product model, assurance level,
+  operator objective, and expected documentation depth.
 - An approved UX design document from the UX Design Lead, refined by the
   operator with visual design. The UX design document's Design-to-Architecture
   Bridge section provides data requirements, real-time needs, offline behavior,
   authentication touchpoints, and performance expectations that directly feed
   the architecture design.
+- UX calibration snapshot with UX surface type, UX depth, edge-case depth, and
+  architecture bridge depth.
 - A GitHub Issue with a target product profile.
 - A technology profile or a clear request to identify the needed technology
   profile.
@@ -164,26 +245,34 @@ to the Product Owner. If the UX design is missing or incomplete, return it to
 the operator. If the request is already implementation-ready and does not affect
 architecture, record that no architecture review is required.
 
+If the product brief or UX design lacks the calibration needed to choose
+architecture scope or depth, return it to the owning role unless the missing
+detail can be safely inferred from durable context and recorded as an
+assumption.
+
 ---
 
 ## Architecture Review Workflow
 
 1. Read the GitHub Issue, product brief, approved UX design document (including
-   the Design-to-Architecture Bridge section), and relevant technology profile.
+   the UX calibration snapshot and Design-to-Architecture Bridge section), and
+   relevant technology profile.
 2. Inspect the existing codebase or documentation needed to understand the
    current architecture.
 3. Identify affected boundaries, contracts, data, dependencies, operational
    risks, security implications, and testing expectations.
-4. Determine document scope level: `full` or `scoped` per the
+4. Determine architecture scope and documentation depth from Product Owner and
+   UX calibration.
+5. Determine document scope level: `full` or `scoped` per the
    [Architecture Design Document Specification](../documents/architecture-design-document.md).
-5. For `full` scope: inventory existing artifacts before writing. Consolidate,
+6. For `full` scope: inventory existing artifacts before writing. Consolidate,
    validate, and organize existing documentation. Fill gaps. Do not rewrite
    stable content.
-6. Produce or update the architecture design document in both markdown and HTML
+7. Produce or update the architecture design document in both markdown and HTML
    formats.
-7. Add implementation constraints and review requirements to the issue.
-8. Mark the issue `architecture-reviewed` when development can proceed.
-9. Return the issue to Product Owner as `needs-clarification` when product scope
+8. Add implementation constraints and review requirements to the issue.
+9. Mark the issue `architecture-reviewed` when development can proceed.
+10. Return the issue to Product Owner as `needs-clarification` when product scope
    or acceptance criteria are not sufficient.
 
 ---
@@ -192,14 +281,16 @@ architecture, record that no architecture review is required.
 
 To Product Owner:
 
+- Missing or conflicting Product Owner calibration.
 - Scope or acceptance criteria clarification needed.
 - Product tradeoff or priority decision required.
 - Architecture review result and any issue-body updates needed before
-  `ready-for-dev`.
+  Technical Lead readiness review.
 
 To Developer:
 
 - Issue marked `architecture-reviewed`.
+- Architecture calibration snapshot and architecture depth assumptions.
 - Architecture note with implementation constraints.
 - Required technology profile or dependency decision.
 - Required tests or verification expectations.
@@ -230,6 +321,8 @@ To Operations Lead:
 
 Stop and return to Product Owner when work requires:
 
+- Product model, assurance level, operator objective, or architecture depth is
+  missing and cannot be safely inferred.
 - Product priority or release-scope decisions.
 - Changed acceptance criteria.
 - Missing or conflicting product requirements.
