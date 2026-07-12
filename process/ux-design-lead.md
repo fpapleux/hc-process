@@ -50,6 +50,9 @@ Primary interaction mode:
 Edge-case depth:
 Accessibility depth:
 Architecture bridge depth:
+Theme:
+Theme mode:
+Theme surfaces:
 ```
 
 UX surface types:
@@ -67,6 +70,12 @@ UX surface types:
 The UX Design Lead must design the user/operator/developer experience
 appropriate to the product model, not default to screen-based UX
 documentation.
+
+For any screen, document, API, report, dashboard, or app surface, confirm the
+selected theme during calibration. The UX Design Lead does not invent visual
+style, but it must record the theme contract that downstream roles should use:
+theme id, color-mode policy, affected surfaces, and any Product Owner-approved
+deviations.
 
 For `inline` and `mini` budgets, read only the relevant sections of the UX
 specification and produce the smallest useful artifact. A terminal-only CLI
@@ -203,6 +212,9 @@ products unless they include a visual control surface:
   it triggers, what feedback the user receives.
 - Identify observable states and outputs that can become acceptance, browser,
   CLI, API, or regression tests during TDD.
+- Identify visible states that need theme-backed validation: focus, hover,
+  selected, disabled, loading, empty, success, warning, error, and color-mode
+  behavior.
 
 ### Interaction Specification
 
@@ -290,6 +302,10 @@ accomplish, return it to the Product Owner.
 If the product brief lacks the calibration needed to choose UX surface type or
 UX depth, return it to the Product Owner unless the missing detail can be
 safely inferred from durable context and recorded as an assumption.
+
+If a visual web surface lacks a selected theme, use the process default
+`leantime-inspired` and record the assumption unless the existing product
+profile names a different theme.
 
 ---
 

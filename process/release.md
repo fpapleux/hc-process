@@ -35,6 +35,8 @@ Release starts assembly only when:
 - Included issues have Developer TDD evidence recorded for changed behavior, or
   a Technical Lead record explaining why automated test-first evidence was not
   applicable.
+- Included visual-surface issues have theme-compliance evidence or recorded
+  accepted deviations.
 - Release-impacting architecture notes are recorded for included issues when
   relevant.
 - Product Owner release-content decisions are recorded and applied to the
@@ -56,6 +58,9 @@ Release assembly rules:
 - The Release agent records the included issue list before release QA starts.
 - Migration, deployment, compatibility, rollback, and operational notes from
   architecture review are carried into release QA and promotion notes.
+- Theme assets, copied-source provenance, license notices, and accepted visual
+  deviations are carried into release QA and promotion notes when theme
+  material ships.
 
 Create the release branch:
 
@@ -116,6 +121,7 @@ has recorded an operator-approved release manifest. The manifest must identify:
 - Operator waiver record and follow-up issue references for every
   `operator-waivable` readiness finding.
 - Deployment validation plan.
+- Theme assets and provenance included in the release when applicable.
 - Operator-provided production folder or runtime location when actual
   production deployment is in scope.
 - Rollback criteria and rollback procedure reference.

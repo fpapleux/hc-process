@@ -11,6 +11,7 @@ The core idea is simple:
 Role controls authority.
 Product controls intent.
 Technology controls technique.
+Theme controls visual identity.
 ```
 
 That separation is what makes the process useful. A Developer agent can write
@@ -48,7 +49,7 @@ deployment, and operations readiness.
 
 ## The Operating Model
 
-Work is divided across three dimensions.
+Work is divided across four dimensions.
 
 ### Role
 
@@ -69,12 +70,21 @@ rules, style conventions, security practices, and stack-specific failure modes.
 Technology guidance tells an authorized role how to work correctly; it does not
 authorize that role to cross process boundaries.
 
+### Theme
+
+Theme profiles define visual identity: tokens, typography, color modes,
+component styling, layout shells, examples, and provenance. Theme guidance
+tells a visual surface what it should feel like across single-page HTML docs,
+API platforms, dashboards, internal tools, and product UIs. It does not decide
+product scope, architecture, or implementation technology.
+
 A concrete agent profile is assembled from these pieces:
 
 ```text
 role profile
 + product profile
 + one or more technology profiles
++ theme profile when the work has a visual surface
 ```
 
 Example:
@@ -85,10 +95,12 @@ role: agents/developer
 product: products/product-name
 technology:
   - technologies/python
+theme:
+  - themes/leantime-inspired
 ```
 
-This keeps permissions, business intent, and engineering practice independent
-enough to reason about.
+This keeps permissions, business intent, engineering practice, and visual
+identity independent enough to reason about.
 
 ## Lifecycle
 
@@ -105,9 +117,11 @@ The default lifecycle is:
    only process-ready issues `ready-for-dev`.
 5. Developer implements one `ready-for-dev` issue at a time in `dev/**` using
    TDD: focused failing test first, minimal passing implementation second,
-   refactor only while tests stay green.
+   refactor only while tests stay green. For visible surfaces, the Developer
+   implements through the selected theme's tokens and components.
 6. QA validates the pushed branch in `tst/**`, checks CI and TDD evidence, runs
-   acceptance and regression checks, and records pass/fail evidence.
+   acceptance, regression, accessibility, and theme-compliance checks, and
+   records pass/fail evidence.
 7. Release assembles only QA-passed work into `rel/**`, runs release-level QA,
    promotes validated source, deploys through approved gates, and tags only
    after production promotion.
@@ -167,6 +181,24 @@ Technical Lead enforces TDD expectations before work starts. QA checks TDD
 evidence before marking work `qa-passed`. Release checks that included issues
 carry Developer TDD evidence or an explicit Technical Lead exception.
 
+### It Gives Every Web Surface A Reusable Visual Identity
+
+The process now treats visual design as reusable infrastructure. A theme
+records the look and feel once, then every HTML brief, architecture document,
+UX document, API platform, dashboard, internal tool, and app UI can consume the
+same token and component contract.
+
+The default theme is `leantime-inspired`: an app-like visual identity derived
+from Leantime's public theme implementation. It brings rounded operational
+surfaces, blue/teal accents, compact work-management density, light/dark mode,
+soft shadows, readable forms and tables, and accessible focus behavior into
+Human-Codex outputs.
+
+Themes are designed to be swappable. A product can start with
+`leantime-inspired`, then later select another theme without rewriting the
+role process, product brief structure, technology standards, or release
+workflow.
+
 ### It Separates Runtime Worlds
 
 Production and non-production are separate runtime worlds. A product, tool,
@@ -200,6 +232,7 @@ This lets agents execute without turning ambiguity into silent policy.
   process/       operating process definitions and lifecycle rules
   security/      environment, secrets, and security follow-up notes
   technologies/  technology-specific engineering standards
+  themes/        reusable visual identity themes for web surfaces
   tools/         canonical reusable tool manuals
   wildwest/      example active product using this process
   README.md      repository overview
@@ -280,6 +313,25 @@ Technology profiles define how authorized agents should work in a stack: test
 strategy, TDD order, validation commands, packaging, style, security, and common
 failure modes. They are reusable across products.
 
+## Themes
+
+[themes/](themes/README.md) defines visual identity themes.
+
+Current default theme:
+
+- [Leantime Inspired](themes/leantime-inspired/README.md)
+
+Themes contain design tokens, component guidance, layout shells, examples, and
+upstream provenance. They are used whenever the process produces a visual web
+surface: static HTML docs, API platforms, dashboards, internal tools, product
+UIs, and browser-viewable process artifacts.
+
+The selected theme is recorded in the product brief or UX design document for
+`standard` and `full` work, or in the issue notes for smaller visual changes.
+Developer implementation uses theme tokens before hard-coded visual values. QA
+records visible theme drift as a defect unless the Product Owner accepts the
+deviation.
+
 ## Tools
 
 [tools/](tools/README.md) contains canonical reusable tool manuals.
@@ -326,6 +378,10 @@ starts:
 3. What technical constraints or architecture notes apply?
 4. What focused test should fail first?
 
+For visual work, add a fifth:
+
+5. What theme, mode, and surface contract should the UI follow?
+
 If those answers are available, agents can work with far less ambiguity and far
 more useful autonomy.
 
@@ -340,6 +396,7 @@ is:
 4. Require QA to validate pushed branches, not developer workspaces.
 5. Keep release promotion separate from development.
 6. Enforce production/non-production runtime separation from the beginning.
+7. Select a theme for every visual surface and implement through its tokens.
 
 From there, add artifact depth as the product risk justifies it.
 

@@ -24,6 +24,7 @@ Inside the product folder:
 - `architecture/`: durable architecture decisions, ADRs, and system notes.
 - `agents/`: agent role profiles and profile composition rules.
 - `process/`: operating process definitions.
+- `themes/`: reusable visual identity themes for generated web surfaces.
 - `README.md`: entry point for this product folder.
 
 Example:
@@ -191,6 +192,8 @@ into `tst/` or `rel/`.
   supplied by the operator before production deployment.
 - Product Owner agents define what to build and why. They do not define how to
   build it or make technology choices.
+- Theme controls visual identity for visual web surfaces. It does not grant
+  product, technical, QA, or release authority.
 - Product Owner agents turn briefs into GitHub Issues, acceptance criteria,
   product priority, and included/deferred issue decisions for releases.
 - Product briefs include a roadmap feature table with `V1 features`,
@@ -224,6 +227,10 @@ into `tst/` or `rel/`.
   coordinates opening the milestone immediately after repository bootstrap. The
   Technical Lead creates maintenance milestones when the release is
   maintenance-only.
+- Every visual web surface must have a selected theme before implementation
+  starts. For `standard` and `full` work, record the theme in the product brief
+  and UX design document. For `inline` and `mini` work, an issue note is enough.
+  Use `leantime-inspired` by default until a product records a different theme.
 - Each feature or defect has a GitHub Issue assigned to the active release
   Milestone before development starts.
 - Every developer-executable issue must directly complete a roadmap feature,
@@ -242,6 +249,10 @@ into `tst/` or `rel/`.
   behavior change, Developer writes or updates the relevant automated test
   first, runs it and records the expected failure, then implements the minimal
   change needed to pass before refactoring.
+- For visual behavior, test-first evidence should cover the smallest useful
+  observable contract: rendered component state, accessibility role/name,
+  keyboard/focus behavior, snapshot, screenshot, or CSS-token assertion,
+  depending on the product's technology profile.
 - Feature branches must be committed and pushed before QA tests them.
 - QA tests the pushed branch, not uncommitted local developer files.
 - Release promotes only tested and approved commits.

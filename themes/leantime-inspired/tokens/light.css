@@ -1,0 +1,114 @@
+/*
+ * Human-Codex leantime-inspired light tokens.
+ * Derived from Leantime public/theme/default/css/light.css at
+ * 4bd9f644785f3656a2caee7bd5e1edac7ab1e19c.
+ */
+
+:root,
+[data-theme="leantime-inspired"][data-color-mode="light"],
+:root[data-theme="leantime-inspired"][data-color-mode="system"] {
+  color-scheme: light;
+
+  --accent1: hsla(199, 100%, 20%, 1);
+  --accent1-hsl: 199, 100%, 20%;
+  --accent1-hover: #555;
+  --accent1-color: #fff;
+  --accent2: hsla(168, 100%, 33%, 1);
+  --accent2-hsl: 168, 100%, 33%;
+  --accent2-hover: #555;
+  --accent2-color: #fff;
+
+  --primary-background: rgba(255, 255, 255, 0.8);
+  --secondary-background: rgba(255, 255, 255, 1);
+  --layered-background: rgba(255, 255, 255, 0.9);
+  --light-layered-background: rgba(255, 255, 255, 0.4);
+  --neutral: rgba(230, 230, 230, 0.8);
+  --solid-neutral: rgba(220, 220, 220, 1);
+  --neutral-background: rgba(240, 240, 240, 0.7);
+
+  --primary-font-color: #333333;
+  --secondary-font-color: #000;
+  --interactive-icon-color: #777;
+
+  --main-bg: var(--primary-background);
+  --content-bg: var(--secondary-background);
+  --main-border-color: rgba(220, 220, 220, 1);
+  --main-border-color-hover: rgba(200, 200, 200, 0.9);
+
+  --primary-font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-size-xs: 10px;
+  --font-size-s: 12px;
+  --base-font-size: 14px;
+  --font-size-m: var(--base-font-size);
+  --font-size-l: 16px;
+  --font-size-xl: 18px;
+  --font-size-xxl: 20px;
+  --font-size-xxxl: 24px;
+
+  --min-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --regular-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --large-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+  --box-radius-large: 24px;
+  --box-radius: 16px;
+  --box-radius-small: 8px;
+  --element-radius: 16px;
+  --input-radius: 15px;
+  --focus-ring-color: var(--accent1);
+
+  --green: #2e7d32;
+  --yellow: #f9a825;
+  --red: #d64045;
+  --blue: #1976d2;
+  --teal: #1bbbb1;
+
+  --feedback-success-bg: #e8f5e9;
+  --feedback-success-color: var(--green);
+  --feedback-success-border: #4caf50;
+  --feedback-warning-bg: #fff3e0;
+  --feedback-warning-color: #856404;
+  --feedback-warning-border: #ff9800;
+  --feedback-info-bg: #e3f2fd;
+  --feedback-info-color: var(--blue);
+  --feedback-info-border: #2196f3;
+  --feedback-error-bg: #ffebee;
+  --feedback-error-color: #c62828;
+  --feedback-error-border: #f44336;
+
+  --hc-accent-1: var(--accent1);
+  --hc-accent-2: var(--accent2);
+  --hc-accent-1-text: var(--accent1-color);
+  --hc-accent-2-text: var(--accent2-color);
+  --hc-bg-page: var(--primary-background);
+  --hc-bg-surface: var(--secondary-background);
+  --hc-bg-elevated: var(--layered-background);
+  --hc-bg-muted: var(--neutral-background);
+  --hc-text-primary: var(--primary-font-color);
+  --hc-text-secondary: var(--secondary-font-color);
+  --hc-text-muted: var(--interactive-icon-color);
+  --hc-border-default: var(--main-border-color);
+  --hc-border-hover: var(--main-border-color-hover);
+  --hc-radius-sm: var(--box-radius-small);
+  --hc-radius-md: var(--element-radius);
+  --hc-radius-lg: var(--box-radius);
+  --hc-radius-xl: var(--box-radius-large);
+  --hc-shadow-sm: var(--min-shadow);
+  --hc-shadow-md: var(--regular-shadow);
+  --hc-shadow-lg: var(--large-shadow);
+  --hc-font-sans: var(--primary-font-family);
+  --hc-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --hc-font-size-xs: var(--font-size-xs);
+  --hc-font-size-sm: var(--font-size-s);
+  --hc-font-size-base: var(--base-font-size);
+  --hc-font-size-lg: var(--font-size-l);
+  --hc-font-size-xl: var(--font-size-xl);
+  --hc-focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus-ring-color) 28%, transparent);
+  --hc-state-success: var(--feedback-success-color);
+  --hc-state-success-bg: var(--feedback-success-bg);
+  --hc-state-warning: var(--feedback-warning-color);
+  --hc-state-warning-bg: var(--feedback-warning-bg);
+  --hc-state-danger: var(--feedback-error-color);
+  --hc-state-danger-bg: var(--feedback-error-bg);
+  --hc-state-info: var(--feedback-info-color);
+  --hc-state-info-bg: var(--feedback-info-bg);
+}

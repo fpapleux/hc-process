@@ -55,6 +55,8 @@ Issue slicing depth:
 Verification depth:
 Environment depth:
 Release/milestone handling:
+Theme:
+Theme mode:
 Deferred execution concerns:
 ```
 
@@ -125,6 +127,8 @@ The development plan:
 - Records the expected TDD starting point for each developer-executable issue:
   the behavior or regression test the Developer should make fail before
   implementation starts.
+- Records selected theme, color-mode policy, affected theme surfaces, and
+  accepted deviations for visual-surface issues.
 - Records intentionally deferred concerns so developers, QA, and release do not
   expand scope by accident.
 
@@ -157,6 +161,7 @@ Issue fields the Technical Lead is responsible for:
 | Source reference | Links the issue to one PO roadmap feature, a slice of one PO roadmap feature, or one defect record. |
 | Acceptance criteria | Carries from the product brief. Does not invent new acceptance criteria. |
 | Calibration | Carries product model, assurance level, operator objective, UX surface type, architecture scope, issue slicing depth, verification depth, and intentional deferrals. |
+| Theme | Carries selected theme, color-mode policy, affected surfaces, and approved deviations when the issue changes a visual web surface. |
 | Architecture constraints | Carries from the architecture design document. Does not alter constraints. |
 | Milestone | Assigns to active release or maintenance milestone. |
 | Priority | Carries Product Owner priority and records Technical Lead execution order based on dependencies, risk, and architecture sequence. |
@@ -179,6 +184,8 @@ Before applying `ready-for-dev`, the Technical Lead verifies:
   recorded or intentionally not applicable.
 - UX surface type and architecture scope are recorded when the issue depends on
   UX or architecture artifacts.
+- Selected theme, color-mode policy, affected surfaces, and approved deviations
+  are recorded when the issue changes a visual web surface.
 - Intentional deferrals are recorded so developers do not expand scope.
 - Product Owner priority and included/deferred release decision are recorded.
 - The issue is assigned to the active milestone when release-bound.

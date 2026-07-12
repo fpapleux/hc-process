@@ -1,0 +1,101 @@
+/*
+ * Document surface for briefs, architecture docs, UX docs, API notes, and
+ * one-page technical design records.
+ */
+
+.hc-document {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 20px 56px;
+}
+
+.hc-document-header {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--hc-border-default);
+}
+
+.hc-document-kicker {
+  color: var(--hc-accent-2);
+  font-size: var(--hc-font-size-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hc-document-title {
+  margin: 0;
+  color: var(--hc-text-secondary);
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+.hc-document-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hc-document-grid {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  gap: 22px;
+}
+
+.hc-document-nav {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+}
+
+.hc-document-content {
+  min-width: 0;
+}
+
+.hc-document-content h2 {
+  margin-top: 28px;
+  color: var(--hc-text-secondary);
+  font-size: 22px;
+}
+
+.hc-document-content h3 {
+  margin-top: 20px;
+  color: var(--hc-text-secondary);
+  font-size: 17px;
+}
+
+.hc-document-content code {
+  border-radius: var(--hc-radius-sm);
+  background: var(--hc-bg-muted);
+  padding: 2px 5px;
+  font-family: var(--hc-font-mono);
+  font-size: 0.92em;
+}
+
+.hc-document-content pre {
+  overflow: auto;
+  border: 1px solid var(--hc-border-default);
+  border-radius: var(--hc-radius-md);
+  background: var(--hc-bg-elevated);
+  padding: 14px;
+}
+
+.hc-document-content pre code {
+  background: transparent;
+  padding: 0;
+}
+
+@media (max-width: 860px) {
+  .hc-document-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hc-document-nav {
+    position: static;
+  }
+
+  .hc-document-title {
+    font-size: 28px;
+  }
+}

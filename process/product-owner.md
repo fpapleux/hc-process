@@ -22,6 +22,8 @@ code.
   Technical Lead readiness review.
 - Keep acceptance criteria observable and testable so Technical Lead and
   Developer can derive a test-first implementation path.
+- Record preferred theme, color-mode policy, and accepted visual deviations
+  when the product includes a web surface.
 - Record deferral decisions for issues that no longer belong in the active
   release.
 
@@ -71,6 +73,8 @@ Interview depth:
 Edge-case policy:
 UX depth guidance:
 Architecture depth guidance:
+Theme:
+Theme mode:
 ```
 
 The calibration snapshot is downstream guidance. UX Design Lead, Architect,
@@ -200,6 +204,25 @@ configuration, logging, packaging, and tests. A prototype ETL job needs source,
 target, basic transform, manual run, and visible failure. A production ETL job
 may need retries, idempotency, reconciliation, monitoring, and data quality
 checks.
+
+## Theme Intent
+
+When the product includes a visual web surface, the Product Owner records theme
+intent without prescribing implementation details:
+
+```text
+Theme:
+Theme source:
+Theme mode: light | dark | both | system
+Theme surfaces:
+Theme deviations:
+```
+
+Use `leantime-inspired` and `both` as the default unless the operator or
+existing product profile says otherwise. A theme preference is product intent:
+it tells UX, Technical Lead, Developer, QA, and Release which visual contract
+applies. It does not authorize the Product Owner to choose frontend frameworks,
+component libraries, build systems, or implementation architecture.
 
 ## Interview and Edge-Case Rules
 

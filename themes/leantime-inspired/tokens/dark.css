@@ -1,0 +1,151 @@
+/*
+ * Human-Codex leantime-inspired dark tokens.
+ * Derived from Leantime public/theme/default/css/dark.css at
+ * 4bd9f644785f3656a2caee7bd5e1edac7ab1e19c.
+ */
+
+[data-theme="leantime-inspired"][data-color-mode="dark"] {
+  color-scheme: dark;
+
+  --accent1: hsla(198, 100%, 32%, 1);
+  --accent1-hsl: 199, 100%, 20%;
+  --accent1-hover: #555;
+  --accent1-color: #fff;
+  --accent2: hsla(168, 100%, 33%, 1);
+  --accent2-hsl: 168, 100%, 33%;
+  --accent2-hover: #555;
+  --accent2-color: #fff;
+
+  --primary-background: #404040;
+  --secondary-background: #292929;
+  --layered-background: #222;
+  --light-layered-background: rgba(0, 0, 0, 0.2);
+  --neutral: rgba(0, 0, 0, 0.2);
+  --solid-neutral: rgba(40, 40, 40, 1);
+  --neutral-background: rgba(40, 40, 40, 0.7);
+
+  --primary-font-color: #bbbbbb;
+  --secondary-font-color: #eee;
+  --interactive-icon-color: #aaa;
+
+  --main-bg: var(--primary-background);
+  --content-bg: var(--secondary-background);
+  --main-border-color: rgba(20, 20, 20, 0.9);
+  --main-border-color-hover: rgba(70, 70, 70, 0.9);
+
+  --primary-font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-size-xs: 10px;
+  --font-size-s: 12px;
+  --base-font-size: 14px;
+  --font-size-m: var(--base-font-size);
+  --font-size-l: 16px;
+  --font-size-xl: 18px;
+  --font-size-xxl: 22px;
+  --font-size-xxxl: 26px;
+
+  --min-shadow: 0 1px 1px rgba(0 0 0 / 20%), 0 0 1px rgba(0 0 0 / 5%);
+  --regular-shadow: 0 2px 6px rgba(0 0 0 / 20%), 0 0 0 rgba(0 0 0 / 20%);
+  --large-shadow: 0 0 8px 0 rgba(0 0 0 / 30%);
+
+  --box-radius-large: 20px;
+  --box-radius: 10px;
+  --box-radius-small: 5px;
+  --element-radius: 15px;
+  --input-radius: 15px;
+  --focus-ring-color: #66b3ff;
+
+  --green: #32965d;
+  --yellow: #fdb833;
+  --red: #f76c5e;
+  --blue: #1b75bb;
+  --teal: #1bbbb1;
+
+  --feedback-success-bg: rgba(76, 175, 80, 0.12);
+  --feedback-success-color: #66bb6a;
+  --feedback-success-border: #4caf50;
+  --feedback-warning-bg: rgba(255, 152, 0, 0.12);
+  --feedback-warning-color: #ffb74d;
+  --feedback-warning-border: #ff9800;
+  --feedback-info-bg: rgba(33, 150, 243, 0.12);
+  --feedback-info-color: #64b5f6;
+  --feedback-info-border: #2196f3;
+  --feedback-error-bg: rgba(244, 67, 54, 0.12);
+  --feedback-error-color: #ef5350;
+  --feedback-error-border: #f44336;
+
+  --hc-accent-1: var(--accent1);
+  --hc-accent-2: var(--accent2);
+  --hc-accent-1-text: var(--accent1-color);
+  --hc-accent-2-text: var(--accent2-color);
+  --hc-bg-page: var(--primary-background);
+  --hc-bg-surface: var(--secondary-background);
+  --hc-bg-elevated: var(--layered-background);
+  --hc-bg-muted: var(--neutral-background);
+  --hc-text-primary: var(--primary-font-color);
+  --hc-text-secondary: var(--secondary-font-color);
+  --hc-text-muted: var(--interactive-icon-color);
+  --hc-border-default: var(--main-border-color);
+  --hc-border-hover: var(--main-border-color-hover);
+  --hc-radius-sm: var(--box-radius-small);
+  --hc-radius-md: var(--element-radius);
+  --hc-radius-lg: var(--box-radius);
+  --hc-radius-xl: var(--box-radius-large);
+  --hc-shadow-sm: var(--min-shadow);
+  --hc-shadow-md: var(--regular-shadow);
+  --hc-shadow-lg: var(--large-shadow);
+  --hc-font-sans: var(--primary-font-family);
+  --hc-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --hc-font-size-xs: var(--font-size-xs);
+  --hc-font-size-sm: var(--font-size-s);
+  --hc-font-size-base: var(--base-font-size);
+  --hc-font-size-lg: var(--font-size-l);
+  --hc-font-size-xl: var(--font-size-xl);
+  --hc-focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus-ring-color) 34%, transparent);
+  --hc-state-success: var(--feedback-success-color);
+  --hc-state-success-bg: var(--feedback-success-bg);
+  --hc-state-warning: var(--feedback-warning-color);
+  --hc-state-warning-bg: var(--feedback-warning-bg);
+  --hc-state-danger: var(--feedback-error-color);
+  --hc-state-danger-bg: var(--feedback-error-bg);
+  --hc-state-info: var(--feedback-info-color);
+  --hc-state-info-bg: var(--feedback-info-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="leantime-inspired"][data-color-mode="system"] {
+    color-scheme: dark;
+
+    --accent1: hsla(198, 100%, 32%, 1);
+    --accent1-hover: #555;
+    --accent1-color: #fff;
+    --accent2: hsla(168, 100%, 33%, 1);
+    --accent2-hover: #555;
+    --accent2-color: #fff;
+    --primary-background: #404040;
+    --secondary-background: #292929;
+    --layered-background: #222;
+    --neutral-background: rgba(40, 40, 40, 0.7);
+    --primary-font-color: #bbbbbb;
+    --secondary-font-color: #eee;
+    --interactive-icon-color: #aaa;
+    --main-border-color: rgba(20, 20, 20, 0.9);
+    --main-border-color-hover: rgba(70, 70, 70, 0.9);
+    --min-shadow: 0 1px 1px rgba(0 0 0 / 20%), 0 0 1px rgba(0 0 0 / 5%);
+    --regular-shadow: 0 2px 6px rgba(0 0 0 / 20%), 0 0 0 rgba(0 0 0 / 20%);
+    --large-shadow: 0 0 8px 0 rgba(0 0 0 / 30%);
+    --box-radius-large: 20px;
+    --box-radius: 10px;
+    --box-radius-small: 5px;
+    --element-radius: 15px;
+    --input-radius: 15px;
+    --focus-ring-color: #66b3ff;
+    --feedback-success-bg: rgba(76, 175, 80, 0.12);
+    --feedback-success-color: #66bb6a;
+    --feedback-warning-bg: rgba(255, 152, 0, 0.12);
+    --feedback-warning-color: #ffb74d;
+    --feedback-info-bg: rgba(33, 150, 243, 0.12);
+    --feedback-info-color: #64b5f6;
+    --feedback-error-bg: rgba(244, 67, 54, 0.12);
+    --feedback-error-color: #ef5350;
+  }
+}

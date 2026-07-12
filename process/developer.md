@@ -21,13 +21,15 @@ The Developer starts work only from a GitHub Issue that is:
 - Paired with acceptance criteria.
 - Paired with a product profile.
 - Paired with a technology profile.
+- Paired with a theme profile when the issue changes a visual web surface.
 - Paired with architecture review evidence when the issue is technically
   significant.
 
 If the issue is unclear, missing acceptance criteria, missing a source roadmap
-feature or defect record, missing a technology profile, missing required
-architecture review, or expanding beyond its scope, return it to the Technical
-Lead instead of guessing.
+feature or defect record, missing a technology profile, missing a required
+theme profile for visual work, missing required architecture review, or
+expanding beyond its scope, return it to the Technical Lead instead of
+guessing.
 
 ## Branch and Checkout Naming
 
@@ -64,6 +66,8 @@ Before implementation starts:
 - Move the issue to `in-dev`.
 - Confirm the product profile.
 - Confirm the technology profile.
+- Confirm the theme profile, color-mode policy, and component/layout contract
+  when the issue changes a visual surface.
 - Confirm architecture notes and constraints when the issue is marked
   `architecture-reviewed`.
 
@@ -80,14 +84,16 @@ Before implementation starts:
    passes immediately or fails for the wrong reason, correct the test before
    changing production code.
 7. Implement the minimal scoped change needed to pass the focused test.
-8. Run the focused test and relevant technology-profile checks.
-9. Refactor only while keeping the focused test and relevant checks green.
-10. Commit with the GitHub Issue number.
-11. Push the feature branch.
-12. Verify that CI has started for the pushed branch when the repository has CI.
-13. Record implementation notes and verification evidence in the GitHub Issue or
+8. For visual surfaces, implement through selected theme tokens, components,
+   and layouts before adding hard-coded visual values.
+9. Run the focused test and relevant technology-profile checks.
+10. Refactor only while keeping the focused test and relevant checks green.
+11. Commit with the GitHub Issue number.
+12. Push the feature branch.
+13. Verify that CI has started for the pushed branch when the repository has CI.
+14. Record implementation notes and verification evidence in the GitHub Issue or
     pull request.
-14. Mark the issue `ready-for-qa`.
+15. Mark the issue `ready-for-qa`.
 
 Example:
 
@@ -115,6 +121,7 @@ Verification:
 - TDD green: npm test -- checkout-banner.test.ts, passed
 - npm run test: passed
 - npm run build: passed
+- theme check: Playwright component screenshot and axe check passed for light and dark modes
 - manual check: not run, reason: no browser behavior changed
 ```
 
@@ -198,6 +205,8 @@ Handoff requires:
 - Commit SHA.
 - TDD evidence: focused test added or updated, expected failing run, and
   passing rerun.
+- Theme evidence for visual work: selected theme, mode tested, token/component
+  usage notes, and screenshot/accessibility evidence when available.
 - Verification commands and results.
 - Known limitations.
 - Pull request link when one exists.

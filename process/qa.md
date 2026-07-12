@@ -17,6 +17,9 @@ QA starts feature validation only when:
 - Developer TDD evidence exists for changed behavior: focused test added or
   updated, expected failing run, and passing rerun after implementation. For
   defect fixes, this must include a regression test that failed before the fix.
+- Theme evidence exists when the issue changes a visual web surface: selected
+  theme, color-mode policy, and visible-state checks or a recorded Technical
+  Lead exception.
 - Architecture-specific validation expectations are recorded when the issue is
   marked `architecture-reviewed`.
 
@@ -54,6 +57,9 @@ QA owns acceptance evidence:
 - CI workflow/run identifier, commit SHA, and pass/fail status when CI exists.
 - Clear pass/fail result.
 - Architecture-specific validation evidence when requested by the Architect.
+- Theme-compliance evidence for visual surfaces: selected theme loaded,
+  expected color mode works, token-backed states render, focus/keyboard states
+  are visible, and Product Owner-approved deviations are recorded.
 
 If the repository has CI and no CI run exists for the tested branch/commit, QA
 does not mark the issue `qa-passed` unless the Technical Lead explicitly
@@ -86,6 +92,8 @@ Release integration QA verifies:
   Technical Lead explicitly records a waiver record.
 - Release-impacting architecture notes and operational validation expectations
   are addressed.
+- Theme assets, color-mode behavior, and approved visual deviations are
+  consistent across the assembled release.
 - No release evidence depends on bypassed validation, fixture credentials,
   dummy TLS material, disabled certificate verification, or browser security
   exceptions.
@@ -153,6 +161,8 @@ QA marks work `qa-passed` only when:
 - Acceptance criteria pass.
 - Relevant regression checks pass.
 - Developer TDD evidence is present for changed behavior and defect fixes.
+- Theme compliance passes for changed visual surfaces, or the Product Owner has
+  accepted the deviation and Technical Lead recorded it.
 - Required CI passes for the exact tested commit, unless explicitly waived by
   Technical Lead using a waiver record.
 - Architecture-specific validation expectations pass when present.

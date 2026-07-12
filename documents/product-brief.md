@@ -71,7 +71,8 @@ Use this structure for prototypes, personal tools, and narrow CLI utilities:
 
 1. Cover: product name, owner/context, one-line purpose.
 2. Calibration: product model, assurance level, objective, budget, interview
-   depth, edge-case policy, downstream depth.
+   depth, edge-case policy, downstream depth, theme intent when visual surfaces
+   exist.
 3. Problem and value: why this is useful now.
 4. Users: only real user types known from context.
 5. Scope: in, out, defaults, assumptions.
@@ -85,6 +86,8 @@ Use this structure for prototypes, personal tools, and narrow CLI utilities:
 Use the mini sections plus the sections that materially help downstream roles:
 
 - Solution overview.
+- Theme intent for visual surfaces: theme id, mode, affected surfaces, and
+  deviations.
 - User journey or operating model diagram.
 - Roadmap table with `V1`, `V2`, and `Beyond` features.
 - Risks and mitigations.
@@ -102,6 +105,10 @@ It must not prescribe technology, components, data
 models, integration patterns, deployment, infrastructure, or security controls.
 Technical context may be recorded as "Context for Architect", not as a
 requirement.
+
+Theme intent may be recorded as product preference. It must not prescribe
+frontend frameworks, asset pipelines, component libraries, or implementation
+architecture.
 
 ## Diagrams
 

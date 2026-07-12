@@ -1,0 +1,102 @@
+id: leantime-inspired
+name: Leantime Inspired
+status: usable-starter
+default: true
+
+license:
+  original_process_material: MIT
+  derived_theme_material: AGPL-3.0
+
+source:
+  type: github
+  repo: Leantime/leantime
+  url: https://github.com/Leantime/leantime
+  commit: 4bd9f644785f3656a2caee7bd5e1edac7ab1e19c
+  branch: master
+  source_mode: copied_and_adapted
+  initial_import_targets:
+    - public/theme/default/theme.ini
+    - public/theme/default/css/light.css
+    - public/theme/default/css/dark.css
+    - public/theme/minimal/theme.ini
+    - public/theme/minimal/css/light.css
+    - public/theme/minimal/css/dark.css
+    - public/assets/css/components/accessibility.css
+    - public/assets/css/components/forms.css
+    - public/assets/css/components/nav.css
+    - public/assets/css/components/tables.css
+    - public/assets/css/components/text-styles.css
+    - public/assets/css/components/structure.css
+    - public/assets/css/components/glass.css
+    - app/Views/Templates/components
+    - app/Views/Templates/layouts/app.blade.php
+    - app/Views/Templates/sections/header.blade.php
+
+intent:
+  summary: >
+    A Human-Codex visual identity derived from Leantime's approachable,
+    work-management UI: rounded surfaces, strong blue/teal accents, compact
+    operational density, light and dark modes, accessible focus states, and
+    token-driven component styling.
+  personality:
+    - practical
+    - calm
+    - focused
+    - app-like
+    - accessible
+    - optimistic without becoming playful
+
+supports:
+  color_modes:
+    - light
+    - dark
+  surfaces:
+    - html_document
+    - app_shell
+    - api_platform
+    - dashboard
+    - internal_tool
+    - product_ui
+
+token_transport:
+  primary: css_custom_properties
+  optional:
+    - json_tokens
+    - tailwind_bridge
+
+token_files:
+  light: tokens/light.css
+  dark: tokens/dark.css
+  json: tokens/tokens.json
+
+style_files:
+  components: components/base.css
+  document_layout: layouts/document.css
+
+component_groups:
+  - buttons
+  - forms
+  - tables
+  - cards
+  - navigation
+  - tabs
+  - badges
+  - feedback
+  - modals
+  - loading
+  - accessibility
+
+layout_groups:
+  - document
+  - app_shell
+  - api_platform
+  - dashboard
+
+rules:
+  - Use theme tokens before hard-coded visual values.
+  - Preserve light and dark mode parity.
+  - Preserve accessible focus states.
+  - Preserve provenance for copied upstream material.
+  - Prefer Leantime's token architecture over exact framework coupling.
+  - Adapt Blade/PHP-specific ideas into framework-neutral HTML/CSS guidance
+    before applying them to non-PHP products.

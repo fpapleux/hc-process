@@ -1,0 +1,163 @@
+/*
+ * Framework-neutral starter components for the Human-Codex leantime-inspired
+ * theme. Consume tokens from ../tokens/.
+ */
+
+.hc-page {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--hc-bg-page);
+  color: var(--hc-text-primary);
+  font-family: var(--hc-font-sans);
+  font-size: var(--hc-font-size-base);
+}
+
+.hc-shell {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.hc-sidebar {
+  border-right: 1px solid var(--hc-border-default);
+  background: var(--hc-bg-surface);
+  padding: 18px;
+}
+
+.hc-main {
+  min-width: 0;
+  padding: 24px;
+}
+
+.hc-card {
+  background: var(--hc-bg-surface);
+  border: 1px solid var(--hc-border-default);
+  border-radius: var(--hc-radius-lg);
+  box-shadow: var(--hc-shadow-sm);
+  padding: 18px;
+}
+
+.hc-card + .hc-card {
+  margin-top: 16px;
+}
+
+.hc-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  border: 1px solid transparent;
+  border-radius: var(--hc-radius-md);
+  padding: 8px 14px;
+  background: var(--hc-accent-1);
+  color: var(--hc-accent-1-text);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hc-button:hover {
+  background: var(--accent1-hover);
+}
+
+.hc-button.secondary {
+  border-color: var(--hc-border-default);
+  background: var(--hc-bg-surface);
+  color: var(--hc-text-primary);
+}
+
+.hc-input,
+.hc-select,
+.hc-textarea {
+  width: 100%;
+  border: 1px solid var(--hc-border-default);
+  border-radius: var(--input-radius);
+  background: var(--input-background, var(--hc-bg-surface));
+  color: var(--hc-text-primary);
+  font: inherit;
+  padding: 8px 10px;
+  box-shadow: var(--input-shadow, none);
+}
+
+.hc-button:focus-visible,
+.hc-input:focus-visible,
+.hc-select:focus-visible,
+.hc-textarea:focus-visible,
+.hc-link:focus-visible {
+  outline: none;
+  box-shadow: var(--hc-focus-ring);
+}
+
+.hc-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid var(--hc-border-default);
+  border-radius: var(--hc-radius-md);
+  background: var(--hc-bg-surface);
+}
+
+.hc-table th,
+.hc-table td {
+  border-bottom: 1px solid var(--hc-border-default);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.hc-table th {
+  color: var(--hc-text-secondary);
+  font-size: var(--hc-font-size-sm);
+  font-weight: 700;
+}
+
+.hc-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: var(--hc-bg-muted);
+  color: var(--hc-text-secondary);
+  font-size: var(--hc-font-size-sm);
+  font-weight: 600;
+}
+
+.hc-alert {
+  border: 1px solid var(--hc-state-info);
+  border-radius: var(--hc-radius-md);
+  background: var(--hc-state-info-bg);
+  color: var(--hc-text-primary);
+  padding: 12px 14px;
+}
+
+.hc-alert.success {
+  border-color: var(--hc-state-success);
+  background: var(--hc-state-success-bg);
+}
+
+.hc-alert.warning {
+  border-color: var(--hc-state-warning);
+  background: var(--hc-state-warning-bg);
+}
+
+.hc-alert.danger {
+  border-color: var(--hc-state-danger);
+  background: var(--hc-state-danger-bg);
+}
+
+@media (max-width: 760px) {
+  .hc-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .hc-sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--hc-border-default);
+  }
+
+  .hc-main {
+    padding: 16px;
+  }
+}

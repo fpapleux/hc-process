@@ -44,6 +44,9 @@ Status: draft | review | accepted | superseded
 Canonical path:
 Related issues:
 Related documents:
+Theme:
+Theme mode:
+Theme source:
 ```
 
 ## Calibration
@@ -60,6 +63,8 @@ Primary interaction mode:
 Edge-case depth:
 Accessibility depth:
 Architecture bridge depth:
+Theme surfaces:
+Theme deviations:
 Deferred UX concerns:
 ```
 
@@ -124,6 +129,11 @@ Screen inventory, navigation model, wireframes, responsive behavior, and visual
 state inventories apply only to screen-based surfaces. Do not create wireframes
 for terminal-only, headless, or API-only products.
 
+For screen, document, API, report, dashboard, and app surfaces, record the
+selected theme and mode. Structural UX still avoids inventing visual design,
+but it must tell downstream roles which theme contract the surface is expected
+to use.
+
 ## Accessibility
 
 Scale accessibility to the surface and assurance level. Always cover keyboard
@@ -131,6 +141,10 @@ operation for terminal/screen products, readable output and errors, focus
 behavior where screens exist, and non-color status communication where visual
 status exists. Add WCAG matrices only for production, enterprise, or regulated
 screen UX.
+
+When a theme is selected, accessibility notes should call out theme-backed
+focus, contrast, disabled, error, warning, and status behavior that must be
+preserved in implementation and QA.
 
 ## Design-to-Architecture Bridge
 

@@ -6,11 +6,12 @@ state its scope, permissions, inputs, outputs, and handoff rules.
 The roles are separated so that product intent, development, validation, and
 release authority do not collapse into one agent.
 
-Agent profiles are composed from three dimensions:
+Agent profiles are composed from four dimensions:
 
 - Role: what authority the agent has.
 - Product: what product context the agent carries.
 - Technology: what technical practices the agent follows.
+- Theme: what visual identity web surfaces follow.
 
 See [Profile Dimensions](dimensions.md) for the full model.
 
@@ -62,6 +63,7 @@ Organizational context:
 - QA standards.
 - GitHub label and status conventions.
 - Repository templates.
+- Theme library and visual identity standards.
 - Security policy.
 - Agent role definitions.
 
@@ -71,6 +73,7 @@ Product-specific context:
 - Roadmap and priorities.
 - User workflows.
 - Naming and domain language.
+- Selected theme, mode, and theme deviations.
 - Codebase architecture and conventions.
 - Fixtures, test data, and regression history.
 - Deployment configuration.
@@ -140,6 +143,8 @@ Responsibilities:
 - Coordinates Developer, QA, Release, and Operations handoffs.
 - Owns defect backlog triage and maintenance release planning.
 - Enforces TDD evidence before Developer work advances to QA.
+- Carries selected theme, mode, and visual-surface expectations into executable
+  issues.
 - Executes post-production cleanup of completed feature branches and checkouts
   from `dev/` and `tst/`.
 
@@ -158,6 +163,8 @@ Responsibilities:
 - Drives implementation with TDD: writes or updates the focused test first,
   records the expected failing run, implements the minimal passing change, and
   records the passing rerun.
+- Implements visible surfaces through the selected theme's tokens,
+  components, and layout contract.
 - Records implementation notes in the GitHub Issue or pull request.
 - Pushes feature branches for QA.
 
@@ -177,6 +184,8 @@ Responsibilities:
 - Validates acceptance criteria.
 - Checks that Developer TDD evidence exists for changed behavior and defect
   fixes before marking work `qa-passed`.
+- Validates theme compliance for changed visual surfaces, including selected
+  mode, token-backed states, visible focus behavior, and approved deviations.
 - Builds product-specific regression knowledge.
 - Opens defects as GitHub Issues.
 - Records validation evidence.
@@ -196,6 +205,8 @@ Responsibilities:
   to the operator-provided production target.
 - Creates GitHub Releases and tags after production promotion.
 - Performs final smoke checks.
+- Carries shipped theme assets, provenance, and accepted visual deviations into
+  release evidence when applicable.
 - Cleans up only Release-owned `rel/**` workspaces after release and hands
   `dev/**` and `tst/**` cleanup candidates to Technical Lead.
 

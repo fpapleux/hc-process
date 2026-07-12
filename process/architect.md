@@ -41,6 +41,7 @@ Risk depth:
 Security depth:
 Operations depth:
 Verification depth:
+Theme integration depth:
 Deferred architecture concerns:
 ```
 
@@ -201,6 +202,8 @@ Architecture review is required before `ready-for-dev` when work includes:
 - Build, deployment, environment, observability, or operational behavior
   changes.
 - Significant performance, reliability, or scalability risk.
+- Theme integration that affects asset delivery, rendering architecture,
+  accessibility guarantees, performance budgets, or platform constraints.
 - Large refactors or work that changes shared contracts.
 - Technology selection or dependency introduction.
 
@@ -242,6 +245,8 @@ The Architect starts review from:
   the architecture design.
 - UX calibration snapshot with UX surface type, UX depth, edge-case depth, and
   architecture bridge depth.
+- Theme selection and theme integration notes when the visual identity affects
+  technical constraints.
 - A GitHub Issue with a target product profile.
 - A technology profile or a clear request to identify the needed technology
   profile.
@@ -266,7 +271,8 @@ assumption.
 2. Inspect the existing codebase or documentation needed to understand the
    current architecture.
 3. Identify affected boundaries, contracts, data, dependencies, operational
-   risks, security implications, and test-first expectations.
+   risks, security implications, theme integration constraints when applicable,
+   and test-first expectations.
 4. Determine architecture scope and documentation depth from Product Owner and
    UX calibration.
 5. Determine document scope level: `full` or `scoped` per the

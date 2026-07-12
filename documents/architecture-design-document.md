@@ -63,6 +63,7 @@ Risk depth:
 Security depth:
 Operations depth:
 Verification depth:
+Theme integration depth:
 Deferred architecture concerns:
 ```
 
@@ -152,6 +153,11 @@ security checks, or operational smoke. For developer-owned behavior changes,
 identify the focused behavior or regression test that should fail before
 implementation when architecture context affects the test shape. The
 verification plan must match the budget and risk.
+
+When the selected theme affects architecture, record the relevant checks:
+asset delivery, bundle impact, rendering constraints, accessibility contracts,
+or platform limitations. Do not expand architecture review for visual styling
+that can be handled entirely by UX, Developer, and QA.
 
 ## Operations Plan Trigger
 
