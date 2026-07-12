@@ -2,8 +2,9 @@
 
 This folder defines the QA role profile.
 
-QA validates pushed branches in `tst/**`, records acceptance evidence, opens
-defects as GitHub Issues, and closes defects only after validation passes.
+QA validates pushed branches in `tst/**`, records acceptance evidence, verifies
+Developer TDD evidence for changed behavior, opens defects as GitHub Issues,
+and closes defects only after validation passes.
 
 Composition:
 

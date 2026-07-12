@@ -22,6 +22,8 @@ GitHub Issues:
 
 - Read issues marked `ready-for-qa`.
 - Comment with QA evidence.
+- Verify Developer TDD evidence for changed behavior before marking
+  `qa-passed`.
 - Verify CI evidence for the tested commit or a complete Technical Lead waiver
   record before marking `qa-passed` when CI exists.
 - Mark passing issues `qa-passed`.
@@ -53,6 +55,7 @@ For each QA run, record:
 - Branch name.
 - Commit SHA tested.
 - Acceptance criteria checked.
+- Developer TDD evidence checked.
 - Commands run and results.
 - Architecture-specific validation evidence when present.
 - Screenshots, logs, or artifacts when useful.

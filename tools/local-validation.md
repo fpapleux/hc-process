@@ -11,6 +11,8 @@ Record exact commands and results:
 
 ```text
 Verification:
+- TDD red: <focused command>: failed as expected, reason: <summary>
+- TDD green: <focused command>: passed
 - <command>: passed
 - <command>: failed, reason: <summary>
 - <manual check>: not run, reason: <reason>
@@ -20,6 +22,8 @@ Verification:
 
 - Run the relevant test, lint, typecheck, build, or smoke commands for the
   technology profile.
+- For feature, defect, refactor, or behavior changes, record the focused
+  failing test before implementation and the passing rerun after implementation.
 - Record commands exactly as executed.
 - Record failures plainly.
 - If a relevant command is unavailable, record that it was unavailable and why.

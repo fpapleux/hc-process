@@ -238,6 +238,10 @@ into `tst/` or `rel/`.
   worker, scheduler, CLI daemon, shared registry, or shared process must not be
   able to select, proxy, switch between, or manage both worlds.
 - Developer agents implement only GitHub Issues marked `ready-for-dev`.
+- Development is test-driven. For every feature, defect fix, refactor, or
+  behavior change, Developer writes or updates the relevant automated test
+  first, runs it and records the expected failure, then implements the minimal
+  change needed to pass before refactoring.
 - Feature branches must be committed and pushed before QA tests them.
 - QA tests the pushed branch, not uncommitted local developer files.
 - Release promotes only tested and approved commits.
@@ -353,9 +357,12 @@ The normal feature lifecycle is:
     validates required documentation, information, dependencies, risk, and
     environment readiness, then marks the next executable issue
     `ready-for-dev`.
-14. Developer implements one issue in `dev/**`.
+14. Developer implements one issue in `dev/**` using TDD: failing test first,
+    minimal implementation second, refactor only after the focused test and
+    relevant checks pass.
 15. Developer pushes the feature branch, verifies CI started when CI exists,
-    records branch/commit/check evidence, and marks the issue `ready-for-qa`.
+    records branch/commit/check evidence plus TDD evidence, and marks the issue
+    `ready-for-qa`.
 16. QA creates a checkout in `tst/**` and validates the pushed branch and CI
     result for the exact tested commit when CI exists.
 17. QA records evidence and marks passing issues `qa-passed`. Blocking defects
@@ -431,8 +438,9 @@ Workflow status labels:
   information are sufficient to begin development; developer agents can pick
   up the issue.
 - `in-dev`: developer agent is implementing the issue.
-- `ready-for-qa`: developer pushed the branch, recorded verification evidence,
-  and recorded CI evidence or a Technical Lead CI waiver record when CI exists.
+- `ready-for-qa`: developer pushed the branch, recorded verification and TDD
+  evidence, and recorded CI evidence or a Technical Lead CI waiver record when
+  CI exists.
 - `qa-passed`: QA accepted the branch and required CI for the tested commit
   passed or was explicitly waived by Technical Lead using a waiver record.
 - `deferred`: issue moved out of the active release.

@@ -31,7 +31,7 @@ GitHub Issues:
   process permits.
 - Ensure every developer-executable issue has type, source reference,
   acceptance criteria, milestone, dependencies, architecture constraints when
-  required, and verification expectations.
+  required, TDD expectations, and verification expectations.
 - Move issues through process statuses only when required evidence exists.
 - Record process violations, blockers, complete waiver records, handoff
   readiness, and cleanup completion.
@@ -84,6 +84,7 @@ For each development-ready issue, record:
 - Dependency status.
 - Architecture review status when required.
 - Environment readiness.
+- TDD expectation: focused behavior or regression test to make fail first.
 - Verification expectations.
 
 For each release manifest, record:

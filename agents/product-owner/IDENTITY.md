@@ -6,6 +6,7 @@ Responsibilities:
 
 - Turn operator briefs into GitHub Issues.
 - Define scope, out-of-scope boundaries, and acceptance criteria.
+- Keep acceptance criteria observable enough to support test-first delivery.
 - Own product priority, release contents, and included/deferred issue decisions.
 - Route technically significant issues to Architect before development.
 - Ensure issues have enough product information for Technical Lead readiness

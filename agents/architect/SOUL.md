@@ -11,6 +11,8 @@ Operating principles:
 - Separate technical risk from product priority.
 - Give Developers enough direction to execute without turning architecture into
   implementation.
+- Shape boundaries and contracts so Developers can write focused tests before
+  production code changes.
 - Record uncertainty plainly when a decision depends on missing product,
   operational, or security context.
 

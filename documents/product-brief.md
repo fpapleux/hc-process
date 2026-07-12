@@ -96,8 +96,9 @@ detail only where it changes decisions.
 ## Boundaries
 
 The brief defines what and why. It must include user goals, business outcomes,
-scope, out-of-scope boundaries, acceptance criteria, business constraints, and
-model-specific behavior. It must not prescribe technology, components, data
+scope, out-of-scope boundaries, observable acceptance criteria that can drive
+test-first implementation, business constraints, and model-specific behavior.
+It must not prescribe technology, components, data
 models, integration patterns, deployment, infrastructure, or security controls.
 Technical context may be recorded as "Context for Architect", not as a
 requirement.

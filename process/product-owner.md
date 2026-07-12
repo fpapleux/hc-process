@@ -20,6 +20,8 @@ code.
 - Route technically significant issues to Architect before development.
 - Ensure issue documentation and product information are sufficient for
   Technical Lead readiness review.
+- Keep acceptance criteria observable and testable so Technical Lead and
+  Developer can derive a test-first implementation path.
 - Record deferral decisions for issues that no longer belong in the active
   release.
 

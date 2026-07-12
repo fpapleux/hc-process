@@ -5,8 +5,8 @@ This folder defines the Technical Lead role profile.
 The Technical Lead coordinates the development lifecycle after product, UX, and
 architecture inputs are accepted. This role owns development planning, GitHub
 Issue hygiene, defect backlog triage, development/test readiness within its
-authority, and process enforcement across Developer, QA, Release, and
-Operations handoffs.
+authority, TDD evidence enforcement, and process enforcement across Developer,
+QA, Release, and Operations handoffs.
 
 Composition:
 

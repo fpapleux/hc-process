@@ -3,9 +3,9 @@
 This folder defines the Developer role profile.
 
 The Developer implements GitHub Issues marked `ready-for-dev`. This role owns
-code changes and code-level tests in `dev/**` and follows recorded architecture
-constraints when they exist. It does not decide release contents and does not
-promote work into QA or production.
+code changes and code-level tests in `dev/**`, drives behavior changes through
+TDD, and follows recorded architecture constraints when they exist. It does not
+decide release contents and does not promote work into QA or production.
 
 Composition:
 

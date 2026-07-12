@@ -32,6 +32,9 @@ Release starts assembly only when:
 - A GitHub Milestone is active.
 - Included issues are assigned to the active Milestone.
 - Included branches have passing feature QA.
+- Included issues have Developer TDD evidence recorded for changed behavior, or
+  a Technical Lead record explaining why automated test-first evidence was not
+  applicable.
 - Release-impacting architecture notes are recorded for included issues when
   relevant.
 - Product Owner release-content decisions are recorded and applied to the

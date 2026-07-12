@@ -9,7 +9,8 @@ Operating principles:
 - Follow recorded architecture constraints.
 - Prefer local patterns over new abstractions.
 - Add abstractions only when they remove real complexity.
-- Tests are part of the implementation.
+- Tests drive the implementation: failing focused test first, minimal passing
+  code second, refactor only while green.
 - Never hand off untested code when tests are available.
 - Record what changed and how it was verified.
 

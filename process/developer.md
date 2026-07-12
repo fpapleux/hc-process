@@ -3,6 +3,12 @@
 The Developer implements assigned GitHub Issues marked `ready-for-dev`.
 Development work happens only in `dev/**`.
 
+Developer work is test-driven. For every feature, defect fix, refactor, or
+behavior change, write or update the focused automated test before production
+code, run it, and confirm the expected failure. Only then implement the minimal
+change required to pass. Refactor only after the focused test and relevant
+checks are green.
+
 ## Intake Requirements
 
 The Developer starts work only from a GitHub Issue that is:
@@ -67,22 +73,30 @@ Before implementation starts:
 2. Confirm whether the issue completes a roadmap feature, completes a slice of
    a roadmap feature, or fixes a defect.
 3. Inspect the existing codebase before changing it.
-4. Implement the scoped change.
-5. Add or update code-level tests.
-6. Run relevant technology-profile checks.
-7. Commit with the GitHub Issue number.
-8. Push the feature branch.
-9. Verify that CI has started for the pushed branch when the repository has CI.
-10. Record implementation notes and verification evidence in the GitHub Issue or
+4. Identify the smallest behavior increment and the automated test that should
+   fail before the change exists.
+5. Add or update that focused test.
+6. Run the focused test and confirm it fails for the expected reason. If it
+   passes immediately or fails for the wrong reason, correct the test before
+   changing production code.
+7. Implement the minimal scoped change needed to pass the focused test.
+8. Run the focused test and relevant technology-profile checks.
+9. Refactor only while keeping the focused test and relevant checks green.
+10. Commit with the GitHub Issue number.
+11. Push the feature branch.
+12. Verify that CI has started for the pushed branch when the repository has CI.
+13. Record implementation notes and verification evidence in the GitHub Issue or
     pull request.
-11. Mark the issue `ready-for-qa`.
+14. Mark the issue `ready-for-qa`.
 
 Example:
 
 ```bash
 cd dev/123-checkout-banner
-# edit code
-# run relevant tests
+# add/update focused failing test
+# run focused test and record expected failure
+# implement minimal change
+# rerun focused and relevant tests
 git status
 git add .
 git commit -m "Implement checkout banner for #123"
@@ -97,6 +111,8 @@ Example:
 
 ```text
 Verification:
+- TDD red: npm test -- checkout-banner.test.ts, failed as expected because banner was missing
+- TDD green: npm test -- checkout-banner.test.ts, passed
 - npm run test: passed
 - npm run build: passed
 - manual check: not run, reason: no browser behavior changed
@@ -151,18 +167,23 @@ Required defect loop:
 
 1. Accept the GitHub Issue and become the owner.
 2. Move the issue to `accepted`.
-3. Fix the bug in `dev/**`.
-4. Add or update the regression test.
-5. Commit and push with the GitHub Issue number.
-6. Record the fix commit SHA and tests run in the GitHub Issue.
-7. Move the issue to `fixed`.
+3. Add or update the regression test that reproduces the defect.
+4. Run the regression test and confirm it fails for the reported defect.
+5. Fix the bug in `dev/**`.
+6. Run the regression test and relevant checks until they pass.
+7. Commit and push with the GitHub Issue number.
+8. Record the fix commit SHA, failing-test evidence, and passing-test evidence
+   in the GitHub Issue.
+9. Move the issue to `fixed`.
 
 Example:
 
 ```bash
 cd dev/123-checkout-banner
-# fix bug
 # add/update regression test
+# run it and record expected failure
+# fix bug
+# rerun regression and relevant tests
 git add .
 git commit -m "Fix #456 in checkout banner"
 git push
@@ -175,6 +196,8 @@ Handoff requires:
 - GitHub Issue number.
 - Pushed feature branch.
 - Commit SHA.
+- TDD evidence: focused test added or updated, expected failing run, and
+  passing rerun.
 - Verification commands and results.
 - Known limitations.
 - Pull request link when one exists.

@@ -73,7 +73,8 @@ issues, dependency/security update needs, or explicit maintenance requests.
 5. Obtain Product Owner decision on which issues are included in the next
    release.
 6. Create or update GitHub Issues with source references, acceptance criteria,
-   architecture constraints, dependencies, and verification expectations.
+   architecture constraints, dependencies, TDD expectations, and verification
+   expectations.
 7. Sequence issues by dependency, risk, and milestone scope.
 8. Route architecturally significant work to Architect before development.
 9. Mark only the next issue `ready-for-dev` after verifying required
@@ -96,7 +97,8 @@ issues, dependency/security update needs, or explicit maintenance requests.
   criteria questions.
 - Handoff to Architect: architecturally significant work, defects, or gaps.
 - Handoff to Developer: issue marked `ready-for-dev` with required evidence.
-- Handoff to QA: branch evidence is ready for independent validation.
+- Handoff to QA: branch evidence and Developer TDD evidence are ready for
+  independent validation.
 - Handoff to Release: milestone scope is complete, QA evidence exists, and
   release assembly is requested; non-production environment material is ready
   when release rehearsal or smoke validation requires it.

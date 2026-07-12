@@ -64,5 +64,5 @@ For each architecture review, record:
 - Data, migration, dependency, environment, security, privacy, reliability, and
   performance impact when relevant.
 - Developer implementation constraints.
-- Developer and QA verification expectations.
+- Developer test-first expectations and Developer/QA verification expectations.
 - Open questions or follow-up work.

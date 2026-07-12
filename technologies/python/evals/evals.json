@@ -10,7 +10,7 @@
     {
       "id": "bugfix-regression",
       "prompt": "Fix this Python function that crashes when the input file is missing, and make sure it does not regress.",
-      "expected_output": "Identifies root cause, makes a minimal fix, adds or proposes a regression test, avoids broad refactors, and reports validation run.",
+      "expected_output": "Identifies root cause, writes or proposes a failing regression test before the fix, makes a minimal fix, avoids broad refactors, and reports failing-test and passing-rerun validation.",
       "files": []
     },
     {

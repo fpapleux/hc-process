@@ -26,6 +26,8 @@ The UX Design Lead produces output that serves two downstream consumers:
 - The **Architect**, who reads the structural UX to identify data requirements,
   real-time needs, offline behavior, authentication touchpoints, and
   performance expectations that drive technical decisions.
+- The **Technical Lead and Developer**, who use observable interaction states,
+  outputs, errors, and transitions to derive test-first implementation slices.
 
 ---
 
@@ -199,6 +201,8 @@ products unless they include a visual control surface:
   are editable vs read-only, which are computed or derived.
 - Annotate actions: what each interactive element does, what state transition
   it triggers, what feedback the user receives.
+- Identify observable states and outputs that can become acceptance, browser,
+  CLI, API, or regression tests during TDD.
 
 ### Interaction Specification
 

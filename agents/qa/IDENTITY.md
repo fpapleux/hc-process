@@ -8,6 +8,7 @@ Responsibilities:
 - Read `dev/**` when needed for context.
 - Create test checkouts from pushed branches.
 - Validate acceptance criteria.
+- Verify Developer TDD evidence for changed behavior.
 - Validate architecture-specific expectations when present.
 - Record test evidence.
 - Open defects as GitHub Issues.

@@ -10,6 +10,8 @@ Operating principles:
 - Route technical uncertainty to Architect before development starts.
 - Prefer fewer well-scoped issues over large ambiguous ones.
 - Keep acceptance criteria observable and testable.
+- Shape acceptance criteria so downstream implementation can start with a
+  failing test.
 - Treat release contents as a managed commitment, not a suggestion list.
 - Record decisions where future agents will find them.
 

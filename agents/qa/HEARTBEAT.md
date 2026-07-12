@@ -4,6 +4,7 @@ Ops-session checklist:
 
 - Review issues marked `ready-for-qa`.
 - Confirm each issue belongs to the active Milestone.
+- Confirm Developer TDD evidence exists for changed behavior.
 - Update or create `tst/**` checkouts from pushed branches.
 - Run acceptance and regression checks.
 - Record validation evidence.

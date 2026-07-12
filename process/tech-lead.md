@@ -122,6 +122,9 @@ The development plan:
 - Estimates effort when the process requires it.
 - Records which architecture constraints and verification expectations apply
   to each issue.
+- Records the expected TDD starting point for each developer-executable issue:
+  the behavior or regression test the Developer should make fail before
+  implementation starts.
 - Records intentionally deferred concerns so developers, QA, and release do not
   expand scope by accident.
 
@@ -183,6 +186,10 @@ Before applying `ready-for-dev`, the Technical Lead verifies:
   explicitly recorded as not required.
 - Dependencies and execution order are clear enough to start.
 - Development and test environment readiness is confirmed or not applicable.
+- The issue identifies the expected test-first behavior or regression check
+  that will drive implementation. If the work cannot reasonably be covered by
+  an automated test, the issue must record why and what evidence will replace
+  it.
 
 Developer-executable issues must not be orphan implementation chores. If a
 feature requires multiple implementation slices, each slice must cite the same
@@ -339,6 +346,8 @@ the defined process:
 - Branches follow the naming convention.
 - Commits reference the GitHub Issue number.
 - Verification evidence is recorded before marking `ready-for-qa`.
+- TDD evidence is recorded before marking `ready-for-qa`: focused test added or
+  updated, expected failing run, and passing rerun after implementation.
 - CI has run or has a complete waiver record before marking `ready-for-qa`
   when the repository has CI.
 - Stop conditions are respected: developers return unclear work to the
@@ -349,6 +358,9 @@ the defined process:
 - QA validates pushed branches, not uncommitted developer state.
 - QA verifies CI evidence for the exact tested commit when CI exists, unless
   Technical Lead recorded a complete CI waiver record for that issue.
+- QA verifies Developer TDD evidence is present for changed behavior and treats
+  missing regression coverage for confirmed defects as a Developer process
+  failure.
 - Defects are recorded as GitHub Issues with required fields before corrective
   development starts.
 - Acceptance evidence is recorded before marking `qa-passed`.
@@ -393,7 +405,8 @@ Required sequence:
    product release contents.
 4. Assign selected issues to the active milestone and mark only the next
    issue `ready-for-dev` after verifying required documentation and information
-   are sufficient to begin development.
+   are sufficient to begin development, including the expected test-first
+   behavior or regression check.
 5. Spawn or hand off to a Developer for one issue at a time. When the Developer
    finishes and records pushed-branch evidence, spawn or hand off to QA for
    that issue. Continue Developer -> QA alternation until all selected issues
@@ -559,6 +572,7 @@ milestone with:
 - Dependency links between related issues.
 - Architecture constraints and verification expectations carried into each
   issue.
+- TDD expectations carried into each developer-executable issue.
 - Product model, assurance level, UX surface type, architecture scope,
   execution depth, verification depth, and intentional deferrals carried into
   issues where relevant.
@@ -576,6 +590,8 @@ To Developer:
   feature or defect record being completed.
 - Acceptance criteria from the product brief.
 - Architecture constraints from the architecture design document.
+- TDD expectation: the focused behavior or regression test that should fail
+  before implementation.
 - Environment ready and accessible.
 - Dependencies on prior issues satisfied.
 
@@ -583,6 +599,7 @@ To QA:
 
 - Validation that developer handoffs include required verification evidence
   before QA picks up the issue.
+- Validation that developer handoffs include TDD evidence for changed behavior.
 - Environment ready for testing.
 - Architecture-specific validation expectations carried from the architecture
   design document.

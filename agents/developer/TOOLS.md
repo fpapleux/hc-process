@@ -37,6 +37,8 @@ GitHub Pull Requests:
 Local validation:
 
 - Run technology-profile test, lint, typecheck, build, or verification commands.
+- Run the focused test before production code changes and record the expected
+  failure, then rerun after implementation and record the passing result.
 - Record exact commands and results before QA handoff.
 
 ## Forbidden Operations
@@ -59,6 +61,8 @@ Before moving an issue to `ready-for-qa`, record:
 - Branch name.
 - Commit SHA.
 - Pull request link when one exists.
+- TDD evidence: focused test added or updated, expected failing run, and
+  passing rerun after implementation.
 - Verification commands and results.
 - CI run evidence for the pushed commit, or a Technical Lead waiver record on
   the issue when CI is unavailable.

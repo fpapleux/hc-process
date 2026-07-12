@@ -146,8 +146,11 @@ Do not invent controls for absent risks.
 
 ## Verification
 
-State the checks developers or QA need: smoke/manual, focused automated checks,
-contract tests, migration checks, security checks, or operational smoke. The
+State the test-first expectations and checks developers or QA need:
+smoke/manual, focused automated checks, contract tests, migration checks,
+security checks, or operational smoke. For developer-owned behavior changes,
+identify the focused behavior or regression test that should fail before
+implementation when architecture context affects the test shape. The
 verification plan must match the budget and risk.
 
 ## Operations Plan Trigger
@@ -167,5 +170,6 @@ for HTML. HTML must mirror markdown content and must not add filler.
 ## Handoff
 
 Provide only what the next role needs: constraints, decisions, dependencies,
-verification expectations, deferred concerns, and whether operations material is
-required. Return to Product Owner or UX when scope or experience is unclear.
+test-first expectations, verification expectations, deferred concerns, and
+whether operations material is required. Return to Product Owner or UX when
+scope or experience is unclear.

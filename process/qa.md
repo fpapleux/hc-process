@@ -14,6 +14,9 @@ QA starts feature validation only when:
 - Acceptance criteria exist.
 - CI evidence exists for the exact pushed branch and commit when the repository
   has CI, unless the Technical Lead explicitly recorded a waiver record.
+- Developer TDD evidence exists for changed behavior: focused test added or
+  updated, expected failing run, and passing rerun after implementation. For
+  defect fixes, this must include a regression test that failed before the fix.
 - Architecture-specific validation expectations are recorded when the issue is
   marked `architecture-reviewed`.
 
@@ -60,7 +63,10 @@ workflow state.
 
 QA writes higher-level checks when the project requires them, such as browser
 flows, smoke tests, fixture validations, or deployment checks. The Developer
-remains responsible for turning confirmed bugs into code-level regression tests.
+remains responsible for turning confirmed bugs into code-level regression tests
+before fixing them. QA treats missing TDD or regression evidence as a process
+blocker and returns the issue through the Technical Lead instead of marking it
+`qa-passed`.
 
 ## Release Integration Validation
 
@@ -120,12 +126,13 @@ Required loop:
 1. QA creates the defect record with failing branch, commit, command, and
    observed behavior.
 2. Developer accepts the defect and becomes the owner.
-3. Developer fixes the bug in `dev/**`.
-4. Developer adds or updates the regression test.
+3. Developer adds or updates the regression test in `dev/**` and records the
+   expected failing run.
+4. Developer fixes the bug in `dev/**` and records the passing rerun.
 5. Developer commits and pushes with the GitHub Issue number in the commit
    message.
-6. Developer records the fix in the GitHub Issue, including the fix commit SHA
-   and tests run.
+6. Developer records the fix in the GitHub Issue, including the fix commit SHA,
+   failing regression test, passing rerun, and other tests run.
 7. QA updates `tst/**` to the new pushed commit and retests.
 8. QA records validation evidence in the defect record.
 9. QA closes the defect only after the validation passes.
@@ -145,6 +152,7 @@ QA marks work `qa-passed` only when:
 
 - Acceptance criteria pass.
 - Relevant regression checks pass.
+- Developer TDD evidence is present for changed behavior and defect fixes.
 - Required CI passes for the exact tested commit, unless explicitly waived by
   Technical Lead using a waiver record.
 - Architecture-specific validation expectations pass when present.

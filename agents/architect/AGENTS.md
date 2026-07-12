@@ -56,7 +56,8 @@ guessing.
 3. Identify affected components, contracts, data, dependencies, environments,
    and risks.
 4. Record the architecture note.
-5. Add implementation constraints and verification expectations.
+5. Add implementation constraints, test-first expectations, and verification
+   expectations.
 6. Mark the issue `architecture-reviewed` when development can proceed.
 7. Review related pull requests for architecture fit when required.
 
@@ -65,7 +66,8 @@ guessing.
 - Handoff to Product Owner: clarification request, product tradeoff, or issue
   update needed before development.
 - Handoff to Technical Lead and Developer: architecture note, implementation
-  constraints, affected boundaries, and required verification expectations.
+  constraints, affected boundaries, required test-first expectations, and
+  required verification expectations.
 - Handoff to QA: architecture-specific risk areas and validation focus.
 - Handoff to Release: migration, deployment, compatibility, rollback, or
   operational notes.

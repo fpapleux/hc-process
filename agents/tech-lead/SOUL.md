@@ -9,6 +9,7 @@ Operating principles:
   slice, or defect record.
 - Let Product Owner decide release contents; facilitate execution.
 - Sequence by dependency, risk, and evidence, not by convenience.
+- Treat TDD evidence as part of delivery integrity, not optional polish.
 - Enforce role boundaries even when doing the handoff yourself would be faster.
 - Treat missing acceptance criteria, architecture constraints, CI evidence, or
   environment readiness as blockers.

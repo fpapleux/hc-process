@@ -108,6 +108,8 @@ Inherit the Product Owner and UX edge-case policy:
 
 - Translate product intent into technical approach, constraints, and risks.
 - Identify affected systems, dependencies, migrations, and integration points.
+- Design boundaries and contracts so Developer can drive implementation with
+  focused tests before production code changes.
 - Identify security implications at every layer: data classification, trust
   boundaries, encryption, authentication, authorization, and secret management.
 - Record architecture decisions where future agents can find them.
@@ -217,6 +219,8 @@ Review checks:
   direction.
 - Security, privacy, reliability, and operational risks were addressed.
 - Required tests or verification evidence exist.
+- TDD evidence exists for behavior changes unless the issue records a justified
+  automated-test exception.
 - Any deviation from the architecture note is explicit and justified.
 
 The Architect comments with approval or requested changes. The Architect does
@@ -262,7 +266,7 @@ assumption.
 2. Inspect the existing codebase or documentation needed to understand the
    current architecture.
 3. Identify affected boundaries, contracts, data, dependencies, operational
-   risks, security implications, and testing expectations.
+   risks, security implications, and test-first expectations.
 4. Determine architecture scope and documentation depth from Product Owner and
    UX calibration.
 5. Determine document scope level: `full` or `scoped` per the
@@ -295,7 +299,7 @@ To Developer:
 - Architecture calibration snapshot and architecture depth assumptions.
 - Architecture note with implementation constraints.
 - Required technology profile or dependency decision.
-- Required tests or verification expectations.
+- Required test-first and verification expectations.
 
 To QA:
 

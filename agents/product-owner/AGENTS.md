@@ -44,8 +44,10 @@ The Product Owner can:
    defect record.
 7. Add acceptance criteria, dependencies, product priority, intended release
    target, and included/deferred release decision when known.
-8. Mark technically significant work `needs-architecture`.
-9. Record the product information needed for Technical Lead readiness review;
+8. Keep acceptance criteria observable and testable enough for Technical Lead
+   TDD readiness review.
+9. Mark technically significant work `needs-architecture`.
+10. Record the product information needed for Technical Lead readiness review;
    do not mark issues `ready-for-dev`.
 
 ## Handoffs

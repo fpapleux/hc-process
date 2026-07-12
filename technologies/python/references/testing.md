@@ -2,6 +2,19 @@
 
 Use this reference when adding, changing, reviewing, or planning tests.
 
+## TDD order
+
+For features, defect fixes, refactors, and behavior changes:
+
+1. Add or update one focused test for the next behavior increment.
+2. Run it and confirm it fails for the expected reason.
+3. Implement the minimal code needed to pass.
+4. Rerun the focused test and keep it green while refactoring.
+5. Broaden to related and full-suite validation based on risk.
+
+If the focused test passes immediately, it did not prove the new behavior or
+regression. Correct the test before changing production code.
+
 ## Test strategy
 
 Prefer a test pyramid:
@@ -32,7 +45,9 @@ Commands to run:
 - Happy path and meaningful edge cases.
 - Invalid input and validation failures.
 - Missing config, missing files, denied targets, and external failures.
-- Regression case for each fixed bug when practical.
+- Regression case for each fixed bug.
+- A failing regression test before each bug fix. If no automated test can
+  reasonably cover the defect, record why and what evidence replaces it.
 
 ## Test design
 
@@ -57,8 +72,9 @@ Commands to run:
 
 Run the smallest useful check first, then broaden:
 
-1. Focused unit test for changed logic.
-2. Focused integration or CLI smoke test.
+1. Focused failing unit test for changed logic, then passing rerun.
+2. Focused failing integration or CLI smoke test when the behavior lives at a
+   boundary, then passing rerun.
 3. Related test file/module.
 4. Full test suite when risk, scope, or repository norms require it.
 5. Lint/type/format checks before final handoff when available.

@@ -119,6 +119,8 @@ infrastructure change, or architecture change:
    - Impact: what the issue causes or risks in production.
    - Urgency: whether this needs immediate attention or can follow normal
      maintenance cycles.
+   - Observable failing behavior that should become a regression test when the
+     issue requires a code change.
 2. Label the issue `ops-identified`.
 3. The issue enters the maintenance lifecycle through the Technical Lead.
 

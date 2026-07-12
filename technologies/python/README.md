@@ -41,12 +41,14 @@ Do not load extra references for:
 1. Inspect local conventions before inventing new ones.
 2. Identify the smallest safe change.
 3. Separate pure logic from I/O and side effects.
-4. Write or update tests first when behavior changes, unless a clear reason
-   makes a different order safer.
-5. Implement the change.
-6. Run the smallest relevant validation.
-7. Run broader project validation when the risk justifies it.
-8. Report commands run, results, and remaining risk.
+4. Write or update the focused test first for every feature, defect fix,
+   refactor, or behavior change.
+5. Run the focused test and confirm the expected failure.
+6. Implement the minimal change needed to pass.
+7. Rerun the focused test, then the smallest relevant validation.
+8. Run broader project validation when the risk justifies it.
+9. Report the failing-test command, passing rerun, broader commands, results,
+   and remaining risk.
 
 ## Decision tree
 
@@ -68,6 +70,8 @@ Do not load extra references for:
   diagnostics to stderr, and preserve enough context to debug.
 - Do not use random fixes during troubleshooting. Identify the cause, gather
   evidence, choose one fix, execute it, then verify end-to-end.
+- Do not change production code for behavior work before a focused failing test
+  exists and has failed for the expected reason.
 - Do not hand over untested code. Run the relevant script, unit tests, lint/type
   checks, or a focused smoke test before saying it is ready.
 - Do not depend on ambient secrets. Load configuration through documented
@@ -88,7 +92,8 @@ Before declaring code ready, verify:
 - Secrets are loaded, not hard-coded.
 - Errors fail loudly and use non-zero exit codes for CLIs.
 - Output contracts are documented and stable.
-- New or changed behavior is tested.
+- New or changed behavior was driven by a focused failing test and passing
+  rerun.
 - Importing the module does not execute side effects.
 - CLI help works when a CLI exists.
 - The final report states what was run and what passed.

@@ -53,7 +53,8 @@ Operations Lead starts scoped production work only when:
   locations, service-manager setup, runtime ownership, and operational caveats
   without exposing secret values.
 - Handoff to Technical Lead: operational issues that require code,
-  infrastructure-as-code, dependency, or process changes.
+  infrastructure-as-code, dependency, or process changes, with the observable
+  failing behavior that should become a regression test when applicable.
 - Handoff to Architect: operational findings that reveal architecture gaps.
 - Handoff to Product Owner: operational constraints that require product scope
   or service-level decisions.

@@ -139,6 +139,7 @@ Responsibilities:
   maintained non-production readiness within Technical Lead authority.
 - Coordinates Developer, QA, Release, and Operations handoffs.
 - Owns defect backlog triage and maintenance release planning.
+- Enforces TDD evidence before Developer work advances to QA.
 - Executes post-production cleanup of completed feature branches and checkouts
   from `dev/` and `tst/`.
 
@@ -154,7 +155,9 @@ Responsibilities:
 
 - Works only in the product's `dev/**` folder.
 - Implements assigned GitHub Issues marked `ready-for-dev`.
-- Writes and updates code-level tests.
+- Drives implementation with TDD: writes or updates the focused test first,
+  records the expected failing run, implements the minimal passing change, and
+  records the passing rerun.
 - Records implementation notes in the GitHub Issue or pull request.
 - Pushes feature branches for QA.
 
@@ -172,6 +175,8 @@ Responsibilities:
 - Works in the product's `tst/**` folder.
 - Creates test checkouts from pushed branches.
 - Validates acceptance criteria.
+- Checks that Developer TDD evidence exists for changed behavior and defect
+  fixes before marking work `qa-passed`.
 - Builds product-specific regression knowledge.
 - Opens defects as GitHub Issues.
 - Records validation evidence.

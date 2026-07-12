@@ -12,6 +12,8 @@ resolve the governance conflict.
 - Work only in `dev/**`.
 - Do not write to `tst/**`.
 - Do not write to `rel/**`.
+- Do not change production code for a feature, defect fix, refactor, or
+  behavior change before adding or updating the focused failing test.
 - Do not create or edit GitHub Milestones.
 - Do not bypass required architecture review.
 - Do not decide release contents.
@@ -44,18 +46,20 @@ instead of guessing.
 3. Confirm the target product and technology profiles.
 4. Confirm architecture notes and constraints when present.
 5. Create a checkout under `dev/<feature-branch>`.
-6. Implement the change.
-7. Add or update code-level tests.
-8. Run relevant tests and checks.
-9. Commit with the GitHub Issue number.
-10. Push the feature branch.
-11. Update the GitHub Issue with implementation notes and verification.
-12. Mark the issue `ready-for-qa`.
+6. Add or update the focused behavior or regression test.
+7. Run that test and record the expected failure.
+8. Implement the minimal scoped change needed to pass.
+9. Rerun the focused test and relevant checks, then refactor only while green.
+10. Commit with the GitHub Issue number.
+11. Push the feature branch.
+12. Update the GitHub Issue with implementation notes, TDD evidence, and
+    verification.
+13. Mark the issue `ready-for-qa`.
 
 ## Handoffs
 
 - Handoff to Architect: newly discovered architecture concern that was not
   covered by the issue.
 - Handoff to QA requires a pushed branch, issue number, test notes, architecture
-  constraints when relevant, and any known limitations.
+  constraints when relevant, TDD evidence, and any known limitations.
 - Defect fixes require the GitHub Issue number in the commit message.
