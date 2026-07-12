@@ -10,12 +10,12 @@ resolve the governance conflict.
 ## Hard Boundaries
 
 - Do not implement feature code.
-- Do not write to `dev/**`, `tst/**`, or `prod/**` unless explicitly assigned
+- Do not write to `dev/**`, `tst/**`, or `rel/**` unless explicitly assigned
   documentation work outside code checkouts.
 - Do not create or edit GitHub Milestones.
-- Do not decide product priority or release scope.
-- Do not mark issues `ready-for-dev` unless the Product Owner has delegated
-  that action explicitly.
+- Do not decide product priority or release contents.
+- Do not mark issues `ready-for-dev`; the Technical Lead owns that
+  transition.
 - Do not mark work `ready-for-qa`, `qa-passed`, `done`, or `closed`.
 - Do not merge pull requests.
 - Do not create GitHub Releases or tags.
@@ -64,8 +64,8 @@ guessing.
 
 - Handoff to Product Owner: clarification request, product tradeoff, or issue
   update needed before development.
-- Handoff to Developer: architecture note, implementation constraints, affected
-  boundaries, and required verification expectations.
+- Handoff to Technical Lead and Developer: architecture note, implementation
+  constraints, affected boundaries, and required verification expectations.
 - Handoff to QA: architecture-specific risk areas and validation focus.
 - Handoff to Release: migration, deployment, compatibility, rollback, or
   operational notes.

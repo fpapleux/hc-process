@@ -45,10 +45,12 @@ Generated dummy credentials, generated dummy certificates, and ephemeral test
 fixtures may be used only to validate test harnesses. They are not acceptable
 evidence that a maintained non-production platform is operational.
 
-Operations Lead owns creation and maintenance of host-managed environment
-material. Release consumes approved material to validate and promote the
-released artifact. Release must not invent credentials, TLS keys, service
-accounts, or trust material to unblock its own smoke checks.
+Technical Lead owns creation and maintenance of non-production environment
+material, including host-managed non-production material. Operations Lead owns
+creation and maintenance of production environment material. Release consumes
+approved material from the owning role to validate and promote the released
+artifact. Release must not invent credentials, TLS keys, service accounts, or
+trust material to unblock its own smoke checks.
 
 ## Platform And Application Segmentation
 
@@ -144,21 +146,39 @@ Release:
 - Promotes validated release branches.
 - Uses production credentials only through approved release tooling.
 - Records production promotion evidence.
-- Consumes approved non-production and production environment material during
-  smoke checks and deployment validation.
+- Consumes Technical Lead-approved non-production material and
+  Operations-approved production material during smoke checks and deployment
+  validation.
 - Does not create or approve host-managed credentials, TLS material, service
   identities, or secret roots.
 - Must refuse release promotion when non-production can access production
   runtimes, credentials, data stores, logs, service units, scheduler actions, or
   external production targets.
+- Must refuse release promotion when any unresolved readiness finding is
+  classified `release-blocking`.
+- May proceed with an `operator-waivable` readiness finding only when the
+  operator explicitly approves the risk in a waiver record and the follow-up
+  issue is recorded.
+
+Technical Lead:
+
+- Provisions and maintains non-production environment material outside Git:
+  secret roots, credentials, TLS material, service-manager configuration,
+  runtime directories, dashboards, alerts, and runbooks.
+- Owns development, test, staging, and maintained non-production runtime
+  readiness.
+- Provisions non-production runtime material separately from production. A
+  shared service account, shared runtime root, shared config file, shared
+  DB/log root, or shared scheduler that can cross the production/non-production
+  boundary is not acceptable non-production material.
+- Creates GitHub Issues for non-production environment problems that block
+  development, QA, release rehearsal, or non-production smoke validation.
 
 Operations Lead:
 
-- Provisions and maintains non-production and production environment material
-  outside Git: secret roots, credentials, TLS material, service-manager
-  configuration, runtime directories, dashboards, alerts, and runbooks.
-- Can be invoked before first production release for scoped non-production
-  provisioning when a runtime release is blocked on real operational material.
+- Provisions and maintains production environment material outside Git: secret
+  roots, credentials, TLS material, service-manager configuration, runtime
+  directories, dashboards, alerts, and runbooks.
 - Monitors production environment health through approved observability
   tooling.
 - Does not receive ad-hoc production mutation access.
@@ -166,10 +186,8 @@ Operations Lead:
   (scaling, restart, failover).
 - Uses production credentials only through approved operational tooling.
 - Creates GitHub Issues for operational problems found in production.
-- Provisions production and non-production runtime material separately. A shared
-  service account, shared runtime root, shared config file, shared DB/log root,
-  or shared scheduler that can cross the production/non-production boundary is
-  not acceptable operational material.
+- Must not create or mutate non-production environment material unless the
+  operator explicitly delegates a specific support task through Technical Lead.
 
 Product Owner:
 

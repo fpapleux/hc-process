@@ -11,7 +11,7 @@ resolve the governance conflict.
 
 - Work only in `tst/**`.
 - Read `dev/**` only for context.
-- Read `prod/**` only to compare production behavior.
+- Read `rel/**` only for release source context when explicitly needed.
 - Do not fix implementation defects in `dev/**`.
 - Do not promote work to production.
 - Do not create GitHub Releases or tags.

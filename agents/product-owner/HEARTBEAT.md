@@ -6,8 +6,8 @@ Ops-session checklist:
 - Review issues in `needs-clarification`.
 - Review issues in `draft`.
 - Confirm intended release priority input is recorded.
-- Check whether release scope still matches product priority.
+- Check whether included/deferred release decisions still match product priority.
 - Route technically significant issues to Architect.
-- Mark actionable issues `ready-for-dev` after required architecture review.
-- Request deferral for issues that no longer belong in the active release.
+- Record product information needed for Technical Lead readiness review.
+- Record deferral decisions for issues that no longer belong in the active release.
 - Record product decisions that changed since the last session.

@@ -13,7 +13,7 @@ QA starts feature validation only when:
 - The issue is marked `ready-for-qa`.
 - Acceptance criteria exist.
 - CI evidence exists for the exact pushed branch and commit when the repository
-  has CI, unless the Technical Lead explicitly recorded a waiver.
+  has CI, unless the Technical Lead explicitly recorded a waiver record.
 - Architecture-specific validation expectations are recorded when the issue is
   marked `architecture-reviewed`.
 
@@ -54,8 +54,9 @@ QA owns acceptance evidence:
 
 If the repository has CI and no CI run exists for the tested branch/commit, QA
 does not mark the issue `qa-passed` unless the Technical Lead explicitly
-waived CI for that issue. QA records the missing run as a blocker or defect
-with the branch, commit, expected workflow, and observed workflow state.
+recorded a CI waiver record for that issue. QA records the missing run as a
+blocker or defect with the branch, commit, expected workflow, and observed
+workflow state.
 
 QA writes higher-level checks when the project requires them, such as browser
 flows, smoke tests, fixture validations, or deployment checks. The Developer
@@ -76,7 +77,7 @@ Release integration QA verifies:
 - Regression, smoke, browser, CLI, API, migration, or deployment rehearsal
   checks required by the product pass against the assembled release branch.
 - Required CI passes for the release branch commit when CI exists, unless the
-  Technical Lead explicitly records a waiver.
+  Technical Lead explicitly records a waiver record.
 - Release-impacting architecture notes and operational validation expectations
   are addressed.
 - No release evidence depends on bypassed validation, fixture credentials,
@@ -145,7 +146,7 @@ QA marks work `qa-passed` only when:
 - Acceptance criteria pass.
 - Relevant regression checks pass.
 - Required CI passes for the exact tested commit, unless explicitly waived by
-  Technical Lead.
+  Technical Lead using a waiver record.
 - Architecture-specific validation expectations pass when present.
 - Defects are closed or explicitly deferred by the Product Owner.
 - Evidence is recorded in the GitHub Issue.

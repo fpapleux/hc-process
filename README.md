@@ -38,7 +38,7 @@ Current role profiles:
 - Product Owner
 - UX Design Lead
 - Architect
-- Tech Lead
+- Technical Lead
 - Operations Lead
 - Developer
 - QA
@@ -61,7 +61,7 @@ Current process definitions:
 - [Product Owner](process/product-owner.md)
 - [UX Design Lead](process/ux-design-lead.md)
 - [Architect](process/architect.md)
-- [Tech Lead](process/tech-lead.md)
+- [Technical Lead](process/tech-lead.md)
 - [Operations Lead](process/operations-lead.md)
 - [Developer](process/developer.md)
 - [QA](process/qa.md)
@@ -108,9 +108,10 @@ Tool documentation uses two layers:
 - Role `TOOLS.md` files grant permission and point only to the manuals that role
   can use.
 
-At agent creation time, copy only the approved manuals into that agent's local
-`tools/` folder. Agents must not receive instructions for tools or operations
-outside their lane.
+Role profiles reference canonical manuals by path. Do not copy canonical
+manuals into role folders. If a role needs extra restrictions, record those
+restrictions in that role's `TOOLS.md` or in a small role-specific supplement
+that contains only the unique role-specific content.
 
 ## Technologies
 

@@ -1,14 +1,14 @@
 # TOOLS.md - QA
 
-This role uses only the local tool manuals in `tools/`.
+This role uses only the canonical tool manuals listed here.
 
 Read before acting:
 
-- `tools/git.md`
-- `tools/github-issues.md`
-- `tools/local-validation.md`
+- `../../tools/git.md`
+- `../../tools/github-issues.md`
+- `../../tools/local-validation.md`
 
-Do not use tool manuals that are not present in this folder.
+Do not use tool manuals that are not listed here.
 
 ## Authority Summary
 
@@ -22,6 +22,8 @@ GitHub Issues:
 
 - Read issues marked `ready-for-qa`.
 - Comment with QA evidence.
+- Verify CI evidence for the tested commit or a complete Technical Lead waiver
+  record before marking `qa-passed` when CI exists.
 - Mark passing issues `qa-passed`.
 - Create defect issues for confirmed failures.
 - Mark defect issues `verified` and `closed` only after validation passes.
@@ -35,7 +37,7 @@ Local validation:
 ## Forbidden Operations
 
 - Do not write implementation fixes in `dev/**`.
-- Do not write to `prod/**`.
+- Do not write to `rel/**`.
 - Do not edit GitHub Milestones.
 - Do not merge pull requests.
 - Do not create GitHub Releases or tags.

@@ -41,7 +41,7 @@ branch: 123-checkout-banner
 
 ## Starting Work
 
-Create a development checkout from the remote production baseline:
+Create a development checkout from the remote production baseline (`main`):
 
 ```bash
 git clone git@github.com:OWNER/REPO.git dev/123-checkout-banner
@@ -112,10 +112,10 @@ When the repository has CI, Developer evidence must also include:
 - CI status, or a clear blocker if CI did not start.
 
 If CI does not start for the pushed branch, do not mark the issue
-`ready-for-qa` unless the Technical Lead explicitly records a waiver in the
-issue. Missing CI caused by a workflow trigger that only names specific feature
-branches is a process defect and must be fixed before normal development
-continues.
+`ready-for-qa` unless the Technical Lead explicitly records a waiver record in
+the issue following the Waiver Records section of `overview.md`. Missing CI
+caused by a workflow trigger that only names specific feature branches is a
+process defect and must be fixed before normal development continues.
 
 ## Pull Request Rules
 

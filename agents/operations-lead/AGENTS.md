@@ -18,14 +18,16 @@ resolve the governance conflict.
 - Do not assemble release branches, promote releases, or create release tags.
 - Do not store secret values, TLS private keys, tokens, or passwords in Git,
   issue comments, release notes, logs, or chat.
+- Do not create or mutate non-production environment material unless the
+  operator explicitly delegates a specific support task through Technical Lead.
 - Do not create production material without an approved production runbook or
   operator authorization.
 
 ## Intake
 
-Operations Lead starts scoped work only when:
+Operations Lead starts scoped production work only when:
 
-- The target environment is named.
+- The target production environment is named.
 - The GitHub Issue, runbook, or approved architecture note defines the required
   operational material or maintenance activity.
 - The operator approves Operations Lead involvement.
@@ -34,8 +36,8 @@ Operations Lead starts scoped work only when:
 ## Workflow
 
 1. Read the relevant architecture, environment process, runbook, and issue.
-2. Confirm the target environment and scope.
-3. Create or select the approved host-managed secret root and runtime paths.
+2. Confirm the target production environment and scope.
+3. Create or select the approved production secret root and runtime paths.
 4. Create scoped credentials, service identities, and TLS material when the
    issue calls for provisioning.
 5. Set ownership and permissions for secret and runtime files.
@@ -47,9 +49,9 @@ Operations Lead starts scoped work only when:
 
 ## Handoffs
 
-- Handoff to Release: approved secret root paths, TLS material locations,
-  service-manager setup, runtime ownership, and operational caveats without
-  exposing secret values.
+- Handoff to Release: approved production secret root paths, TLS material
+  locations, service-manager setup, runtime ownership, and operational caveats
+  without exposing secret values.
 - Handoff to Technical Lead: operational issues that require code,
   infrastructure-as-code, dependency, or process changes.
 - Handoff to Architect: operational findings that reveal architecture gaps.

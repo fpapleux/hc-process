@@ -20,6 +20,7 @@ The standard role profiles live in:
 
 - [product-owner](product-owner/README.md)
 - [architect](architect/README.md)
+- [tech-lead](tech-lead/README.md)
 - [developer](developer/README.md)
 - [qa](qa/README.md)
 - [release](release/README.md)
@@ -29,6 +30,7 @@ The role operating processes live in:
 
 - [Product Owner process](../process/product-owner.md)
 - [Architect process](../process/architect.md)
+- [Technical Lead process](../process/tech-lead.md)
 - [Developer process](../process/developer.md)
 - [QA process](../process/qa.md)
 - [Release process](../process/release.md)
@@ -79,6 +81,7 @@ Product-specific context:
 | --- | --- | --- |
 | Product Owner | Yes | Carries product vision, priorities, scope boundaries, roadmap, naming, tradeoffs, and the meaning of done. |
 | Architect | Yes | Carries product architecture, system boundaries, technical decisions, integration risks, and durable design constraints. |
+| Technical Lead | Yes | Carries delivery plan, issue sequencing, milestone/release coordination, environment readiness, process enforcement, and defect backlog context. |
 | Developer | Mostly yes | Carries codebase conventions, tests, local setup, and known implementation pitfalls. |
 | QA | Mixed | Uses shared QA discipline, but accumulates product-specific acceptance behavior, fixtures, regressions, and test history. |
 | Release | Mostly cross-product | Applies standard release mechanics across products, with product-scoped configuration and credentials. |
@@ -93,10 +96,12 @@ Responsibilities:
 - Turns user briefs into GitHub Issues.
 - Maintains the roadmap feature inventory for V1, V2, and Beyond.
 - Defines scope, out-of-scope boundaries, and acceptance criteria.
-- Creates and manages GitHub Milestones.
-- Owns release scope and issue priority.
-- Marks issues `ready-for-dev` only when they are actionable.
-- Defers issues that no longer belong in the active release.
+- Owns product priority, release contents, and included/deferred issue
+  decisions.
+- Ensures issue documentation and product information are sufficient for
+  Technical Lead readiness review.
+- Records deferral decisions for issues that no longer belong in the active
+  release.
 - Carries long-term product memory.
 
 The Product Owner does not implement code.
@@ -118,6 +123,29 @@ Responsibilities:
 The Architect does not implement code, decide product priority, validate QA, or
 promote releases.
 
+## Technical Lead
+
+The Technical Lead is product-specific and delivery-focused.
+
+Responsibilities:
+
+- Translates accepted product, UX, and architecture inputs into executable
+  GitHub Issues.
+- Maintains issue hygiene, sequencing, dependencies, and status integrity.
+- Arranges missing release and milestone records when activated.
+- Facilitates Product Owner decisions about which issues are included in the
+  next release.
+- Prepares and maintains development, testing, staging, release rehearsal, and
+  maintained non-production readiness within Technical Lead authority.
+- Coordinates Developer, QA, Release, and Operations handoffs.
+- Owns defect backlog triage and maintenance release planning.
+- Executes post-production cleanup of completed feature branches and checkouts
+  from `dev/` and `tst/`.
+
+The Technical Lead does not define product scope, make architecture decisions,
+write application code, run QA acceptance tests, assemble release branches, or
+promote releases.
+
 ## Developer
 
 The Developer is product-bound during execution.
@@ -130,8 +158,8 @@ Responsibilities:
 - Records implementation notes in the GitHub Issue or pull request.
 - Pushes feature branches for QA.
 
-The Developer does not decide release scope and does not promote work into
-`tst/**` or `prod/**`.
+The Developer does not decide release contents and does not promote work into
+`tst/**` or `rel/**`.
 
 ## QA
 
@@ -157,12 +185,14 @@ Release is centralized in process but product-scoped in execution.
 
 Responsibilities:
 
-- Works in the product's `prod/**` folder.
+- Works in the product's local release source checkouts under `rel/**`.
 - Assembles approved issues into `release/<milestone-name>` branches.
-- Promotes validated release branches to production.
+- Promotes validated release branches to `main` in source control and deploys
+  to the operator-provided production target.
 - Creates GitHub Releases and tags after production promotion.
 - Performs final smoke checks.
-- Cleans up completed phase checkouts after release.
+- Cleans up only Release-owned `rel/**` workspaces after release and hands
+  `dev/**` and `tst/**` cleanup candidates to Technical Lead.
 
 Release agents can serve multiple products only through product-specific release
 profiles. A release profile defines the repository, branch rules, deployment
@@ -174,19 +204,19 @@ Operations Lead is centralized in process but product-scoped in execution.
 
 Responsibilities:
 
-- Provisions and maintains host-managed non-production and production
-  environment material.
-- Owns secret roots, scoped credentials, TLS material, service-manager setup,
-  runtime directories, dashboards, alerts, and runbooks outside Git.
-- Monitors managed environments and records operational issues.
+- Provisions and maintains production environment material.
+- Owns production secret roots, scoped credentials, TLS material,
+  service-manager setup, runtime directories, dashboards, alerts, and runbooks
+  outside Git.
+- Monitors production managed environments and records operational issues.
 - Maintains the operations plan after activation.
-- Hands approved environment material to Release without exposing secret
-  values.
+- Hands approved production environment material to Release without exposing
+  secret values.
 
 Operations Lead agents can serve multiple products only through product-specific
-operations profiles. An operations profile defines the environments, secret
-locations, service-manager rules, monitoring targets, incident procedures, and
-runbooks for one product.
+operations profiles. An operations profile defines the production
+environments, secret locations, service-manager rules, monitoring targets,
+incident procedures, and runbooks for one product.
 
 ## Boundary Rules
 

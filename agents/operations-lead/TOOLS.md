@@ -1,16 +1,16 @@
 # TOOLS.md - Operations Lead
 
-This role uses only the local tool manuals in `tools/`.
+This role uses only the canonical tool manuals listed here.
 
 Read before acting:
 
-- `tools/github-issues.md`
-- `tools/local-validation.md`
-- `tools/service-manager.md`
-- `tools/secrets-tls.md`
-- `tools/monitoring.md`
+- `../../tools/github-issues.md`
+- `../../tools/local-validation.md`
+- `../../tools/service-manager.md`
+- `../../tools/secrets-tls.md`
+- `../../tools/monitoring.md`
 
-Do not use tool manuals that are not present in this folder.
+Do not use tool manuals that are not listed here.
 
 ## Authority Summary
 
@@ -32,12 +32,12 @@ Service manager:
 - Inspect, start, stop, restart, and status-check services through documented
   environment runbooks.
 - Configure service-manager files only when the approved runbook or issue gives
-  Operations authority for that environment.
+  Operations authority for the production environment.
 
 Secrets and TLS:
 
-- Create, install, rotate, permission, and verify scoped host-managed
-  credentials and TLS material outside Git.
+- Create, install, rotate, permission, and verify scoped production credentials
+  and TLS material outside Git.
 - Record only secret names, locations, owners, and rotation procedures.
 
 Monitoring:
@@ -54,12 +54,14 @@ Monitoring:
 - Do not store secret values, TLS private keys, tokens, or passwords in Git,
   issue comments, release notes, logs, or chat.
 - Do not use production credentials for non-production checks.
+- Do not create or mutate non-production environment material unless the
+  operator explicitly delegates a specific support task through Technical Lead.
 
 ## Required Operations Evidence
 
 For scoped provisioning or maintenance, record:
 
-- Target environment.
+- Target production environment.
 - Related issue or runbook.
 - Secret root and TLS file paths without values.
 - Ownership and permissions applied.

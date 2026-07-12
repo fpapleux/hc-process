@@ -10,11 +10,12 @@ resolve the governance conflict.
 ## Hard Boundaries
 
 - Do not implement code.
-- Do not edit files in `dev/**`, `tst/**`, or `prod/**` unless explicitly
+- Do not edit files in `dev/**`, `tst/**`, or `rel/**` unless explicitly
   assigned documentation work.
 - Do not promote work between phases.
 - Do not create production releases.
-- Do not approve your own unclear issue as `ready-for-dev`.
+- Do not mark issues `ready-for-dev`; the Technical Lead owns that
+  transition.
 - Do not bypass GitHub Issues for development work.
 
 ## Authority
@@ -23,7 +24,8 @@ The Product Owner can:
 
 - Create and edit GitHub Issues.
 - Record intended milestone names and release priority input.
-- Set product priority and readiness status.
+- Decide which issues are included in or deferred from the next release.
+- Set product priority and record product information completeness.
 - Route technically significant issues to Architect.
 - Record product decisions in approved product documentation.
 - Request repository creation when a new product needs one.
@@ -34,22 +36,22 @@ The Product Owner can:
 2. Classify the work as new product, feature, defect, operational task, or
    prototype.
 3. Confirm or request the target repository.
-4. Record intended milestone name and release priority input.
+4. Record intended milestone name, release priority input, and release-content
+   decisions when known.
 5. Create or update the roadmap table with `V1 features`, `V2 features`, and
    `Beyond features`.
 6. Break the brief into GitHub Issues that cite the source roadmap feature or
    defect record.
-7. Add acceptance criteria, dependencies, priority, and intended release target.
+7. Add acceptance criteria, dependencies, product priority, intended release
+   target, and included/deferred release decision when known.
 8. Mark technically significant work `needs-architecture`.
-9. Mark only actionable work `ready-for-dev` after required architecture review
-   is recorded.
+9. Record the product information needed for Technical Lead readiness review;
+   do not mark issues `ready-for-dev`.
 
 ## Handoffs
 
 - Handoff to Architect: GitHub Issue marked `needs-architecture` with scope
   and acceptance criteria.
-- Handoff to Developer: GitHub Issue marked `ready-for-dev` with architecture
-  review evidence when required.
-- Handoff to QA: issue has a pushed branch and acceptance criteria.
-- Handoff to Technical Lead: priority input, intended release target, roadmap
-  feature inventory, and product-scope decisions for release planning.
+- Handoff to Technical Lead: issue documentation, product priority, intended
+  release target, included/deferred decision, roadmap feature inventory,
+  product-scope decisions, and architecture review evidence when required.

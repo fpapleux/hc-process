@@ -27,7 +27,7 @@ systemd-analyze verify PATH/TO/unit.service
 
 - Confirm the target environment before starting, stopping, or restarting a
   service.
-- Do not modify production service units without an approved runbook or
-  operator authorization.
+- Do not modify service units without an approved runbook or operator
+  authorization.
 - Do not leave services in a failed or half-configured state without recording
   the blocker and rollback or recovery action.

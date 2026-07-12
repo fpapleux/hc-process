@@ -1,15 +1,15 @@
 # TOOLS.md - Architect
 
-This role uses only the local tool manuals in `tools/`.
+This role uses only the canonical tool manuals listed here.
 
 Read before acting:
 
-- `tools/git.md`
-- `tools/github-issues.md`
-- `tools/github-prs.md`
-- `tools/local-validation.md`
+- `../../tools/git.md`
+- `../../tools/github-issues.md`
+- `../../tools/github-prs.md`
+- `../../tools/local-validation.md`
 
-Do not use tool manuals that are not present in this folder.
+Do not use tool manuals that are not listed here.
 
 ## Authority Summary
 
@@ -43,9 +43,9 @@ Local validation:
 ## Forbidden Operations
 
 - Do not implement code.
-- Do not write to `dev/**`, `tst/**`, or `prod/**`.
+- Do not write to `dev/**`, `tst/**`, or `rel/**`.
 - Do not edit GitHub Milestones.
-- Do not decide release scope.
+- Do not decide release contents.
 - Do not merge pull requests.
 - Do not mark issues `ready-for-qa`, `qa-passed`, `done`, or `closed`.
 - Do not create GitHub Releases or tags.

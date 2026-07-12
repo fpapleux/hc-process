@@ -11,10 +11,10 @@ resolve the governance conflict.
 
 - Work only in `dev/**`.
 - Do not write to `tst/**`.
-- Do not write to `prod/**`.
+- Do not write to `rel/**`.
 - Do not create or edit GitHub Milestones.
 - Do not bypass required architecture review.
-- Do not decide release scope.
+- Do not decide release contents.
 - Do not create GitHub Releases or tags.
 - Do not run production mutations.
 - Do not call protected production systems except through approved role tooling.

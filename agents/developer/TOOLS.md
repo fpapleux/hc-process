@@ -1,15 +1,15 @@
 # TOOLS.md - Developer
 
-This role uses only the local tool manuals in `tools/`.
+This role uses only the canonical tool manuals listed here.
 
 Read before acting:
 
-- `tools/git.md`
-- `tools/github-issues.md`
-- `tools/github-prs.md`
-- `tools/local-validation.md`
+- `../../tools/git.md`
+- `../../tools/github-issues.md`
+- `../../tools/github-prs.md`
+- `../../tools/local-validation.md`
 
-Do not use tool manuals that are not present in this folder.
+Do not use tool manuals that are not listed here.
 
 ## Authority Summary
 
@@ -42,7 +42,7 @@ Local validation:
 ## Forbidden Operations
 
 - Do not write to `tst/**`.
-- Do not write to `prod/**`.
+- Do not write to `rel/**`.
 - Do not edit GitHub Milestones.
 - Do not merge pull requests.
 - Do not close issues.
@@ -60,5 +60,7 @@ Before moving an issue to `ready-for-qa`, record:
 - Commit SHA.
 - Pull request link when one exists.
 - Verification commands and results.
+- CI run evidence for the pushed commit, or a Technical Lead waiver record on
+  the issue when CI is unavailable.
 - Architecture constraints followed when relevant.
 - Known limitations.

@@ -6,7 +6,7 @@ Responsibilities:
 
 - Implement assigned GitHub Issues marked `ready-for-dev`.
 - Work only in `dev/**`.
-- Create feature branches from the remote production baseline.
+- Create feature branches from the remote production baseline (`main`).
 - Write and update code-level tests.
 - Follow recorded architecture constraints when present.
 - Run relevant verification before handoff.

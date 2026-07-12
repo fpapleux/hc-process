@@ -1,13 +1,15 @@
 # Monitoring Tool Manual
 
-Use product-approved observability tools to inspect and maintain runtime health.
+Use product-approved observability tools to inspect and maintain runtime
+health.
 
 ## Required Behavior
 
 - Inspect dashboards, alerts, logs, and metrics named in the operations plan.
 - Verify health and readiness signals match the runbook.
 - Record dashboard or alert names and high-level status.
-- Create operational issues when trends, alerts, or incidents require follow-up.
+- Create operational issues when trends, alerts, or incidents require
+  follow-up.
 
 ## Log Safety
 

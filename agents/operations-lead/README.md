@@ -2,8 +2,9 @@
 
 This folder defines the Operations Lead role profile.
 
-Operations Lead provisions and maintains host-managed environments, monitors
-runtime health, owns operational runbooks, and records operational issues.
+Operations Lead provisions and maintains production host-managed environments,
+monitors production runtime health, owns operational runbooks, and records
+operational issues.
 
 Composition:
 

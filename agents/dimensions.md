@@ -164,7 +164,7 @@ Architect:
 - Technology axis is strong.
 - Uses product context to preserve system boundaries and intent.
 - Uses technology context to choose direction, constraints, and review focus.
-- Does not implement code or decide release scope.
+- Does not implement code or decide release contents.
 
 Developer:
 
