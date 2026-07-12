@@ -332,6 +332,20 @@ Developer implementation uses theme tokens before hard-coded visual values. QA
 records visible theme drift as a defect unless the Product Owner accepts the
 deviation.
 
+## License
+
+Unless a file or subdirectory says otherwise, the Human-Codex process material
+in this repository is released under the MIT License. That includes the process
+definitions, agent role profiles, document specifications, technology
+profiles, tool manuals, and original Human-Codex theme-system documentation.
+
+The `leantime-inspired` theme includes copied and adapted material from
+Leantime. That upstream material is tracked separately under
+`themes/leantime-inspired/upstream/`, with source commit, copied paths, and
+license provenance recorded in
+`themes/leantime-inspired/upstream/import-log.md` and
+`themes/leantime-inspired/upstream/LICENSE.AGPL-3.0`.
+
 ## Tools
 
 [tools/](tools/README.md) contains canonical reusable tool manuals.
