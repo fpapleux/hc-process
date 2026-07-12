@@ -66,6 +66,13 @@ The UX Design Lead must design the user/operator/developer experience
 appropriate to the product model, not default to screen-based UX
 documentation.
 
+For `inline` and `mini` budgets, read only the relevant sections of the UX
+specification and produce the smallest useful artifact. A terminal-only CLI
+usually needs command shape, flags/options, output, errors, help, and exit
+behavior; it does not need wireframes, screen inventories, responsive behavior,
+or full accessibility matrices unless the operator asks or the tool includes a
+visual surface.
+
 ### Assurance-Level UX Depth
 
 UX depth is determined by:

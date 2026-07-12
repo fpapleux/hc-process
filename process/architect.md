@@ -61,6 +61,13 @@ observability, deployment, or operations design unless explicitly requested or
 safety-critical. A production or enterprise system must not hide material
 architecture ambiguity behind prototype shortcuts.
 
+For `inline` and `mini` budgets, read only the architecture spec sections that
+match the product model and risk. A personal CLI script normally gets either
+"no architecture review required" or a scoped note covering only real decisions:
+execution context, dependencies, files/network, credentials, destructive
+actions, and verification. Do not create a full architecture document or
+operations plan just because the template exists.
+
 ### Model-Specific Architecture Emphasis
 
 For a `CLI Tool`, focus on execution context, packaging, command dispatch,
@@ -166,21 +173,16 @@ omitted from the HTML version.
 
 ### Operations Plan
 
-The Architect produces the initial operations plan alongside the architecture
-design document. The operations plan translates the operations capabilities
-defined in section 7.2 of the architecture design document into a concrete
-operational specification: SLIs, SLOs, monitoring strategy, alerting, incident
-management, capacity planning, backup and recovery, and security monitoring.
+The Architect produces an initial operations plan only when the architecture
+has an operated runtime: production service, scheduler/daemon, external users,
+SLO/alerting need, backup/restore obligation, managed credentials/TLS, or an
+operator request. Otherwise record "operations plan: not required" with the
+reason.
 
-The initial operations plan follows the
-[Operations Plan Document Specification](../documents/operations-plan.md).
-Sections that require production data (actual baselines, dashboard URLs, tested
-restore times) are marked as placeholders for the Operations Lead to fill after
-the first release.
-
-The Architect produces the initial operations plan in both markdown and HTML
-versions, following the same synchronization and format rules as the
-architecture design document.
+When required, the plan follows the
+[Operations Plan Document Specification](../documents/operations-plan.md). Mark
+unknown production baselines, dashboard URLs, and restore timings as
+placeholders for Operations Lead adaptation after first release.
 
 After the first production release, the Operations Lead adapts the operations
 plan to the live environment and owns it from that point forward. The Architect

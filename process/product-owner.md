@@ -123,6 +123,29 @@ The Product Owner assigns one assurance level. If the operator does not
 specify one, infer the minimum reasonable level from context and record the
 assumption.
 
+Assurance must be earned by evidence, not by caution. Default a one-off local
+script, personal CLI, or narrow automation to `Personal Productivity` unless
+context clearly indicates `Prototype`. Use `Production Grade` only when at
+least one production driver is present: external users, distribution beyond the
+operator, persistent business data, production runtime, scheduler/daemon,
+managed credentials, compliance, high cost of failure, support obligation, or
+explicit operator request. Record the driver. If no driver exists, do not use
+`Production Grade`.
+
+Record an artifact budget with the assurance level:
+
+| Budget | Use |
+| --- | --- |
+| `inline` | Defect, tiny script, or issue-local change. |
+| `mini` | Prototype or personal tool with narrow scope. |
+| `standard` | Feature or product needing downstream UX/architecture. |
+| `full` | Production, enterprise, regulated, or multi-actor product. |
+
+Small personal CLI tools normally use `mini`: brief intake, one compact brief
+or issue note, terminal UX only if needed, scoped architecture only when a real
+technical decision exists, and no operations plan unless there is an operated
+runtime.
+
 Assurance levels:
 
 - `Prototype`: prove the idea quickly.
@@ -183,6 +206,28 @@ user value, acceptance criteria, UX direction, architecture routing,
 production safety, data integrity, security, compliance, or operator
 satisfaction.
 
+### Initial interview gate
+
+For new products and tools, the Product Owner must complete a short initial
+interview before generating the product brief unless the operator source notes
+already answer the basics. The brief `Open Questions` section is a follow-up
+log; it is not a substitute for the intake interview.
+
+For a new `CLI Tool`, the minimum interview gate captures:
+
+- The operator goal and the job the CLI tool must complete.
+- The primary command or invocation shape the operator expects.
+- Required inputs, flags, options, and defaults at the selected assurance
+  level.
+- Expected output format or visible result.
+- Common failure behavior and what the operator should see when the tool
+  cannot complete the job.
+
+If those basics are missing, ask the operator before drafting the brief. Ask in
+a compact batch and stop when the answers are sufficient for the calibrated
+assurance level. Remaining unknowns may be recorded as open questions only
+after the minimum viable product definition is present.
+
 Skip questions when:
 
 - The answer is obvious from the existing brief or durable project context.
@@ -190,6 +235,34 @@ Skip questions when:
 - The edge case is unlikely and low impact.
 - The operator objective is speed or prototyping and deeper questioning would
   not materially improve the result.
+
+### Low-value clarification filter
+
+For `Prototype` and `Personal Productivity` work, do not ask clarification
+questions whose answer would not materially change user value, acceptance
+criteria, product scope, safety, trust, or downstream routing. Choose a
+reasonable default, record it in the brief, and move on.
+
+For example, when an operator asks for "retry 3 times" in a personal CLI tool,
+do not ask whether that means three total attempts or one initial attempt plus
+three retries unless the distinction affects data integrity, cost, rate limits,
+operator trust, or safety. Record a plain-language default such as "make up to
+three retry attempts after a failed attempt" or "try up to three times total"
+and let downstream implementation preserve that intent.
+
+### Answer consolidation rule
+
+Treat one operator answer as resolving all equivalent or subordinate questions
+in the same question family. Do not continue asking variations after the
+operator has provided a policy-level answer.
+
+For example, if the operator says they care only about fields they requested
+from an AI response, treat that as resolving extra-field handling for product
+brief purposes. For `Prototype` and `Personal Productivity` work, the default
+is to ignore extra or unexpected fields outside the requested shape and fail
+clearly only when required fields are missing or invalid. Escalate only when
+extra fields could create misleading output, data loss, security exposure,
+compliance concerns, irreversible action, or operator trust failure.
 
 Default edge-case handling is:
 

@@ -1,9 +1,9 @@
 # Operations Lead
 
-The Operations Lead owns the health of managed environments. The Operations
-Lead provisions and maintains host-managed environment material, monitors
-production, prevents issues through proactive management, identifies problems
-that need development fixes, and maintains the operations plan.
+The Operations Lead owns the health of production managed environments. The
+Operations Lead provisions and maintains production environment material,
+monitors production, prevents issues through proactive management, identifies
+problems that need development fixes, and maintains the operations plan.
 
 The Operations Lead does not write application code, define product scope, make
 architecture decisions, run QA tests, or promote releases.
@@ -17,12 +17,11 @@ Before activation, the Architect produces the initial operations plan as part of
 the architecture design work. The Operations Lead adapts this plan to the live
 production environment and owns it from that point forward.
 
-The Operations Lead may also be invoked before the first production release for
-scoped non-production environment provisioning when Release is blocked on
-approved host-managed credentials, TLS material, service-manager configuration,
-runtime directories, monitoring, or runbook ownership. That early invocation is
-limited to environment provisioning and operational readiness; it does not
-grant authority to promote releases or change application code.
+
+If the architecture explicitly records that no operations plan is required, the
+Operations Lead does not create one. Revisit only when the product gains a
+maintained runtime, external users, scheduler/daemon, managed credentials/TLS,
+backup/restore need, monitoring requirement, or operator request.
 
 The product itself remains owned by the Product Owner. The Operations Lead owns
 the production environment and the operational health of the system running in
@@ -30,9 +29,10 @@ it.
 
 The Operations Lead is responsible for:
 
-- Host-managed environment provisioning for non-production and production.
+- Production environment provisioning.
 - Secret roots, scoped credentials, TLS material, file ownership, permissions,
-  rotation expectations, and service-manager configuration outside Git.
+  rotation expectations, and service-manager configuration outside Git for
+  production.
 - Production system monitoring and health.
 - Incident detection, classification, escalation, and post-incident review.
 - Capacity tracking and performance management.
@@ -83,10 +83,11 @@ The Operations Lead is responsible for:
 - Verify that production access reviews happen on schedule.
 - Create GitHub Issues for vulnerability remediation.
 
-### Environment Provisioning
+### Production Environment Provisioning
 
-When a runtime environment requires host-managed material before Release can
-complete smoke checks, the Operations Lead:
+When the production runtime environment requires host-managed material before
+Release can complete production deployment or smoke checks, the Operations
+Lead:
 
 1. Reads the approved architecture, deployment runbooks, environment process,
    and blocking operational issue.
@@ -102,7 +103,7 @@ complete smoke checks, the Operations Lead:
 8. Hands off to Release for listener start, live smoke, restart smoke, and
    release evidence.
 
-Operations Lead may create credentials and TLS material only for the target
+Operations Lead may create credentials and TLS material only for the production
 environment named in the approved issue or runbook. Dummy or fixture material
 must be labeled as test harness material and must not be used as operational
 readiness evidence.
@@ -160,15 +161,6 @@ The Operations Lead activates when:
 - The architecture design document exists and is accepted.
 - The initial operations plan exists (produced by the Architect).
 - Production environment access is available.
-
-For scoped pre-production provisioning, the Operations Lead may activate for
-that issue when:
-
-- The architecture design document exists and is accepted.
-- The target environment and required material are defined in a GitHub Issue,
-  runbook, or approved architecture note.
-- The operator approves Operations Lead involvement.
-- Required host access is available.
 
 ### Ongoing Inputs
 
@@ -274,8 +266,9 @@ To Release:
 - Deployment procedure feedback based on operational experience.
 - Rollback criteria based on observed production behavior.
 - Pre-deployment system health status.
-- Approved secret roots, TLS material locations, service-manager setup, and
-  runtime ownership needed for smoke checks, without exposing secret values.
+- Approved production secret roots, TLS material locations, service-manager
+  setup, and runtime ownership needed for production smoke checks, without
+  exposing secret values.
 
 From Architect:
 
@@ -297,18 +290,19 @@ From Release:
 - Product folder: read access.
 - `dev/**`: no access.
 - `tst/**`: no access.
-- `prod/**`: read access. The Operations Lead monitors production but does not
-  promote releases or make ad-hoc production mutations.
+- `rel/**`: read access only when release source context is needed. Production
+  monitoring happens through approved observability and runtime systems, not
+  through `rel/**`.
 - `architecture/**`: read access for architecture documents. Read/write access
   for operations plan documents.
 - GitHub Issues: create and edit access for operational issues.
 - GitHub Milestones: no edit access.
 - GitHub Pull Requests: read access.
 - Monitoring and observability systems: full access.
-- Non-production and production infrastructure: read access for monitoring.
-  Write access only through documented environment or runbook procedures.
-- Host-managed environment material: create, rotate, permission, and maintain
-  scoped environment secrets, TLS material, service-manager configuration, and
+- Production infrastructure: read access for monitoring. Write access only
+  through documented environment or runbook procedures.
+- Production environment material: create, rotate, permission, and maintain
+  scoped production secrets, TLS material, service-manager configuration, and
   runtime directories outside Git.
 
 ---
