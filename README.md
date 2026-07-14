@@ -14,15 +14,9 @@ Technology controls technique.
 Theme controls visual identity.
 ```
 
-That separation is what makes the process useful. A Developer agent can write
-code, but it cannot decide what belongs in the release. A Product Owner agent
-can define acceptance criteria, but it cannot prescribe implementation. QA can
-validate behavior, but it does not fix defects in the developer lane. Release
-can promote approved work, but only after QA and manifest gates are satisfied.
-
-The result is a process that gives agents enough autonomy to move quickly while
-keeping the things humans care about visible: scope, approval, evidence,
-environment safety, and production risk.
+That separation gives agents enough autonomy to move quickly while keeping the
+things humans care about visible: scope, approval, evidence, environment
+safety, and production risk.
 
 ## Why This Exists
 
@@ -47,45 +41,19 @@ architecture. A production service can require the full chain: brief, UX,
 architecture, development plan, QA evidence, release manifest, staged
 deployment, and operations readiness.
 
-## Install As A Codex Skill
+## How Work Is Coordinated
 
-This repository is meant to stay live and editable. The Codex skill should be a
-thin wrapper that points at this repo, not a copied snapshot of the process
-files.
+The process is multi-channel enabled: one role can coordinate other roles or
+subprocesses in parallel, but approval gates stay controlled. For example, a
+Product Owner can ask UX and Architecture to work in parallel, then return with
+questions or approval-ready documents. Later, Technical Lead planning and
+Operations planning can run side by side while the Product Owner keeps one
+controlled status thread with the human operator.
 
-To install it:
+![Multi-channel coordination status update](assets/multi-channel-coordination.png)
 
-1. Open a terminal and choose the parent folder where you want the process
-   repository to live.
-2. Clone the repository:
-
-```text
-git clone <repository-url> <folder-name>
-cd <folder-name>
-```
-
-3. In Codex, ask it to create a skill that points at this cloned repository in
-   place.
-4. Restart or reload Codex so the skill is discovered.
-5. Verify the skill with a small prompt such as:
-
-```text
-$process role=PO Help me frame a mini product brief for a tiny habit tracker.
-```
-
-Use a prompt like this from inside the cloned repository:
-
-```text
-Create a Codex skill named `process` that I can invoke with `$process`.
-Make it a thin wrapper around this checkout: do not copy repo content, and re-read the live files on each use.
-Support role prompts like `role=PO`, `role=Developer`, `role=QA`, and show me the created `SKILL.md`.
-```
-
-If you create or move the checkout later, recreate or update the wrapper so it
-points at the new checkout. The wrapper should be disposable; this repository is
-the maintained source.
-
-## The Operating Model
+The important pattern is that parallel work does not mean uncontrolled work.
+Each channel has a role, a lane, a handoff artifact, and a clear return point.
 
 Work is divided across four dimensions.
 
@@ -137,9 +105,6 @@ theme:
   - themes/leantime-inspired
 ```
 
-This keeps permissions, business intent, engineering practice, and visual
-identity independent enough to reason about.
-
 ## Lifecycle
 
 The default lifecycle is:
@@ -167,8 +132,7 @@ The default lifecycle is:
    incidents, production credentials, TLS material, runbooks, and operations
    plan maintenance.
 
-The lifecycle is not meant to add ceremony to every task. It scales by artifact
-budget:
+The lifecycle scales by artifact budget:
 
 - `inline`: defect, tiny script, or issue-local change.
 - `mini`: prototype or personal tool with narrow scope.
@@ -177,13 +141,171 @@ budget:
 
 The process asks for the smallest artifact set that still protects the work.
 
+## Install As A Codex Skill
+
+This repository is meant to stay live and editable. The Codex skill should be a
+thin wrapper that points at this repo, not a copied snapshot of the process
+files.
+
+To install it:
+
+1. Open a terminal and choose the parent folder where you want the process
+   repository to live.
+2. Clone the repository:
+
+```text
+git clone <repository-url> <folder-name>
+cd <folder-name>
+```
+
+3. In Codex, ask it to create a skill that points at this cloned repository in
+   place.
+4. Restart or reload Codex so the skill is discovered.
+5. Verify the skill with a small prompt such as:
+
+```text
+$process role=PO Help me frame a mini product brief for a tiny habit tracker.
+```
+
+Use a prompt like this from inside the cloned repository:
+
+```text
+Create a Codex skill named `process` that I can invoke with `$process`.
+Make it a thin wrapper around this checkout: do not copy repo content, and re-read the live files on each use.
+Support role prompts like `role=PO`, `role=Developer`, `role=QA`, and show me the created `SKILL.md`.
+```
+
+If you create or move the checkout later, recreate or update the wrapper so it
+points at the new checkout. The wrapper should be disposable; this repository is
+the maintained source.
+
+## How To Use This Process
+
+Start with the outcome you need and invoke the role that owns the next
+decision.
+
+- Need scope, acceptance criteria, or release inclusion? Start with Product
+  Owner.
+- Need flows, CLI shape, screen behavior, or accessibility? Use UX Design Lead.
+- Need boundaries, dependencies, migrations, or security direction? Use
+  Architect.
+- Need issues sequenced and made ready for implementation? Use Technical Lead.
+- Need code written for a ready issue? Use Developer.
+- Need independent validation? Use QA.
+- Need release assembly, promotion, and deployment evidence? Use Release.
+- Need production runtime material, monitoring, or incidents handled? Use
+  Operations Lead.
+
+### Condensed PO-Led Flow
+
+This is the practical way to run a small product when you want one controlled
+conversation and let the Product Owner coordinate the other roles.
+
+1. Start with Product Owner:
+
+```text
+$process role=PO Interview me and create a product brief for <product>.
+```
+
+2. Approve the brief, then have the Product Owner coordinate discovery:
+
+```text
+I approve the brief. Engage the UX Lead and Architect as subprocesses and return with either questions or documents ready to approve.
+```
+
+3. Approve the documents, then request the release plan:
+
+```text
+I approve all docs. Coordinate development of a release with the Technical Lead and return with the development plan. Have the Operations Lead prepare the operations plan.
+```
+
+4. Approve planning, then let development run under Product Owner control:
+
+```text
+I approve the development plan and operations plan. Control development until the product is ready for deployment.
+```
+
+5. Review the developed product and release evidence:
+
+```text
+Review the developed product, verify tests passed, summarize outstanding defects, and prepare deployment approval.
+```
+
+6. Approve deployment, validate production, and close the release:
+
+```text
+I approve deployment. Have the product deployed in production and return when it is ready for validation.
+```
+
+After validation, tell the Product Owner to close the release.
+
+### Direct Role Flow
+
+Use this when you want to work with each role explicitly instead of having the
+Product Owner coordinate the subprocesses.
+
+```text
+$process role=PO Create a mini product brief for a simple habit tracker.
+```
+
+```text
+$process role=UX Using the accepted brief, define the main flow, screens,
+states, accessibility expectations, and theme notes.
+```
+
+```text
+$process role=Architect Using the brief and UX notes, produce a compact
+architecture direction with storage, test boundaries, security assumptions, and
+verification expectations.
+```
+
+```text
+$process role=TL Convert the accepted brief, UX notes, and architecture
+direction into ready-for-dev issues for the first release.
+```
+
+```text
+$process role=Developer Implement the first ready-for-dev issue with TDD and
+record failing-test, passing-rerun, and validation evidence.
+```
+
+```text
+$process role=QA Validate the pushed branch, check acceptance criteria and TDD
+evidence, run relevant regression checks, and record pass or fail evidence.
+```
+
+```text
+$process role=Release Prepare a release for the QA-passed work, include only
+approved issues, verify release evidence, and produce a release note.
+```
+
+The direct flow is more verbose, but useful when the user wants to inspect each
+role output before the next role starts.
+
+### Before Code Starts
+
+The process works best when every issue can answer four questions before code
+starts:
+
+1. What product outcome or defect record does this issue serve?
+2. What observable acceptance criteria define done?
+3. What technical constraints or architecture notes apply?
+4. What focused test should fail first?
+
+For visual work, add a fifth:
+
+5. What theme, mode, and surface contract should the UI follow?
+
+If those answers are available, agents can work with far less ambiguity and far
+more useful autonomy.
+
 ## What Makes It Different
 
 ### It Is Built For Agent Authority, Not Just Agent Output
 
-The process assumes agents can take real action. That makes authority boundaries
-non-negotiable. Each role has a lane, a tool surface, and explicit stop
-conditions. Agents can move fast inside their lane, but handoffs require
+The process assumes agents can take real action. That makes authority
+boundaries non-negotiable. Each role has a lane, a tool surface, and explicit
+stop conditions. Agents can move fast inside their lane, but handoffs require
 evidence.
 
 ### It Makes The Filesystem Match The Process
@@ -221,9 +343,9 @@ carry Developer TDD evidence or an explicit Technical Lead exception.
 
 ### It Gives Every Web Surface A Reusable Visual Identity
 
-The process now treats visual design as reusable infrastructure. A theme
-records the look and feel once, then every HTML brief, architecture document,
-UX document, API platform, dashboard, internal tool, and app UI can consume the
+The process treats visual design as reusable infrastructure. A theme records
+the look and feel once, then every HTML brief, architecture document, UX
+document, API platform, dashboard, internal tool, and app UI can consume the
 same token and component contract.
 
 The default theme is `leantime-inspired`: an app-like visual identity derived
@@ -233,9 +355,8 @@ soft shadows, readable forms and tables, and accessible focus behavior into
 Human-Codex outputs.
 
 Themes are designed to be swappable. A product can start with
-`leantime-inspired`, then later select another theme without rewriting the
-role process, product brief structure, technology standards, or release
-workflow.
+`leantime-inspired`, then later select another theme without rewriting the role
+process, product brief structure, technology standards, or release workflow.
 
 ### It Separates Runtime Worlds
 
@@ -266,6 +387,7 @@ This lets agents execute without turning ambiguity into silent policy.
 ```text
 .
   agents/        reusable role profiles and profile composition rules
+  assets/        README images and lightweight repository media
   documents/     document specifications for briefs, UX, architecture, ops
   process/       operating process definitions and lifecycle rules
   security/      environment, secrets, and security follow-up notes
@@ -276,7 +398,9 @@ This lets agents execute without turning ambiguity into silent policy.
   README.md      repository overview
 ```
 
-## Agents
+## Repository Tour
+
+### Agents
 
 [agents/](agents/README.md) defines reusable role profiles.
 
@@ -297,7 +421,7 @@ deliberately repetitive in the places that matter because agents often enter
 through different surfaces. The canonical process remains in `process/**`, and
 the role profiles mirror the rules an agent must remember at runtime.
 
-## Process
+### Process
 
 [process/](process/overview.md) defines how work moves from idea to production.
 
@@ -318,7 +442,7 @@ The overview is the starting point. Role files define the authority,
 responsibilities, workflow, evidence requirements, stop conditions, and handoff
 rules for each stage.
 
-## Documents
+### Documents
 
 [documents/](documents/) defines the artifacts that carry intent and evidence
 between roles.
@@ -339,7 +463,7 @@ Current document types:
 Documents scale with the artifact budget. The process prefers a compact,
 accurate issue note over a large template filled with filler.
 
-## Technologies
+### Technologies
 
 [technologies/](technologies/README.md) defines stack-specific practices.
 
@@ -348,10 +472,10 @@ Current profile:
 - [Python](technologies/python/README.md)
 
 Technology profiles define how authorized agents should work in a stack: test
-strategy, TDD order, validation commands, packaging, style, security, and common
-failure modes. They are reusable across products.
+strategy, TDD order, validation commands, packaging, style, security, and
+common failure modes. They are reusable across products.
 
-## Themes
+### Themes
 
 [themes/](themes/README.md) defines visual identity themes.
 
@@ -370,21 +494,7 @@ Developer implementation uses theme tokens before hard-coded visual values. QA
 records visible theme drift as a defect unless the Product Owner accepts the
 deviation.
 
-## License
-
-Unless a file or subdirectory says otherwise, the Human-Codex process material
-in this repository is released under the MIT License. That includes the process
-definitions, agent role profiles, document specifications, technology
-profiles, tool manuals, and original Human-Codex theme-system documentation.
-
-The `leantime-inspired` theme includes copied and adapted material from
-Leantime. That upstream material is tracked separately under
-`themes/leantime-inspired/upstream/`, with source commit, copied paths, and
-license provenance recorded in
-`themes/leantime-inspired/upstream/import-log.md` and
-`themes/leantime-inspired/upstream/LICENSE.AGPL-3.0`.
-
-## Tools
+### Tools
 
 [tools/](tools/README.md) contains canonical reusable tool manuals.
 
@@ -396,139 +506,16 @@ Tool documentation uses two layers:
 
 This prevents tool knowledge from becoming tool authority.
 
-## Security And Environments
+### Security And Environments
 
-[security/](security/README.md) and [process/environments.md](process/environments.md)
-define environment and secret-handling expectations.
+[security/](security/README.md) and
+[process/environments.md](process/environments.md) define environment and
+secret-handling expectations.
 
 The most important rule is that production and non-production separation is not
 waivable. Release evidence cannot rely on production credentials in
 non-production, dummy TLS material, disabled certificate verification, browser
 security exceptions, or fixture secrets masquerading as operational readiness.
-
-## How To Use This Process
-
-Start with the outcome you need and invoke the role that owns the next decision.
-
-- Need scope, acceptance criteria, or release inclusion? Start with Product
-  Owner.
-- Need flows, CLI shape, screen behavior, or accessibility? Use UX Design Lead.
-- Need boundaries, dependencies, migrations, or security direction? Use
-  Architect.
-- Need issues sequenced and made ready for implementation? Use Technical Lead.
-- Need code written for a ready issue? Use Developer.
-- Need independent validation? Use QA.
-- Need release assembly, promotion, and deployment evidence? Use Release.
-- Need production runtime material, monitoring, or incidents handled? Use
-  Operations Lead.
-
-The process works best when every issue can answer four questions before code
-starts:
-
-1. What product outcome or defect record does this issue serve?
-2. What observable acceptance criteria define done?
-3. What technical constraints or architecture notes apply?
-4. What focused test should fail first?
-
-For visual work, add a fifth:
-
-5. What theme, mode, and surface contract should the UI follow?
-
-If those answers are available, agents can work with far less ambiguity and far
-more useful autonomy.
-
-## Example: Build A Simple Product
-
-The easiest way to use the skill is to move one small product through the
-lifecycle and let each role do only its own job. For a first run, choose a
-`mini` artifact budget and a harmless product, such as a local web app that
-tracks daily habits.
-
-Start with product intent:
-
-```text
-$process role=PO Create a mini product brief for a simple habit tracker. It
-should let one person define habits, mark today's habits complete, and see a
-seven-day streak. Keep the first release small.
-```
-
-Expected output: product goal, non-goals, target user, first-release scope,
-acceptance criteria, and any open product questions. Do not ask the Developer
-to invent these later.
-
-Shape the user experience:
-
-```text
-$process role=UX Using the accepted habit tracker brief, define the main flow,
-screens, empty states, completion states, accessibility expectations, and
-theme notes for a mini first release.
-```
-
-Expected output: the structure of the experience, not implementation code. For
-a CLI product, this might be commands and terminal states. For a web product,
-this might be screens, components, forms, and visible states.
-
-Add architecture only as much as the risk requires:
-
-```text
-$process role=Architect Using the product brief and UX notes, produce a compact
-architecture direction for a local single-user habit tracker. Call out data
-storage, test boundaries, security assumptions, and verification expectations.
-```
-
-Expected output: technical boundaries, stack assumptions, key decisions,
-constraints, and tests the implementation must make possible.
-
-Turn the accepted work into executable issues:
-
-```text
-$process role=TL Convert the accepted brief, UX notes, and architecture
-direction into ready-for-dev issues for the habit tracker first release. Keep
-each issue small enough for TDD.
-```
-
-Expected output: sequenced issues with acceptance criteria, dependencies,
-validation notes, and the focused test that should fail first.
-
-Implement one ready issue at a time:
-
-```text
-$process role=Developer Implement the first ready-for-dev issue for the habit
-tracker. Use TDD: add the focused failing test first, make the smallest
-implementation pass, then run the relevant checks and record evidence.
-```
-
-Expected output: code changes plus failing-test evidence, passing focused
-rerun, broader validation, and a handoff note. The Developer should not expand
-product scope while coding.
-
-Validate independently:
-
-```text
-$process role=QA Validate the pushed branch for the first habit tracker issue.
-Check the acceptance criteria, review the Developer TDD evidence, run relevant
-regression checks, and record pass or fail evidence.
-```
-
-Expected output: QA evidence from a validation workspace, not from the
-Developer's workspace. Failed validation goes back to Technical Lead or
-Developer with a concrete defect record.
-
-Promote only approved work:
-
-```text
-$process role=Release Prepare a mini release for the QA-passed habit tracker
-work. Include only approved issues, verify release evidence, and produce a
-release note.
-```
-
-Expected output: release manifest, included issues, validation evidence, known
-risks, approval status, and release note. If the product has a real runtime,
-Operations Lead takes over production health after promotion.
-
-For a tiny local tool, you may stop after QA and keep release notes lightweight.
-For anything production-facing, continue through Release and Operations Lead
-instead of treating a merged branch as a release.
 
 ## Adoption Notes
 
@@ -548,3 +535,17 @@ From there, add artifact depth as the product risk justifies it.
 The goal is not bureaucracy. The goal is reliable agent delivery: clear intent,
 bounded authority, evidence-rich handoffs, and production changes that can be
 explained after the fact.
+
+## License
+
+Unless a file or subdirectory says otherwise, the Human-Codex process material
+in this repository is released under the MIT License. That includes the process
+definitions, agent role profiles, document specifications, technology
+profiles, tool manuals, and original Human-Codex theme-system documentation.
+
+The `leantime-inspired` theme includes copied and adapted material from
+Leantime. That upstream material is tracked separately under
+`themes/leantime-inspired/upstream/`, with source commit, copied paths, and
+license provenance recorded in
+`themes/leantime-inspired/upstream/import-log.md` and
+`themes/leantime-inspired/upstream/LICENSE.AGPL-3.0`.
