@@ -1,9 +1,15 @@
 # Human-Codex Process
 
-This repository defines a practical operating system for agent-managed product
-work. It is designed for teams that want AI agents to do real delivery work
-without collapsing product ownership, engineering judgment, QA, release, and
-operations into one unbounded assistant.
+Use AI agents like a delivery team, not like a magic text box.
+
+Human-Codex Process is a practical operating system for AI-assisted software
+delivery. It helps experienced product and engineering teams move faster with
+AI while keeping the parts that make software reliable: clear product intent,
+architecture, tests, QA, release gates, operational readiness, and human
+decision points.
+
+The promise is not that AI lets us skip professional software development. The
+promise is that AI can now help perform much more of that work.
 
 The core idea is simple:
 
@@ -14,26 +20,33 @@ Technology controls technique.
 Theme controls visual identity.
 ```
 
-That separation gives agents enough autonomy to move quickly while keeping the
-things humans care about visible: scope, approval, evidence, environment
-safety, and production risk.
+That separation lets agents move quickly without giving them silent authority
+over scope, implementation, validation, release, and production risk.
 
-## Why This Exists
+## Why Try It
 
-Most agent workflows start with a prompt and end with a diff. That is fine for
-small edits, but it breaks down when the work needs product judgment, design
-constraints, architecture decisions, test evidence, release coordination, or
-operational ownership.
+Most AI coding workflows are optimized for prompt-to-diff work. That is useful,
+but it does not solve product delivery. Real software work needs shared memory,
+good decisions, quality gates, evidence, and clear ownership.
+
+Human-Codex Process is built for the moment when a team says:
+
+- "AI is useful, but the output quality is inconsistent."
+- "The agent did the task, but it lost the product thread."
+- "It worked in the first chat, then another agent missed half the context."
+- "It overbuilt, got stuck, or spent hours heading in the wrong direction."
+- "We still need architecture, tests, QA, and release discipline. Who creates
+  and checks those now?"
 
 This process turns agent work into a delivery system:
 
-- Product intent is captured before implementation starts.
+- Product intent is written down before implementation starts.
 - UX, architecture, and technical planning scale to the risk of the work.
-- Development is driven by TDD, with failing-test and passing-rerun evidence.
+- Development uses TDD evidence, not just claims that tests pass.
 - QA validates pushed branches independently from developer workspaces.
 - Release promotes only tested and approved commits.
 - Production and non-production runtime worlds stay physically separated.
-- Every handoff records evidence instead of relying on chat memory.
+- Every handoff leaves an artifact instead of relying on chat memory.
 
 It is intentionally procedural, but not heavy by default. A tiny defect can use
 inline issue notes. A personal tool can use a compact brief and scoped
@@ -41,14 +54,71 @@ architecture. A production service can require the full chain: brief, UX,
 architecture, development plan, QA evidence, release manifest, staged
 deployment, and operations readiness.
 
+## What This Solves
+
+Unstructured "vibe coding" can feel fast while quietly creating delivery risk.
+One chat may remember the product intent, but that memory is not automatically
+shared across agents, roles, workspaces, or future sessions. Decisions get
+lost, context drifts, and products fail for familiar reasons: unclear scope,
+weak architecture, missing tests, poor validation, and unmanaged release risk.
+
+This process makes professional software practices explicit enough for agents
+to execute:
+
+- Product context becomes shared documentation instead of private chat memory.
+- UX, architecture, development, QA, release, and operations keep separate
+  responsibilities.
+- Gates and evidence let humans steer the work without micromanaging every
+  edit.
+- Guardrails prevent agents from overbuilding, spinning on empty, or drifting
+  away from the approved intent.
+
+The leverage comes from automation, not omission. AI reduces workload by
+helping perform the professional steps, not by pretending the steps are
+optional.
+
+## What This Does Not Replace
+
+This process does not replace actual knowledge of professional software
+development. It helps automate professional practice; it does not make the
+practice unnecessary.
+
+People who do not know what good product definition, architecture, testing, QA,
+release discipline, or operations readiness look like will still struggle to
+judge the output. The likely gain is not that anyone can now build reliable
+software without expertise. The likely gain is that skilled teams can shorten
+development cycles, produce more software, and raise consistency by making
+their expectations explicit and reusable.
+
+In short: this is for people who already care about building software well and
+want AI to help them do more of it.
+
+## Best First Trial
+
+Do not start by trying to transform your whole delivery process. Start with one
+real slice of work:
+
+- small enough to finish;
+- important enough that quality matters;
+- concrete enough to define acceptance criteria;
+- visible enough that the team can judge the result.
+
+Good candidates are internal tools, narrow product features, repeatable defect
+streams, documentation-heavy technical changes, or operational work where
+evidence matters. Run one release through the process, then ask whether the
+work was easier to review, easier to trust, and easier to continue than a
+normal prompt-driven coding session.
+
 ## How Work Is Coordinated
 
-The process is multi-channel enabled: one role can coordinate other roles or
-subprocesses in parallel, but approval gates stay controlled. For example, a
-Product Owner can ask UX and Architecture to work in parallel, then return with
-questions or approval-ready documents. Later, Technical Lead planning and
-Operations planning can run side by side while the Product Owner keeps one
-controlled status thread with the human operator.
+The process is multi-channel enabled. One role can coordinate other roles or
+subprocesses in parallel, while approval gates stay controlled.
+
+That is where this becomes more than a prompt pattern. A Product Owner can ask
+UX and Architecture to work in parallel, then return with questions or
+approval-ready documents. Later, Technical Lead planning and Operations
+planning can run side by side while the Product Owner keeps one controlled
+status thread with the human operator.
 
 ![Multi-channel coordination status update](assets/multi-channel-coordination.png)
 
@@ -143,9 +213,9 @@ The process asks for the smallest artifact set that still protects the work.
 
 ## Install As A Codex Skill
 
-This repository is meant to stay live and editable. The Codex skill should be a
-thin wrapper that points at this repo, not a copied snapshot of the process
-files.
+This repository is meant to stay live and editable. Install it as a thin Codex
+skill wrapper that points at the cloned repository. Do not copy the process
+files into the skill; that would turn a living process into a stale snapshot.
 
 To install it:
 
@@ -181,8 +251,9 @@ the maintained source.
 
 ## How To Use This Process
 
-Start with the outcome you need and invoke the role that owns the next
-decision.
+Start with the outcome you need. Invoke the role that owns the next decision,
+or keep one Product Owner control thread and let the Product Owner coordinate
+the other roles.
 
 - Need scope, acceptance criteria, or release inclusion? Start with Product
   Owner.
@@ -198,8 +269,9 @@ decision.
 
 ### Condensed PO-Led Flow
 
-This is the practical way to run a small product when you want one controlled
-conversation and let the Product Owner coordinate the other roles.
+This is the practical way to run a small product when you want speed without
+losing control. The human stays in one conversation, approves gates, and lets
+the Product Owner coordinate the other roles.
 
 1. Start with Product Owner:
 
@@ -242,7 +314,8 @@ After validation, tell the Product Owner to close the release.
 ### Direct Role Flow
 
 Use this when you want to work with each role explicitly instead of having the
-Product Owner coordinate the subprocesses.
+Product Owner coordinate the subprocesses. It is more verbose, but useful when
+the team wants to inspect every role output before the next role starts.
 
 ```text
 $process role=PO Create a mini product brief for a simple habit tracker.
@@ -278,9 +351,6 @@ evidence, run relevant regression checks, and record pass or fail evidence.
 $process role=Release Prepare a release for the QA-passed work, include only
 approved issues, verify release evidence, and produce a release note.
 ```
-
-The direct flow is more verbose, but useful when the user wants to inspect each
-role output before the next role starts.
 
 ### Before Code Starts
 
@@ -519,8 +589,7 @@ security exceptions, or fixture secrets masquerading as operational readiness.
 
 ## Adoption Notes
 
-You do not need to adopt the entire system on day one. The useful starting set
-is:
+Do not adopt the entire system on day one. The useful starting set is:
 
 1. Use role boundaries from `agents/**`.
 2. Use the lifecycle and labels from `process/overview.md`.
@@ -532,9 +601,9 @@ is:
 
 From there, add artifact depth as the product risk justifies it.
 
-The goal is not bureaucracy. The goal is reliable agent delivery: clear intent,
-bounded authority, evidence-rich handoffs, and production changes that can be
-explained after the fact.
+The goal is not to admire the process. The goal is to see whether AI-assisted
+delivery becomes more consistent, reviewable, and useful when professional
+software practice is made explicit.
 
 ## License
 
