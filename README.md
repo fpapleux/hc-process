@@ -53,18 +53,19 @@ This repository is meant to stay live and editable. The Codex skill should be a
 thin wrapper that points at this repo, not a copied snapshot of the process
 files.
 
-The expected local path is:
+To install it:
+
+1. Open a terminal and choose the parent folder where you want the process
+   repository to live.
+2. Clone the repository:
 
 ```text
-~/dev/process
+git clone <repository-url> <folder-name>
+cd <folder-name>
 ```
 
-To install it on a new machine:
-
-1. Clone or copy this repository to `~/dev/process`.
-2. Create a Codex skill folder at `~/.codex/skills/process/`.
-3. Add a `SKILL.md` file that tells Codex to use `~/dev/process` as the source
-   of truth and to re-read the live process files on every activation.
+3. In Codex, ask it to create a skill that points at this cloned repository in
+   place.
 4. Restart or reload Codex so the skill is discovered.
 5. Verify the skill with a small prompt such as:
 
@@ -72,42 +73,41 @@ To install it on a new machine:
 $process role=PO Help me frame a mini product brief for a tiny habit tracker.
 ```
 
-If you keep the repository somewhere else, update the paths in the skill
-wrapper. The important behavior is that Codex re-reads the live repository
-instead of relying on stale instructions.
+Use a prompt like this from inside the cloned repository:
 
-A minimal wrapper looks like this:
+```text
+Create a Codex skill named `process` that I can invoke with `$process`.
 
-```markdown
----
-name: process
-description: Use the operator's live software-development process repository at ~/dev/process to adopt controlled product roles and run structured software work.
----
+The skill must use this repository in place as its source of truth. Do not copy
+the repository contents into the skill. The skill should contain only the
+minimal wrapper instructions needed to make Codex re-read the live files from
+this checkout every time the skill is activated, so future `git pull` updates
+to this repository automatically affect the skill without manual sync work.
 
-# Process
+The skill should:
 
-Use `~/dev/process` as the source of truth. Re-read the relevant files from
-disk every time this skill is activated.
+- Be named `process`.
+- Be invokable as `$process`.
+- Resolve role aliases such as `role=PO`, `role=UX`, `role=Architect`,
+  `role=TL`, `role=Developer`, `role=QA`, `role=Release`, and
+  `role=Operations Lead`.
+- On every activation, start by reading this checkout's `README.md`,
+  `agents/README.md`, and `process/overview.md`.
+- Then read the matching process file under `process/` and matching role
+  profile under `agents/` for the requested role.
+- Keep role authority boundaries intact: Product Owner defines intent, UX
+  Design Lead defines experience, Architect defines technical direction,
+  Technical Lead prepares ready work, Developer implements ready issues, QA
+  validates pushed work, Release promotes approved work, and Operations Lead
+  owns production runtime health.
 
-Start by reading:
-
-- `~/dev/process/README.md`
-- `~/dev/process/agents/README.md`
-- `~/dev/process/process/overview.md`
-
-Resolve any requested role from the prompt, such as `role=PO`,
-`role=Architect`, `role=Developer`, `role=QA`, `role=Release`, or
-`role=Operations Lead`.
-
-Then read the matching process file under `~/dev/process/process/` and the
-matching role profile under `~/dev/process/agents/`.
-
-Keep role authority boundaries intact. Product Owner defines intent, UX Design
-Lead defines experience, Architect defines technical direction, Technical Lead
-prepares ready work, Developer implements ready issues, QA validates pushed
-work, Release promotes approved work, and Operations Lead owns production
-runtime health.
+After creating the skill, tell me where the skill wrapper was created and show
+me the `SKILL.md` content.
 ```
+
+If you create or move the checkout later, recreate or update the wrapper so it
+points at the new checkout. The wrapper should be disposable; this repository is
+the maintained source.
 
 ## The Operating Model
 
