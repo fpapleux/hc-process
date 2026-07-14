@@ -464,7 +464,6 @@ This lets agents execute without turning ambiguity into silent policy.
   technologies/  technology-specific engineering standards
   themes/        reusable visual identity themes for web surfaces
   tools/         canonical reusable tool manuals
-  wildwest/      example active product using this process
   README.md      repository overview
 ```
 
