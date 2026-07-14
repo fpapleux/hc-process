@@ -77,32 +77,8 @@ Use a prompt like this from inside the cloned repository:
 
 ```text
 Create a Codex skill named `process` that I can invoke with `$process`.
-
-The skill must use this repository in place as its source of truth. Do not copy
-the repository contents into the skill. The skill should contain only the
-minimal wrapper instructions needed to make Codex re-read the live files from
-this checkout every time the skill is activated, so future `git pull` updates
-to this repository automatically affect the skill without manual sync work.
-
-The skill should:
-
-- Be named `process`.
-- Be invokable as `$process`.
-- Resolve role aliases such as `role=PO`, `role=UX`, `role=Architect`,
-  `role=TL`, `role=Developer`, `role=QA`, `role=Release`, and
-  `role=Operations Lead`.
-- On every activation, start by reading this checkout's `README.md`,
-  `agents/README.md`, and `process/overview.md`.
-- Then read the matching process file under `process/` and matching role
-  profile under `agents/` for the requested role.
-- Keep role authority boundaries intact: Product Owner defines intent, UX
-  Design Lead defines experience, Architect defines technical direction,
-  Technical Lead prepares ready work, Developer implements ready issues, QA
-  validates pushed work, Release promotes approved work, and Operations Lead
-  owns production runtime health.
-
-After creating the skill, tell me where the skill wrapper was created and show
-me the `SKILL.md` content.
+Make it a thin wrapper around this checkout: do not copy repo content, and re-read the live files on each use.
+Support role prompts like `role=PO`, `role=Developer`, `role=QA`, and show me the created `SKILL.md`.
 ```
 
 If you create or move the checkout later, recreate or update the wrapper so it
