@@ -47,6 +47,68 @@ architecture. A production service can require the full chain: brief, UX,
 architecture, development plan, QA evidence, release manifest, staged
 deployment, and operations readiness.
 
+## Install As A Codex Skill
+
+This repository is meant to stay live and editable. The Codex skill should be a
+thin wrapper that points at this repo, not a copied snapshot of the process
+files.
+
+The expected local path is:
+
+```text
+~/dev/process
+```
+
+To install it on a new machine:
+
+1. Clone or copy this repository to `~/dev/process`.
+2. Create a Codex skill folder at `~/.codex/skills/process/`.
+3. Add a `SKILL.md` file that tells Codex to use `~/dev/process` as the source
+   of truth and to re-read the live process files on every activation.
+4. Restart or reload Codex so the skill is discovered.
+5. Verify the skill with a small prompt such as:
+
+```text
+$process role=PO Help me frame a mini product brief for a tiny habit tracker.
+```
+
+If you keep the repository somewhere else, update the paths in the skill
+wrapper. The important behavior is that Codex re-reads the live repository
+instead of relying on stale instructions.
+
+A minimal wrapper looks like this:
+
+```markdown
+---
+name: process
+description: Use the operator's live software-development process repository at ~/dev/process to adopt controlled product roles and run structured software work.
+---
+
+# Process
+
+Use `~/dev/process` as the source of truth. Re-read the relevant files from
+disk every time this skill is activated.
+
+Start by reading:
+
+- `~/dev/process/README.md`
+- `~/dev/process/agents/README.md`
+- `~/dev/process/process/overview.md`
+
+Resolve any requested role from the prompt, such as `role=PO`,
+`role=Architect`, `role=Developer`, `role=QA`, `role=Release`, or
+`role=Operations Lead`.
+
+Then read the matching process file under `~/dev/process/process/` and the
+matching role profile under `~/dev/process/agents/`.
+
+Keep role authority boundaries intact. Product Owner defines intent, UX Design
+Lead defines experience, Architect defines technical direction, Technical Lead
+prepares ready work, Developer implements ready issues, QA validates pushed
+work, Release promotes approved work, and Operations Lead owns production
+runtime health.
+```
+
 ## The Operating Model
 
 Work is divided across four dimensions.
@@ -398,6 +460,99 @@ For visual work, add a fifth:
 
 If those answers are available, agents can work with far less ambiguity and far
 more useful autonomy.
+
+## Example: Build A Simple Product
+
+The easiest way to use the skill is to move one small product through the
+lifecycle and let each role do only its own job. For a first run, choose a
+`mini` artifact budget and a harmless product, such as a local web app that
+tracks daily habits.
+
+Start with product intent:
+
+```text
+$process role=PO Create a mini product brief for a simple habit tracker. It
+should let one person define habits, mark today's habits complete, and see a
+seven-day streak. Keep the first release small.
+```
+
+Expected output: product goal, non-goals, target user, first-release scope,
+acceptance criteria, and any open product questions. Do not ask the Developer
+to invent these later.
+
+Shape the user experience:
+
+```text
+$process role=UX Using the accepted habit tracker brief, define the main flow,
+screens, empty states, completion states, accessibility expectations, and
+theme notes for a mini first release.
+```
+
+Expected output: the structure of the experience, not implementation code. For
+a CLI product, this might be commands and terminal states. For a web product,
+this might be screens, components, forms, and visible states.
+
+Add architecture only as much as the risk requires:
+
+```text
+$process role=Architect Using the product brief and UX notes, produce a compact
+architecture direction for a local single-user habit tracker. Call out data
+storage, test boundaries, security assumptions, and verification expectations.
+```
+
+Expected output: technical boundaries, stack assumptions, key decisions,
+constraints, and tests the implementation must make possible.
+
+Turn the accepted work into executable issues:
+
+```text
+$process role=TL Convert the accepted brief, UX notes, and architecture
+direction into ready-for-dev issues for the habit tracker first release. Keep
+each issue small enough for TDD.
+```
+
+Expected output: sequenced issues with acceptance criteria, dependencies,
+validation notes, and the focused test that should fail first.
+
+Implement one ready issue at a time:
+
+```text
+$process role=Developer Implement the first ready-for-dev issue for the habit
+tracker. Use TDD: add the focused failing test first, make the smallest
+implementation pass, then run the relevant checks and record evidence.
+```
+
+Expected output: code changes plus failing-test evidence, passing focused
+rerun, broader validation, and a handoff note. The Developer should not expand
+product scope while coding.
+
+Validate independently:
+
+```text
+$process role=QA Validate the pushed branch for the first habit tracker issue.
+Check the acceptance criteria, review the Developer TDD evidence, run relevant
+regression checks, and record pass or fail evidence.
+```
+
+Expected output: QA evidence from a validation workspace, not from the
+Developer's workspace. Failed validation goes back to Technical Lead or
+Developer with a concrete defect record.
+
+Promote only approved work:
+
+```text
+$process role=Release Prepare a mini release for the QA-passed habit tracker
+work. Include only approved issues, verify release evidence, and produce a
+release note.
+```
+
+Expected output: release manifest, included issues, validation evidence, known
+risks, approval status, and release note. If the product has a real runtime,
+Operations Lead takes over production health after promotion.
+
+For a tiny local tool, you may stop after QA and keep release notes lightweight.
+For anything production-facing, continue through Release and Operations Lead
+instead of treating a merged branch as a release.
 
 ## Adoption Notes
 
