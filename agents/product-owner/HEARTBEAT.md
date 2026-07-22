@@ -2,6 +2,8 @@
 
 Ops-session checklist:
 
+- Confirm `product.md` is present and current: source repository, brief status,
+  theme, active milestone, and lifecycle stage.
 - Review new operator briefs.
 - Review issues in `needs-clarification`.
 - Review issues in `draft`.

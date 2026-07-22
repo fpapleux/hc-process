@@ -25,6 +25,10 @@ Inside the product folder:
 - `agents/`: agent role profiles and profile composition rules.
 - `process/`: operating process definitions.
 - `themes/`: reusable visual identity themes for generated web surfaces.
+- `product.md`: product context record. The durable link between this product
+  and its source repository, brief, theme, active milestone, and lifecycle
+  stage. Created and maintained by the Product Owner. Its presence marks that
+  the Product Owner has established product context.
 - `README.md`: entry point for this product folder.
 
 Example:
@@ -42,11 +46,89 @@ website/
   architecture/
   agents/
   process/
+  product.md
   README.md
 ```
 
 Each feature folder is a Git checkout of the project repository. Do not copy
 repositories manually between folders.
+
+## Product Context Record
+
+`product.md` is the product context record at the root of the product folder.
+It is the single durable marker that the Product Owner has established product
+context, and the canonical link between the process and the product's source
+repository. The Product Owner creates it on first engagement and keeps it
+current. Other roles read it but do not own it.
+
+The record captures:
+
+- Product name and one-line framing.
+- Assurance level and artifact budget.
+- Source repository: remote URL and local product-folder path.
+- Product brief: location and status (`none`, `draft`, `approved`).
+- Selected theme and theme mode, when the product has a visual surface.
+- Active milestone or recorded release intent.
+- Lifecycle stage: brief, ux, architecture, planning, development, qa, release,
+  or operations.
+- Date the Product Owner first engaged and the last update.
+
+Template:
+
+```text
+# Product Context — <product name>
+
+- Framing: <one line>
+- Assurance level: Prototype | Personal Productivity | Production Grade | Enterprise / Regulated
+- Artifact budget: inline | mini | standard | full
+- Source repository: <remote URL or "not created yet">
+- Local product folder: <path>
+- Product brief: <path or "none"> — status: none | draft | approved
+- Theme: <theme or "n/a"> — mode: light | dark | both | system
+- Active milestone / release intent: <milestone or intent>
+- Lifecycle stage: brief | ux | architecture | planning | development | qa | release | operations
+- PO first engaged: YYYY-MM-DD
+- Last updated: YYYY-MM-DD by <role>
+```
+
+For `inline` and `mini` work where the operator intentionally proceeds without a
+Product Owner brief, the record instead carries a Product Owner exception block:
+
+```text
+## Product Owner Exception (inline/mini only)
+
+- Reason: <why Product Owner product definition is skipped>
+- Requested by: <operator approval source>
+- Scope limit: <what this exception covers>
+- Date: YYYY-MM-DD
+```
+
+## Session Start Product Context Check
+
+On the first interaction of a session, before doing role work, the active agent
+establishes product context:
+
+1. Identify the target product folder from the operator's request, the current
+   workspace, or by asking when it is ambiguous.
+2. Read `product.md` at the product folder root.
+
+Then:
+
+- If `product.md` exists, state the resolved product context (product, source
+  repository, brief status, theme, active milestone, lifecycle stage) and
+  continue in the active role.
+- If `product.md` is missing, the Product Owner has not established product
+  context:
+  - If the active role is Product Owner, create `product.md` as part of
+    establishing product context.
+  - If the active role is not Product Owner, stop and recommend engaging the
+    Product Owner first. Continue only when the operator engages the Product
+    Owner or records a Product Owner exception in `product.md` for `inline` or
+    `mini` work.
+
+This check applies to every artifact budget. `inline` and `mini` work may
+satisfy it with a Product Owner exception block instead of a full Product Owner
+brief.
 
 ## New Product Source Repository Bootstrap
 
@@ -180,6 +262,11 @@ into `tst/` or `rel/`.
 
 ## Core Rules
 
+- Every session begins with the Session Start Product Context Check. The product
+  context record `product.md` is the durable marker that the Product Owner has
+  established product context. A non-Product-Owner role stops and recommends the
+  Product Owner when `product.md` is missing, unless an operator-recorded
+  Product Owner exception covers `inline` or `mini` work.
 - The remote Git branch is the source of truth.
 - A phase folder is only a local checkout of that branch for a specific purpose.
 - Development happens in `dev/<feature-branch>`.

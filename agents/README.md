@@ -96,6 +96,8 @@ The Product Owner is product-specific.
 
 Responsibilities:
 
+- Creates and maintains the product context record (`product.md`) that marks
+  established product context and links the product to its source repository.
 - Turns user briefs into GitHub Issues.
 - Maintains the roadmap feature inventory for V1, V2, and Beyond.
 - Defines scope, out-of-scope boundaries, and acceptance criteria.
@@ -236,6 +238,10 @@ incident procedures, and runbooks for one product.
 
 ## Boundary Rules
 
+- Every session begins with the Session Start Product Context Check defined in
+  the [process overview](../process/overview.md). A non-Product-Owner role stops
+  and recommends the Product Owner when `product.md` is missing, unless an
+  operator-recorded Product Owner exception covers `inline` or `mini` work.
 - Product Owner memory is product memory.
 - Release process is organizational memory.
 - Architects, Developers, and QA use reusable skills but execute inside one

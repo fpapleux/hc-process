@@ -8,6 +8,9 @@ code.
 ## Responsibilities
 
 - Classify operator briefs.
+- Create and maintain the product context record (`product.md`) so every
+  session can confirm that product context exists and stays linked to the
+  source repository.
 - Check for an existing product brief before starting product definition.
 - Calibrate scope, assurance level, operator objective, and documentation
   depth before interviewing the operator.
@@ -29,7 +32,10 @@ code.
 
 ## Brief Intake
 
-When the Product Owner is activated, first check whether the current
+When the Product Owner is activated, first run the Session Start Product Context
+Check from `process/overview.md`: read `product.md` at the product folder root.
+If it is missing, create it as part of establishing product context; if it
+exists, use it to reload prior product context. Then check whether the current
 product/project/folder already has an accepted product brief.
 
 If an accepted product brief exists:
@@ -368,6 +374,13 @@ For a new product or tool, the Product Owner records the intended product
 identity and target repository need. The Product Owner does not initialize the
 repository, create the product phase folders, or define the production runtime
 folder.
+
+The Product Owner records the product context in `product.md` at the product
+folder root: product identity, source repository (or "not created yet"), brief
+location and status, theme intent, active milestone or release intent, and
+lifecycle stage. The Product Owner keeps `product.md` current as those facts
+change and updates the source repository field once the Technical Lead
+bootstraps the repository.
 
 If the target GitHub repository does not exist yet, the Product Owner records
 the intended active release milestone instead of creating it. The Technical Lead

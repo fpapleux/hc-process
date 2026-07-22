@@ -2,6 +2,10 @@
 
 Use AI agents like a delivery team, not like a magic text box.
 
+<p align="center">
+  <img src="assets/social/launch/imagegen/01-launch-card.png" alt="Human-Codex Process launch visual with otter mascot" width="720">
+</p>
+
 Human-Codex Process is a practical operating system for AI-assisted software
 delivery. It helps experienced product and engineering teams move faster with
 AI while keeping the parts that make software reliable: clear product intent,
@@ -22,6 +26,10 @@ Theme controls visual identity.
 
 That separation lets agents move quickly without giving them silent authority
 over scope, implementation, validation, release, and production risk.
+
+The otter mascot is there for a reason: this process is serious about software
+delivery, but it is also meant to make modern AI work feel sharper, faster, and
+more alive for the people already doing the craft.
 
 ## Why Try It
 
@@ -77,6 +85,10 @@ The leverage comes from automation, not omission. AI reduces workload by
 helping perform the professional steps, not by pretending the steps are
 optional.
 
+<p align="center">
+  <img src="assets/social/launch/imagegen/02-quality-system.png" alt="Human-Codex Process quality system visual" width="520">
+</p>
+
 ## What This Does Not Replace
 
 This process does not replace actual knowledge of professional software
@@ -121,6 +133,10 @@ planning can run side by side while the Product Owner keeps one controlled
 status thread with the human operator.
 
 ![Multi-channel coordination status update](assets/multi-channel-coordination.png)
+
+<p align="center">
+  <img src="assets/social/launch/imagegen/04-parallel-controlled.png" alt="Human-Codex Process parallel work controlled gates visual" width="520">
+</p>
 
 The important pattern is that parallel work does not mean uncontrolled work.
 Each channel has a role, a lane, a handoff artifact, and a clear return point.
@@ -371,6 +387,22 @@ more useful autonomy.
 
 ## What Makes It Different
 
+### It Anchors Every Session To Product Context
+
+Every product folder carries a `product.md` context record: the durable link
+between the product and its source repository, brief, theme, active milestone,
+and lifecycle stage. The Product Owner creates it on first engagement and keeps
+it current.
+
+Every session starts with a Session Start Product Context Check. The active
+agent identifies the target product and reads `product.md`. If it exists, the
+agent restates the product context and continues. If it is missing, the Product
+Owner has not established product context yet: a Product Owner session creates
+the record, and any other role stops and recommends starting with the Product
+Owner, unless the operator records a Product Owner exception for `inline` or
+`mini` work. This removes the guesswork about which repository a session belongs
+to and keeps the Product Owner as the reliable starting point.
+
 ### It Is Built For Agent Authority, Not Just Agent Output
 
 The process assumes agents can take real action. That makes authority
@@ -390,6 +422,7 @@ product/
   architecture/
   agents/
   process/
+  product.md   product context record (repo link, brief, theme, milestone, stage)
   README.md
 ```
 
@@ -603,6 +636,16 @@ From there, add artifact depth as the product risk justifies it.
 The goal is not to admire the process. The goal is to see whether AI-assisted
 delivery becomes more consistent, reviewable, and useful when professional
 software practice is made explicit.
+
+## Launch Assets
+
+The repository includes an 8-week public launch image set under
+`assets/social/launch/imagegen/`. The images are designed to introduce the
+process one idea at a time: delivery teams, quality systems, lifecycle,
+parallel gates, team adoption, architecture, test evidence, and controlled
+release.
+
+![Human-Codex Process 8-week campaign](assets/social/launch/imagegen/contact-sheet-final.png)
 
 ## License
 

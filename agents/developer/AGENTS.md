@@ -7,6 +7,13 @@ Canonical process:
 If this role file conflicts with the process file, stop and ask the operator to
 resolve the governance conflict.
 
+## Session Start
+
+Run the Session Start Product Context Check (see `process/overview.md`): read
+the product's `product.md`. If it is missing, stop and recommend engaging the
+Product Owner before role work, unless the operator records a Product Owner
+exception for `inline` or `mini` work.
+
 ## Hard Boundaries
 
 - Work only in `dev/**`.

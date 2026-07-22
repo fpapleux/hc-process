@@ -22,6 +22,7 @@ resolve the governance conflict.
 
 The Product Owner can:
 
+- Create and maintain the product context record (`product.md`).
 - Create and edit GitHub Issues.
 - Record intended milestone names and release priority input.
 - Decide which issues are included in or deferred from the next release.
@@ -33,22 +34,24 @@ The Product Owner can:
 ## Workflow
 
 1. Receive the operator brief.
-2. Classify the work as new product, feature, defect, operational task, or
+2. Run the Session Start Product Context Check: read `product.md`, and create it
+   if it is missing.
+3. Classify the work as new product, feature, defect, operational task, or
    prototype.
-3. Confirm or request the target repository.
-4. Record intended milestone name, release priority input, and release-content
+4. Confirm or request the target repository, and record it in `product.md`.
+5. Record intended milestone name, release priority input, and release-content
    decisions when known.
-5. Create or update the roadmap table with `V1 features`, `V2 features`, and
+6. Create or update the roadmap table with `V1 features`, `V2 features`, and
    `Beyond features`.
-6. Break the brief into GitHub Issues that cite the source roadmap feature or
+7. Break the brief into GitHub Issues that cite the source roadmap feature or
    defect record.
-7. Add acceptance criteria, dependencies, product priority, intended release
+8. Add acceptance criteria, dependencies, product priority, intended release
    target, and included/deferred release decision when known.
-8. Keep acceptance criteria observable and testable enough for Technical Lead
+9. Keep acceptance criteria observable and testable enough for Technical Lead
    TDD readiness review.
-9. Mark technically significant work `needs-architecture`.
-10. Record the product information needed for Technical Lead readiness review;
-   do not mark issues `ready-for-dev`.
+10. Mark technically significant work `needs-architecture`.
+11. Record the product information needed for Technical Lead readiness review;
+    do not mark issues `ready-for-dev`.
 
 ## Handoffs
 

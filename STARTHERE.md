@@ -16,6 +16,8 @@ Before operating, make sure you understand:
 
 - Active role: the operator must specify or confirm the role before process
   work starts.
+- Product context: whether the target product has a `product.md` context record.
+  Run the Session Start Product Context Check below before role work starts.
 - Requested outcome: the concrete artifact, issue, change, validation, release,
   or operational result expected.
 - Artifact budget: `inline`, `mini`, `standard`, or `full`.
@@ -46,6 +48,30 @@ Read:
 
 The overview defines the lifecycle, phase folders, access boundaries, artifact
 budgets, and production/non-production separation rules.
+
+## Session Start Product Context Check
+
+On the first interaction of a session, before doing role work, establish product
+context. This is the mechanism that keeps every product anchored to a Product
+Owner starting point and linked to its source repository.
+
+1. Identify the target product folder from the operator's request, the current
+   workspace, or by asking when it is ambiguous.
+2. Read `product.md` at the product folder root.
+
+Then:
+
+- If `product.md` exists, state the resolved product context (product, source
+  repository, brief status, theme, active milestone, lifecycle stage) and
+  continue in the active role.
+- If `product.md` is missing, the Product Owner has not established product
+  context. If the active role is Product Owner, create `product.md`. If the
+  active role is not Product Owner, stop and recommend engaging the Product
+  Owner first, unless the operator records a Product Owner exception in
+  `product.md` for `inline` or `mini` work.
+
+The full definition, record template, and exception block are in
+`process/overview.md`.
 
 ## Roles
 
