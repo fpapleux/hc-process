@@ -23,9 +23,9 @@ Inside the product folder:
   branches when needed. This is not the actual production runtime folder.
 - `documentation/`: the single home for all durable product documentation —
   product briefs, UX design documents, architecture design documents, ADRs and
-  system notes, operations plans, and product-specific process documentation.
-  Created by the Product Owner on first engagement. Product documentation does
-  not live anywhere else.
+  system notes, development plans, operations plans, and product-specific
+  process documentation. Created by the Product Owner on first engagement.
+  Product documentation does not live anywhere else.
 - `agents/`: agent role profiles and profile composition rules.
 - `process/`: operating process definitions.
 - `themes/`: reusable visual identity themes for generated web surfaces.
@@ -318,6 +318,15 @@ into `tst/` or `rel/`.
 - The Technical Lead receives the accepted product brief, UX design document,
   and architecture design document, produces a development plan, and manages
   the GitHub Issues log.
+- The development plan is a durable synthesis document that breaks scope into
+  work items with scope, success criteria, and definition of done, sequences
+  them, identifies parallel tracks that speed up delivery, and is architected
+  around release content so each subsequent release adds to it. It lives in the
+  product's `documentation/` folder and is the orientation source a spawned
+  subagent reads to see how its scoped work fits the whole. It is required for
+  any feature work involving more than one role, even in a shorter form, and is
+  skippable only for `inline` defect or tiny single-role changes. Development
+  plans follow the [Development Plan Document Specification](../documents/development-plan.md).
 - For a new product with no repository yet, the Technical Lead bootstraps the
   source repository in `rel/main`, then creates `dev/`, `tst/`, and `rel/` in
   the product process folder before encoding the development plan in GitHub
@@ -378,12 +387,13 @@ into `tst/` or `rel/`.
 - Product environment targeting follows [Product Environment Process](environments.md).
 - UX design work follows the [UX Design Document Specification](../documents/ux-design-document.md).
 - Architecture work follows the [Architecture Design Document Specification](../documents/architecture-design-document.md).
+- Development planning follows the [Development Plan Document Specification](../documents/development-plan.md).
 - Technically significant issues receive architecture review before
   development starts.
 - All product documentation — product briefs, UX design documents, architecture
-  design documents, ADRs, and operations plans — lives in the product's
-  `documentation/` folder. Product documentation is not scattered across other
-  locations.
+  design documents, ADRs, development plans, and operations plans — lives in the
+  product's `documentation/` folder. Product documentation is not scattered
+  across other locations.
 - Operations plans follow the [Operations Plan Document Specification](../documents/operations-plan.md).
 
 ## Approval Evidence
@@ -477,11 +487,14 @@ The normal feature lifecycle is:
     Owner, Technical Lead asks Release to open the planning release record in
     GitHub after repository bootstrap.
 11. Technical Lead receives the product brief, UX design document, and
-    architecture design document. Produces a development plan: creates issue
-    coverage for the in-scope Product Owner roadmap features, decomposes work
-    into GitHub Issues, records the source feature or defect for each developer
-    issue, sequences by dependency, assigns to the milestone, and prepares
-    environments.
+    architecture design document. Produces a development plan in the product's
+    `documentation/` folder following the development plan specification: breaks
+    scope into work items with scope, success criteria, and definition of done;
+    sequences them by dependency; identifies parallel tracks that speed up
+    delivery; and consolidates a synthesis organized around release content that
+    later releases add to. Creates issue coverage for the in-scope Product Owner
+    roadmap features, records the source feature or defect for each developer
+    issue, assigns to the milestone, and prepares environments.
 12. Operator approves the development plan.
 13. Technical Lead asks Release to open the planning release record in GitHub:
     a GitHub Milestone and release tracking issue. This is not a GitHub Release
@@ -609,4 +622,5 @@ Defect-specific statuses:
 - [Product environment process](environments.md)
 - [UX Design Document Specification](../documents/ux-design-document.md)
 - [Architecture Design Document Specification](../documents/architecture-design-document.md)
+- [Development Plan Document Specification](../documents/development-plan.md)
 - [Operations Plan Document Specification](../documents/operations-plan.md)

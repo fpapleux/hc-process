@@ -112,6 +112,7 @@ for a standalone artifact.
 - Product brief: `documents/product-brief.md`
 - UX design document: `documents/ux-design-document.md`
 - Architecture design document: `documents/architecture-design-document.md`
+- Development plan: `documents/development-plan.md`
 - Operations plan: `documents/operations-plan.md`
 
 These files specify how to write each document. The produced documents

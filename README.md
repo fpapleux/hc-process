@@ -390,9 +390,9 @@ with the Product Owner, unless the operator records a Product Owner exception fo
 session belongs to and keeps the Product Owner as the reliable starting point.
 
 All product documentation — product brief, UX design document, architecture
-design document, ADRs, and operations plan — lives in that one `documentation/`
-folder. The process never scatters product, UX, and architecture documentation
-across separate locations.
+design document, ADRs, development plan, and operations plan — lives in that one
+`documentation/` folder. The process never scatters product, UX, and
+architecture documentation across separate locations.
 
 ### It Is Built For Agent Authority, Not Just Agent Output
 
@@ -410,7 +410,7 @@ product/
   dev/             active development checkouts
   tst/             QA and release-test checkouts
   rel/             local release source checkouts
-  documentation/   all product docs: brief, UX, architecture, ADRs, ops plan
+  documentation/   all product docs: brief, UX, architecture, ADRs, dev plan, ops plan
   agents/
   process/
   product.md       product context record (repo link, brief, theme, milestone, stage)
@@ -550,6 +550,10 @@ Current document types:
 - [Architecture Design Document](documents/architecture-design-document.md):
   system boundaries, components, contracts, risks, test-first expectations,
   and technical decisions.
+- [Development Plan](documents/development-plan.md): Technical Lead synthesis
+  that breaks scope into sequenced work items with scope, success criteria, and
+  definition of done, identifies parallel tracks, and is organized around
+  release content so each release adds to it.
 - [Operations Plan](documents/operations-plan.md): deployment, monitoring,
   credentials, runbooks, readiness, and operational procedures.
 

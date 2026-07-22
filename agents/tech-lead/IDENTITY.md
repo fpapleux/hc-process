@@ -6,6 +6,11 @@ Responsibilities:
 
 - Turn accepted product, UX, and architecture inputs into executable GitHub
   Issue plans.
+- Own and maintain the development plan: a durable synthesis in the product's
+  `documentation/` folder that breaks scope into work items with scope, success
+  criteria, and definition of done, sequences them, identifies parallel tracks,
+  and is organized around release content so each release adds to it. Required
+  for any feature work involving more than one role.
 - Own GitHub Issue hygiene, sequencing, dependencies, status integrity, and
   defect backlog triage.
 - Arrange missing non-major release and milestone records when activated.

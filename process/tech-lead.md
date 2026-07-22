@@ -110,6 +110,32 @@ All three inputs must be in `accepted` status before the Technical Lead begins
 planning. If any is in `draft` or `review`, the Technical Lead returns it to
 its owner.
 
+The development plan is a durable synthesis document, not just a set of issues.
+The Technical Lead writes and maintains it following the
+[Development Plan Document Specification](../documents/development-plan.md) and
+saves it in the product's `documentation/` folder as
+`<product-name>-development-plan.md` (with a synchronized `.html` for `full`
+work, or when the operator asks). It is required for any feature work that
+involves more than one role, even in a shorter form; it is skippable only for
+`inline` defect fixes and tiny single-role, issue-local changes.
+
+The plan does four things beyond listing issues:
+
+- Breaks the scope into work items and defines, for each, its scope, success
+  criteria, and definition of done.
+- Sequences the work items by dependency, risk, and architectural priority.
+- Treats parallel development as a first-class opportunity: it identifies the
+  independent tracks that can run concurrently to speed up delivery and marks
+  the integration points where those tracks converge.
+- Consolidates everything into a synthesis, architected around release content.
+  The plan is organized by release and is cumulative: each subsequent release
+  adds a section rather than replacing the plan.
+
+The plan opens with an overview section that any role — and especially a spawned
+subagent working one narrow item — reads first to understand how its scope fits
+the overall picture. Keeping this synthesis current is what lets parallel
+subagents act on small slices without losing the whole.
+
 The development plan:
 
 - Decomposes the product brief and architecture design into GitHub Issues.
@@ -402,6 +428,11 @@ Technical Lead orchestrates the release as a sequence of role handoffs. The
 Technical Lead coordinates the work, but each subagent acts only within its own
 role authority.
 
+When spawning or handing off to a subagent for a single work item, the Technical
+Lead points it to the development plan so it reads the plan overview first. The
+subagent then understands how its narrow scope fits the whole release, which
+items it depends on, and which items may be running in parallel, before it acts.
+
 Required sequence:
 
 1. Confirm the planning release record exists in GitHub. This means a GitHub
@@ -571,9 +602,20 @@ For maintenance work, the Technical Lead starts from:
 
 ## Development Plan Output
 
-The development plan is not a separate document. It is the set of GitHub Issues
-created from the product brief and architecture design, organized in the active
-milestone with:
+The development plan has two synchronized faces: a plan document and the GitHub
+Issues log. For any feature work involving more than one role, the Technical
+Lead writes a development plan document in the product's `documentation/` folder
+following the [Development Plan Document Specification](../documents/development-plan.md).
+It is skippable only for `inline` defect fixes and tiny single-role changes,
+where the issue carries the same information.
+
+The plan document is the synthesis: a plan overview for orientation, the
+release-organized breakdown, per-work-item scope, success criteria, and
+definition of done, the dependency sequence, and the parallel tracks that speed
+up delivery. It is cumulative — each subsequent release adds a section.
+
+The GitHub Issues log is the executable face of the same plan, organized in the
+active milestone with:
 
 - Coverage for each in-scope Product Owner roadmap feature.
 - A source map showing which issue or issues complete each roadmap feature or
@@ -588,6 +630,10 @@ milestone with:
   issues where relevant.
 - Environment readiness confirmed before the first issue is marked
   `ready-for-dev`.
+
+The plan document and the Issues log must not contradict each other: issues
+carry execution state; the plan document carries the synthesis, sequencing,
+parallelization, and release organization.
 
 ---
 

@@ -33,6 +33,10 @@ The Technical Lead can:
 
 - Create, triage, edit, assign, label, sequence, and close GitHub Issues within
   the product process.
+- Author and maintain the development plan document in the product's
+  `documentation/` folder: work-item breakdown with scope, success criteria, and
+  definition of done; dependency sequencing; parallel tracks; and a
+  release-organized synthesis that subagents read to orient.
 - Maintain the active development plan through GitHub Issues and milestones.
 - Arrange missing release and milestone records when activated.
 - Facilitate the Product Owner's decision about which issues are included in
@@ -83,19 +87,24 @@ issues, dependency/security update needs, or explicit maintenance requests.
    architecture constraints, dependencies, TDD expectations, and verification
    expectations.
 7. Sequence issues by dependency, risk, and milestone scope.
-8. Route architecturally significant work to Architect before development.
-9. Mark only the next issue `ready-for-dev` after verifying required
-   documentation and information are sufficient to begin development.
-10. Hand off one issue at a time to Developer, then QA after Developer evidence
-    is recorded.
-11. Triage QA defects and decide whether they block the release or are deferred
+8. Produce or update the development plan document in `documentation/`: work-item
+   scope, success criteria, and definition of done; the dependency sequence;
+   the parallel tracks that speed up delivery; and the release-organized
+   synthesis. Required for any feature work involving more than one role; a
+   shorter form is acceptable for `mini` work.
+9. Route architecturally significant work to Architect before development.
+10. Mark only the next issue `ready-for-dev` after verifying required
+    documentation and information are sufficient to begin development.
+11. Hand off one issue at a time to Developer, then QA after Developer evidence
+    is recorded, pointing each subagent to the development plan overview first.
+12. Triage QA defects and decide whether they block the release or are deferred
     through the approved process.
-12. Request Release assembly only after included issues are `qa-passed` or
+13. Request Release assembly only after included issues are `qa-passed` or
     explicitly deferred.
-13. Coordinate release integration QA, classified non-production and production
+14. Coordinate release integration QA, classified non-production and production
     readiness findings, release notes, and the operator-approved release
     manifest.
-14. After production release completion, execute cleanup of completed feature
+15. After production release completion, execute cleanup of completed feature
     branches and checkouts from `dev/` and `tst/`.
 
 ## Handoffs

@@ -12,6 +12,9 @@ Ops-session checklist:
 - Review active release and milestone records; arrange missing non-major
   records or ask the operator for major version release ordering.
 - Confirm Product Owner decision on next-release issue inclusion.
+- Confirm the development plan in `documentation/` is current: work-item scope,
+  success criteria, definition of done, sequence, parallel tracks, and the
+  release-organized synthesis match the active GitHub Issues.
 - Review active milestone scope and issue status.
 - Confirm each `ready-for-dev` candidate has sufficient documentation and
   information to begin development: type, source reference, acceptance

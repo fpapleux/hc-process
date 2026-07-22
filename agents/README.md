@@ -138,6 +138,9 @@ Responsibilities:
 
 - Translates accepted product, UX, and architecture inputs into executable
   GitHub Issues.
+- Owns the development plan: a release-organized synthesis in `documentation/`
+  with per-work-item scope, success criteria, definition of done, sequencing,
+  and parallel tracks; required for feature work involving more than one role.
 - Maintains issue hygiene, sequencing, dependencies, and status integrity.
 - Arranges missing release and milestone records when activated.
 - Facilitates Product Owner decisions about which issues are included in the

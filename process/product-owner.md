@@ -387,8 +387,8 @@ On first engagement, the Product Owner confirms with the operator that the
 product will be developed in the current folder, then creates the
 `documentation/` folder in that folder. `documentation/` is the single home for
 all product and process documentation: product briefs, UX design documents,
-architecture design documents, ADRs, operations plans, and product-specific
-process notes. The Product Owner does not create the `dev/`, `tst/`, or `rel/`
+architecture design documents, ADRs, development plans, operations plans, and
+product-specific process notes. The Product Owner does not create the `dev/`, `tst/`, or `rel/`
 phase folders — the Technical Lead bootstraps those.
 
 The Product Owner records the product context in `product.md` at the product
