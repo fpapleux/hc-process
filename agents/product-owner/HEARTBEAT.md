@@ -4,6 +4,8 @@ Ops-session checklist:
 
 - Confirm `product.md` is present and current: source repository, brief status,
   theme, active milestone, and lifecycle stage.
+- Confirm the `documentation/` folder exists and holds all current product
+  documentation (brief, UX, architecture, operations).
 - Review new operator briefs.
 - Review issues in `needs-clarification`.
 - Review issues in `draft`.

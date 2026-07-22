@@ -65,9 +65,12 @@ Then:
   repository, brief status, theme, active milestone, lifecycle stage) and
   continue in the active role.
 - If `product.md` is missing, the Product Owner has not established product
-  context. If the active role is Product Owner, create `product.md`. If the
-  active role is not Product Owner, stop and recommend engaging the Product
-  Owner first, unless the operator records a Product Owner exception in
+  context. If the active role is Product Owner, confirm with the operator that
+  the product will be developed in the current folder (if not, recommend
+  restarting from the correct development folder and stop), create the
+  `documentation/` folder, create `product.md`, then begin product definition.
+  If the active role is not Product Owner, stop and recommend engaging the
+  Product Owner first, unless the operator records a Product Owner exception in
   `product.md` for `inline` or `mini` work.
 
 The full definition, record template, and exception block are in
@@ -110,6 +113,11 @@ for a standalone artifact.
 - UX design document: `documents/ux-design-document.md`
 - Architecture design document: `documents/architecture-design-document.md`
 - Operations plan: `documents/operations-plan.md`
+
+These files specify how to write each document. The produced documents
+themselves — for every budget and role — are saved in the product's
+`documentation/` folder. Product, UX, architecture, and operations documentation
+must not live in separate places.
 
 Full standalone artifacts are usually appropriate for `full` work and for
 operator-requested documentation. `inline` and `mini` work may use issue notes,

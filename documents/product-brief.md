@@ -21,16 +21,18 @@ Do not inflate the budget because a full template exists.
 
 ## Outputs
 
-For `standard` and `full`, create synchronized markdown and HTML files:
+For `standard` and `full`, create synchronized markdown and HTML files in the
+product's `documentation/` folder:
 
 ```text
-<product-name>-brief.md
-<product-name>-brief.html
+documentation/<product-name>-brief.md
+documentation/<product-name>-brief.html
 ```
 
 For `inline` and `mini`, markdown is enough unless the operator asks for HTML.
 When HTML is produced, it must match the markdown content. Use the presentation
-visual system; do not add content just to fill slides.
+visual system; do not add content just to fill slides. All brief files are saved
+in the product's `documentation/` folder.
 
 ## Intake
 

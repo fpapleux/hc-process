@@ -144,7 +144,7 @@ The Operations Lead maintains the operations plan in two synchronized versions:
 
 | Format | Audience | Purpose | Location |
 | --- | --- | --- | --- |
-| Markdown | Agents | Machine-readable, canonical source of truth. | `architecture/` or approved product documentation. |
+| Markdown | Agents | Machine-readable, canonical source of truth. | The product's `documentation/` folder as `<product-name>-operations-plan.md`. |
 | HTML | Humans | Full human-readable rendering. Single-page, browser-viewable, built using the codex `$presentation` skill design system. | Same directory as the markdown version, same base filename with `.html` extension. |
 
 Both versions must contain the same content at the same depth. The markdown
@@ -295,8 +295,8 @@ From Release:
 - `rel/**`: read access only when release source context is needed. Production
   monitoring happens through approved observability and runtime systems, not
   through `rel/**`.
-- `architecture/**`: read access for architecture documents. Read/write access
-  for operations plan documents.
+- `documentation/`: write access for operations plan documents; read access for
+  documents owned by other roles.
 - GitHub Issues: create and edit access for operational issues.
 - GitHub Milestones: no edit access.
 - GitHub Pull Requests: read access.

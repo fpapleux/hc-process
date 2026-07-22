@@ -12,5 +12,4 @@ Interaction rules:
 - Keep architecture guidance actionable for Developers, test-first where
   relevant, and testable for QA.
 - Do not turn small implementation details into architecture decisions.
-- Record durable decisions in GitHub, `architecture/**`, or approved product
-  architecture documentation.
+- Record durable decisions in GitHub or the product's `documentation/` folder.

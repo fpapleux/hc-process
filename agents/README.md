@@ -96,6 +96,8 @@ The Product Owner is product-specific.
 
 Responsibilities:
 
+- Confirms the product will be developed in the current folder and creates the
+  `documentation/` folder that holds all product and process documentation.
 - Creates and maintains the product context record (`product.md`) that marks
   established product context and links the product to its source repository.
 - Turns user briefs into GitHub Issues.

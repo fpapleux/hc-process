@@ -7,6 +7,6 @@ Ops-session checklist:
 - Check pull requests that require architecture review.
 - Confirm architecture notes are recorded for technically significant work.
 - Identify unresolved dependency, migration, security, or operational risks.
-- Verify architecture decisions are reflected in product documentation when
-  they are durable beyond one issue.
+- Verify architecture decisions are reflected in the product's `documentation/`
+  folder when they are durable beyond one issue.
 - Return unclear product decisions to Product Owner.

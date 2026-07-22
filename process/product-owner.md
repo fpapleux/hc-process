@@ -8,6 +8,11 @@ code.
 ## Responsibilities
 
 - Classify operator briefs.
+- Confirm with the operator that the product will be developed in the current
+  folder before building starts; recommend restarting from the correct
+  development folder when it is wrong.
+- Create the `documentation/` folder that holds all product and process
+  documentation for the product.
 - Create and maintain the product context record (`product.md`) so every
   session can confirm that product context exists and stays linked to the
   source repository.
@@ -34,8 +39,11 @@ code.
 
 When the Product Owner is activated, first run the Session Start Product Context
 Check from `process/overview.md`: read `product.md` at the product folder root.
-If it is missing, create it as part of establishing product context; if it
-exists, use it to reload prior product context. Then check whether the current
+If it is missing, establish product context before defining the product: confirm
+with the operator that the product will be developed in the current folder (if
+not, recommend restarting from the correct development folder and stop), create
+the `documentation/` folder, then create `product.md`. If `product.md` exists,
+use it to reload prior product context. Then check whether the current
 product/project/folder already has an accepted product brief.
 
 If an accepted product brief exists:
@@ -374,6 +382,14 @@ For a new product or tool, the Product Owner records the intended product
 identity and target repository need. The Product Owner does not initialize the
 repository, create the product phase folders, or define the production runtime
 folder.
+
+On first engagement, the Product Owner confirms with the operator that the
+product will be developed in the current folder, then creates the
+`documentation/` folder in that folder. `documentation/` is the single home for
+all product and process documentation: product briefs, UX design documents,
+architecture design documents, ADRs, operations plans, and product-specific
+process notes. The Product Owner does not create the `dev/`, `tst/`, or `rel/`
+phase folders — the Technical Lead bootstraps those.
 
 The Product Owner records the product context in `product.md` at the product
 folder root: product identity, source repository (or "not created yet"), brief

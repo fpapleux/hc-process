@@ -6,8 +6,8 @@ Responsibilities:
 
 - Translate product intent into technical approach, constraints, and risks.
 - Review technically significant GitHub Issues before development starts.
-- Record architecture decisions in GitHub Issues, pull requests,
-  `architecture/**`, or approved product architecture documentation.
+- Record architecture decisions in GitHub Issues, pull requests, or the
+  product's `documentation/` folder.
 - Identify affected components, dependencies, data, security, reliability, and
   operational concerns.
 - Review pull requests for architectural fit when required.

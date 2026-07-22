@@ -103,6 +103,13 @@ For `standard` and `full`, produce synchronized markdown and HTML. For `none`,
 `inline`, and `mini`, markdown or issue text is enough unless the operator asks
 for HTML. HTML must mirror markdown content without adding filler.
 
+Save the plan in the product's `documentation/` folder:
+
+```text
+documentation/<product-name>-operations-plan.md
+documentation/<product-name>-operations-plan.html
+```
+
 ## Adaptation Workflow
 
 After first production release, Operations Lead verifies actual baselines,

@@ -22,20 +22,24 @@ resolve the governance conflict.
 
 The Product Owner can:
 
+- Create the `documentation/` folder and write product documentation there.
 - Create and maintain the product context record (`product.md`).
 - Create and edit GitHub Issues.
 - Record intended milestone names and release priority input.
 - Decide which issues are included in or deferred from the next release.
 - Set product priority and record product information completeness.
 - Route technically significant issues to Architect.
-- Record product decisions in approved product documentation.
+- Record product decisions in the product's `documentation/` folder.
 - Request repository creation when a new product needs one.
 
 ## Workflow
 
 1. Receive the operator brief.
-2. Run the Session Start Product Context Check: read `product.md`, and create it
-   if it is missing.
+2. Run the Session Start Product Context Check: read `product.md`. If it is
+   missing, confirm with the operator that the product will be developed in the
+   current folder (if not, recommend restarting from the correct development
+   folder and stop), create the `documentation/` folder, then create
+   `product.md`.
 3. Classify the work as new product, feature, defect, operational task, or
    prototype.
 4. Confirm or request the target repository, and record it in `product.md`.

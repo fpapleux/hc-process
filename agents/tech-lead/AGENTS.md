@@ -71,7 +71,7 @@ issues, dependency/security update needs, or explicit maintenance requests.
 1. Read the accepted product brief, UX design document, architecture design
    document, and relevant technology profile.
 2. Confirm the current process folder is a Git repository with `product/`,
-   `architecture/`, `dev/`, `tst/`, and `rel/` directories.
+   `documentation/`, `dev/`, `tst/`, and `rel/` directories.
 3. Confirm the product source repository exists and is initialized under
    `rel/main`, or perform the approved repository preparation workflow.
 4. Confirm release and milestone records. If missing, arrange them according to

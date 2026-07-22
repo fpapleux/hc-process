@@ -397,11 +397,18 @@ it current.
 Every session starts with a Session Start Product Context Check. The active
 agent identifies the target product and reads `product.md`. If it exists, the
 agent restates the product context and continues. If it is missing, the Product
-Owner has not established product context yet: a Product Owner session creates
-the record, and any other role stops and recommends starting with the Product
-Owner, unless the operator records a Product Owner exception for `inline` or
-`mini` work. This removes the guesswork about which repository a session belongs
-to and keeps the Product Owner as the reliable starting point.
+Owner has not established product context yet: the Product Owner confirms with
+the operator that the product will be developed in the current folder (or
+recommends restarting from the correct one), creates the `documentation/`
+folder, and creates the record. Any other role stops and recommends starting
+with the Product Owner, unless the operator records a Product Owner exception for
+`inline` or `mini` work. This removes the guesswork about which repository a
+session belongs to and keeps the Product Owner as the reliable starting point.
+
+All product documentation — product brief, UX design document, architecture
+design document, ADRs, and operations plan — lives in that one `documentation/`
+folder. The process never scatters product, UX, and architecture documentation
+across separate locations.
 
 ### It Is Built For Agent Authority, Not Just Agent Output
 
@@ -416,13 +423,13 @@ Product folders use phase-specific checkouts:
 
 ```text
 product/
-  dev/   active development checkouts
-  tst/   QA and release-test checkouts
-  rel/   local release source checkouts
-  architecture/
+  dev/             active development checkouts
+  tst/             QA and release-test checkouts
+  rel/             local release source checkouts
+  documentation/   all product docs: brief, UX, architecture, ADRs, ops plan
   agents/
   process/
-  product.md   product context record (repo link, brief, theme, milestone, stage)
+  product.md       product context record (repo link, brief, theme, milestone, stage)
   README.md
 ```
 
@@ -564,6 +571,10 @@ Current document types:
 
 Documents scale with the artifact budget. The process prefers a compact,
 accurate issue note over a large template filled with filler.
+
+The `documents/` folder holds the specifications for how to write each artifact.
+The produced artifacts for a real product all live together in that product's
+`documentation/` folder, not in scattered locations.
 
 ### Technologies
 

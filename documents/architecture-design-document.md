@@ -173,6 +173,13 @@ For `standard` and `full`, produce synchronized markdown and HTML. For `inline`
 and `mini`, a markdown note or issue comment is enough unless the operator asks
 for HTML. HTML must mirror markdown content and must not add filler.
 
+Save the document in the product's `documentation/` folder:
+
+```text
+documentation/<product-name>-architecture.md
+documentation/<product-name>-architecture.html
+```
+
 ## Handoff
 
 Provide only what the next role needs: constraints, decisions, dependencies,

@@ -21,7 +21,11 @@ Inside the product folder:
   the production baseline (`main`) used for support, approved hotfix source
   work, and non-production runtime use. Other `rel/**` folders hold release
   branches when needed. This is not the actual production runtime folder.
-- `architecture/`: durable architecture decisions, ADRs, and system notes.
+- `documentation/`: the single home for all durable product documentation —
+  product briefs, UX design documents, architecture design documents, ADRs and
+  system notes, operations plans, and product-specific process documentation.
+  Created by the Product Owner on first engagement. Product documentation does
+  not live anywhere else.
 - `agents/`: agent role profiles and profile composition rules.
 - `process/`: operating process definitions.
 - `themes/`: reusable visual identity themes for generated web surfaces.
@@ -43,7 +47,11 @@ website/
     release-2026.06.1/
   rel/
     main/
-  architecture/
+  documentation/
+    website-brief.md
+    website-brief.html
+    website-ux-design.md
+    website-architecture.md
   agents/
   process/
   product.md
@@ -83,6 +91,7 @@ Template:
 - Artifact budget: inline | mini | standard | full
 - Source repository: <remote URL or "not created yet">
 - Local product folder: <path>
+- Documentation folder: documentation/
 - Product brief: <path or "none"> — status: none | draft | approved
 - Theme: <theme or "n/a"> — mode: light | dark | both | system
 - Active milestone / release intent: <milestone or intent>
@@ -119,8 +128,16 @@ Then:
   continue in the active role.
 - If `product.md` is missing, the Product Owner has not established product
   context:
-  - If the active role is Product Owner, create `product.md` as part of
-    establishing product context.
+  - If the active role is Product Owner, establish product context before
+    defining the product:
+    1. Confirm with the operator that the product will be developed in the
+       current folder. This is required before building can start. If it is the
+       wrong folder, recommend restarting the session from the correct
+       development folder and stop.
+    2. Create the `documentation/` folder in the current folder. It holds all
+       product and process documentation for the product.
+    3. Create `product.md`.
+    4. Then begin product definition.
   - If the active role is not Product Owner, stop and recommend engaging the
     Product Owner first. Continue only when the operator engages the Product
     Owner or records a Product Owner exception in `product.md` for `inline` or
@@ -157,7 +174,10 @@ production deployment, during the Release process.
 
 Product Owner agents:
 
-- Product folder: read access.
+- Product folder: read access; create the `documentation/` folder and write
+  `product.md` at the product folder root.
+- `documentation/`: write access for product briefs and product-owned product
+  documentation; read access for documents owned by other roles.
 - `dev/**`: no write access.
 - `tst/**`: no write access.
 - `rel/**`: no write access.
@@ -170,7 +190,8 @@ Product Owner agents:
 UX Design Lead agents:
 
 - Product folder: read access.
-- `architecture/**`: read access only.
+- `documentation/`: write access for UX design documents; read access for
+  documents owned by other roles.
 - `dev/**`: no access.
 - `tst/**`: no access.
 - `rel/**`: no access.
@@ -180,8 +201,8 @@ UX Design Lead agents:
 Architect agents:
 
 - Product folder: read access.
-- `architecture/**`: read/write access.
-- Approved product architecture documentation: write access.
+- `documentation/`: write access for architecture design documents, ADRs, and
+  system notes; read access for documents owned by other roles.
 - `dev/**`: read access only.
 - `tst/**`: read access only when needed for architecture review.
 - `rel/**`: read access only when needed for baseline or release-impact
@@ -210,7 +231,7 @@ Technical Lead agents:
 - `tst/**`: read/write access (environment setup and maintenance).
 - `rel/**`: read access for baseline reference; write access for
   non-production runtime setup under Technical Lead authority when required.
-- `architecture/**`: read access only.
+- `documentation/`: read access.
 - GitHub repository creation: allowed only for new product bootstrap after the
   operator-approved brief, UX, and architecture exist.
 - GitHub Issues: full access (create, edit, assign, label, close).
@@ -244,8 +265,8 @@ Operations Lead agents:
 - `dev/**`: no access.
 - `tst/**`: no access.
 - `rel/**`: read access when release source context is needed.
-- `architecture/**`: read access for architecture documents. Read/write access
-  for operations plan documents.
+- `documentation/`: write access for operations plan documents; read access for
+  documents owned by other roles.
 - GitHub Issues: create and edit access for operational issues.
 - GitHub Milestones: no edit access.
 - GitHub Pull Requests: read access.
@@ -267,6 +288,11 @@ into `tst/` or `rel/`.
   established product context. A non-Product-Owner role stops and recommends the
   Product Owner when `product.md` is missing, unless an operator-recorded
   Product Owner exception covers `inline` or `mini` work.
+- On first engagement, the Product Owner confirms with the operator that the
+  product will be developed in the current folder before building starts. If it
+  is the wrong folder, the recommendation is to restart the session from the
+  correct development folder. The Product Owner then creates the `documentation/`
+  folder that holds all product and process documentation.
 - The remote Git branch is the source of truth.
 - A phase folder is only a local checkout of that branch for a specific purpose.
 - Development happens in `dev/<feature-branch>`.
@@ -354,8 +380,10 @@ into `tst/` or `rel/`.
 - Architecture work follows the [Architecture Design Document Specification](../documents/architecture-design-document.md).
 - Technically significant issues receive architecture review before
   development starts.
-- Durable architecture decisions, UX design documents, and operations plans
-  live in `architecture/**` or approved product documentation.
+- All product documentation — product briefs, UX design documents, architecture
+  design documents, ADRs, and operations plans — lives in the product's
+  `documentation/` folder. Product documentation is not scattered across other
+  locations.
 - Operations plans follow the [Operations Plan Document Specification](../documents/operations-plan.md).
 
 ## Approval Evidence
@@ -416,75 +444,83 @@ budget calls for them or the operator asks.
 
 The normal feature lifecycle is:
 
-1. Product Owner produces the product brief in markdown and HTML versions with
+1. Product Owner runs the Session Start Product Context Check, confirms with the
+   operator that the product will be developed in the current folder, creates
+   the `documentation/` folder, and creates `product.md`. If it is the wrong
+   folder, the Product Owner recommends restarting from the correct development
+   folder and stops.
+2. Product Owner produces the product brief in markdown and HTML versions with
    user goals, business outcomes, scope, acceptance criteria, and a roadmap
    feature table listing V1, V2, and Beyond features. The markdown version is
    canonical; the HTML version is mandatory and must match the markdown
-   content. The brief does not prescribe technology or implementation.
-2. Product Owner records the intended release priority and milestone intent.
+   content. The brief does not prescribe technology or implementation. The brief
+   is saved in the product's `documentation/` folder.
+3. Product Owner records the intended release priority and milestone intent.
    The GitHub Milestone is opened later by Release at Technical Lead request
    when the repository exists.
-3. Operator approves the product brief.
-4. UX Design Lead produces the UX design document (markdown and HTML versions):
+4. Operator approves the product brief.
+5. UX Design Lead produces the UX design document (markdown and HTML versions):
    user flows, wireframes, interaction specs, accessibility requirements, and
-   the design-to-architecture bridge.
-5. Operator approves the UX design, applies visual design refinement, and
+   the design-to-architecture bridge. The document is saved in the product's
+   `documentation/` folder.
+6. Operator approves the UX design, applies visual design refinement, and
    hands the approved designs to the Architect.
-6. Architect reads the approved UX designs and the product brief. Produces
-   the architecture design document (markdown and HTML versions). Marks
-   reviewed issues `architecture-reviewed`.
-7. Operator approves the architecture design.
-8. For a new product with no repository yet, Technical Lead performs the new
+7. Architect reads the approved UX designs and the product brief. Produces
+   the architecture design document (markdown and HTML versions) in the
+   product's `documentation/` folder. Marks reviewed issues
+   `architecture-reviewed`.
+8. Operator approves the architecture design.
+9. For a new product with no repository yet, Technical Lead performs the new
    product source repository bootstrap in `rel/main` and creates `dev/`,
    `tst/`, and `rel/` in the product process folder.
-9. For a new product whose active milestone was only recorded by the Product
-   Owner, Technical Lead asks Release to open the planning release record in
-   GitHub after repository bootstrap.
-10. Technical Lead receives the product brief, UX design document, and
+10. For a new product whose active milestone was only recorded by the Product
+    Owner, Technical Lead asks Release to open the planning release record in
+    GitHub after repository bootstrap.
+11. Technical Lead receives the product brief, UX design document, and
     architecture design document. Produces a development plan: creates issue
     coverage for the in-scope Product Owner roadmap features, decomposes work
     into GitHub Issues, records the source feature or defect for each developer
     issue, sequences by dependency, assigns to the milestone, and prepares
     environments.
-11. Operator approves the development plan.
-12. Technical Lead asks Release to open the planning release record in GitHub:
+12. Operator approves the development plan.
+13. Technical Lead asks Release to open the planning release record in GitHub:
     a GitHub Milestone and release tracking issue. This is not a GitHub Release
     or tag.
-13. Product Owner decides which issues are included in or deferred from the
+14. Product Owner decides which issues are included in or deferred from the
     next release. Technical Lead applies included issues to the milestone,
     validates required documentation, information, dependencies, risk, and
     environment readiness, then marks the next executable issue
     `ready-for-dev`.
-14. Developer implements one issue in `dev/**` using TDD: failing test first,
+15. Developer implements one issue in `dev/**` using TDD: failing test first,
     minimal implementation second, refactor only after the focused test and
     relevant checks pass.
-15. Developer pushes the feature branch, verifies CI started when CI exists,
+16. Developer pushes the feature branch, verifies CI started when CI exists,
     records branch/commit/check evidence plus TDD evidence, and marks the issue
     `ready-for-qa`.
-16. QA creates a checkout in `tst/**` and validates the pushed branch and CI
+17. QA creates a checkout in `tst/**` and validates the pushed branch and CI
     result for the exact tested commit when CI exists.
-17. QA records evidence and marks passing issues `qa-passed`. Blocking defects
+18. QA records evidence and marks passing issues `qa-passed`. Blocking defects
     return to Developer and then QA before release inclusion unless explicitly
     deferred.
-18. Technical Lead repeats the Developer -> QA alternation until all selected
+19. Technical Lead repeats the Developer -> QA alternation until all selected
     issues are `qa-passed`, fixed, or explicitly deferred.
-19. Release assembles QA-passed issues into `release/<milestone-name>`.
-20. QA validates the assembled release branch in `tst/release-<milestone-name>`
+20. Release assembles QA-passed issues into `release/<milestone-name>`.
+21. QA validates the assembled release branch in `tst/release-<milestone-name>`
     and records release integration evidence.
-21. Technical Lead validates non-production readiness when infrastructure,
+22. Technical Lead validates non-production readiness when infrastructure,
     runtime, credentials, TLS, browser trust, monitoring, or deployment
     ownership can affect release rehearsal. Operations Lead validates
     production readiness when actual production deployment is in scope. These
     checks may run concurrently with release integration QA.
-22. Technical Lead produces release notes and a release manifest. Operator
+23. Technical Lead produces release notes and a release manifest. Operator
     approval of the manifest freezes release contents.
-23. Release prepares the release plan and deployment plan.
-24. Release deploys production code first to the approved non-production
+24. Release prepares the release plan and deployment plan.
+25. Release deploys production code first to the approved non-production
     production-code environment and validates deployment there.
-25. Release deploys the validated release to the operator-provided production
+26. Release deploys the validated release to the operator-provided production
     folder or runtime location.
-26. Release creates the GitHub Release and tag.
-27. Operations Lead adapts the production operations plan (first release) or
+27. Release creates the GitHub Release and tag.
+28. Operations Lead adapts the production operations plan (first release) or
     reviews the production readiness checklist (subsequent releases),
     establishes or updates monitoring, and begins production oversight.
 

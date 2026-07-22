@@ -164,6 +164,13 @@ For `standard` and `full`, produce synchronized markdown and HTML. For `inline`
 and `mini`, markdown or issue text is enough unless the operator asks for HTML.
 HTML must mirror markdown content without adding filler.
 
+Save the document in the product's `documentation/` folder:
+
+```text
+documentation/<product-name>-ux-design.md
+documentation/<product-name>-ux-design.html
+```
+
 ## Stop Conditions
 
 Return to Product Owner for missing scope, missing users, conflicting acceptance

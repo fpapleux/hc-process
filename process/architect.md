@@ -127,7 +127,7 @@ architecture design document:
 
 | Format | Audience | Purpose | Location |
 | --- | --- | --- | --- |
-| Markdown | Agents | Machine-readable, canonical source of truth. Used by developer, QA, release, and other agents to consume architecture decisions. | `architecture/` or approved product architecture documentation. |
+| Markdown | Agents | Machine-readable, canonical source of truth. Used by developer, QA, release, and other agents to consume architecture decisions. | The product's `documentation/` folder as `<product-name>-architecture.md`. |
 | HTML | Humans | Full human-readable version of the architecture design document. Single-page, browser-viewable, built using the codex `$presentation` skill design system. Contains every section, diagram, decision, and detail from the markdown version — it is not a summary, excerpt, or slide deck of highlights. Used by humans to review, discuss, and approve architecture. | Same directory as the markdown version, same base filename with `.html` extension. |
 
 Both versions must contain the same architectural content at the same depth.

@@ -3,7 +3,7 @@
 Ops-session checklist:
 
 - Confirm the current folder is a Git repository with `product/`,
-  `architecture/`, `dev/`, `tst/`, and `rel/`.
+  `documentation/`, `dev/`, `tst/`, and `rel/`.
 - Confirm the product process repo and product source repo are defined and
   initialized.
 - Confirm non-production environment ownership, credentials, TLS,

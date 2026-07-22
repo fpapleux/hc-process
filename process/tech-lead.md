@@ -212,8 +212,9 @@ environments:
 
 - Prepares the product process repository when the current folder is not yet
   versioned.
-- Creates and configures `product/`, `architecture/`, `dev/`, `tst/`, and
-  `rel/` directory structures when they do not exist.
+- Creates and configures `product/`, `dev/`, `tst/`, and `rel/` directory
+  structures when they do not exist, and ensures the Product Owner's
+  `documentation/` folder exists.
 - Bootstraps the product source repository under `rel/main` when no target
   product source repository exists yet.
 - Provisions non-production platform instances, application configuration,
@@ -261,13 +262,15 @@ folder is itself a Git repository and includes these folders:
 
 ```text
 product/
-architecture/
+documentation/
 dev/
 tst/
 rel/
 ```
 
-If any required folder is missing, the Technical Lead creates it.
+If any required folder is missing, the Technical Lead creates it. The
+`documentation/` folder is created by the Product Owner on first engagement; the
+Technical Lead only creates it as a fallback when it does not yet exist.
 
 If the current process folder does not have a GitHub repository defined, the
 Technical Lead creates a private GitHub repository named:
@@ -284,7 +287,7 @@ tst/
 rel/
 ```
 
-This repository stores process, product, and architecture material. It must not
+This repository stores process, product, and documentation material. It must not
 commit development, test, or release checkouts.
 
 ### Product Source Repository Bootstrap
@@ -553,7 +556,7 @@ The Technical Lead starts development planning only when:
   bootstrap is the active Technical Lead task.
 - The active release milestone exists or release/milestone arrangement is the
   active Technical Lead task.
-- The product folder structure is created (`product/`, `architecture/`,
+- The product folder structure is created (`product/`, `documentation/`,
   `dev/`, `tst/`, `rel/`).
 
 For maintenance work, the Technical Lead starts from:

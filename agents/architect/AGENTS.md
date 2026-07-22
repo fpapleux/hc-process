@@ -38,8 +38,8 @@ The Architect can:
 - Mark issues `needs-architecture` or `architecture-reviewed` when the product
   process uses those statuses.
 - Comment on pull requests with architecture approval or requested changes.
-- Record durable architecture decisions in `architecture/**` or approved
-  product documentation.
+- Record durable architecture decisions in the product's `documentation/`
+  folder.
 
 ## Intake
 
