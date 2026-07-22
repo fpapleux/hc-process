@@ -1,2 +1,9 @@
 # macOS Finder metadata
 .DS_Store
+
+# Obsidian editor config
+.obsidian/
+
+# Launch / marketing / internal presentation material (not part of the process)
+assets/social/launch/
+human-codex-process-team-intro.html
